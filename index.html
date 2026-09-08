@@ -2,333 +2,186 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dapur Kapal V12.1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dapur Kapal V13</title>
 
 <style>
 *{box-sizing:border-box}
-
 body{
   margin:0;
   font-family:Arial,sans-serif;
-  background:#f4f7f9;
+  background:#f3f6f9;
   color:#17202a;
 }
-
 body.dark{
-  background:#12171b;
-  color:#f1f3f5;
+  background:#101820;
+  color:#f1f5f9;
 }
-
 header{
-  background:#087f8c;
+  background:linear-gradient(135deg,#075985,#0f766e);
   color:white;
-  padding:18px 15px;
-  text-align:center;
+  padding:20px 15px;
+  position:sticky;
+  top:0;
+  z-index:20;
 }
-
-header h1{
-  margin:0 0 5px;
-}
-
-header p{
-  margin:0;
-  font-size:13px;
-}
-
+header h1{margin:0;font-size:24px}
+header p{margin:5px 0 0;opacity:.9}
 .container{
-  max-width:1050px;
+  max-width:1100px;
   margin:auto;
   padding:15px;
 }
-
 .card{
   background:white;
-  border-radius:14px;
+  border-radius:16px;
   padding:15px;
-  margin-bottom:12px;
-  box-shadow:0 2px 8px rgba(0,0,0,.08);
+  margin-bottom:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.07);
 }
-
 .dark .card{
-  background:#1d252b;
-  box-shadow:none;
+  background:#1b2730;
 }
-
-.toolbar{
+.grid{
   display:grid;
-  grid-template-columns:1fr 160px 100px;
-  gap:8px;
-  margin-bottom:12px;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
 }
-
-input,select,textarea{
-  width:100%;
-  padding:11px;
-  border:1px solid #ccd5da;
-  border-radius:9px;
-  background:white;
-  color:#111;
+.stat{
+  padding:15px;
+  border-radius:14px;
+  background:#e0f2fe;
+}
+.dark .stat{background:#24343f}
+.stat b{
+  display:block;
+  font-size:25px;
+  margin-top:5px;
+}
+button,input,select,textarea{
   font:inherit;
 }
-
-.dark input,
-.dark select,
-.dark textarea{
-  background:#252e35;
-  color:white;
-  border-color:#465159;
-}
-
 button{
   border:0;
-  border-radius:9px;
+  border-radius:10px;
   padding:10px 13px;
   cursor:pointer;
-  font:inherit;
-}
-
-.btn{
-  background:#087f8c;
+  background:#0f766e;
   color:white;
+  margin:3px;
 }
-
-.green{
-  background:#2f9e44;
+button.secondary{background:#475569}
+button.danger{background:#dc2626}
+button.warning{background:#d97706}
+button.blue{background:#0369a1}
+input,select,textarea{
+  width:100%;
+  padding:10px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  margin:5px 0 10px;
+  background:white;
+  color:#111827;
+}
+.dark input,.dark select,.dark textarea{
+  background:#26343d;
   color:white;
+  border-color:#475569;
 }
-
-.orange{
-  background:#f08c00;
-  color:white;
+label{
+  font-weight:bold;
+  font-size:14px;
 }
-
-.red{
-  background:#d6336c;
-  color:white;
+.recipe{
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:13px;
+  margin-bottom:10px;
 }
-
-.gray{
-  background:#e9ecef;
-  color:#111;
-}
-
-.dark .gray{
-  background:#343a40;
-  color:white;
-}
-
-.recipe-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:12px;
-}
-
-.recipe-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:10px;
-}
-
+.dark .recipe{border-color:#475569}
+.recipe h3{margin:0 0 5px}
 .badge{
   display:inline-block;
   padding:5px 8px;
-  margin:2px;
   border-radius:20px;
-  background:#dff6fa;
-  color:#087f8c;
+  background:#dbeafe;
+  color:#1e40af;
   font-size:12px;
+  margin:2px;
 }
-
 .dark .badge{
-  background:#173e45;
-  color:#9be7ef;
+  background:#164e63;
+  color:#bae6fd;
 }
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-  margin-top:10px;
+.day{
+  border:1px solid #cbd5e1;
+  border-radius:15px;
+  padding:12px;
+  margin-bottom:12px;
 }
-
-.info{
-  background:#f1f3f5;
-  padding:8px;
-  border-radius:8px;
-  font-size:12px;
+.dark .day{border-color:#475569}
+.slot{
+  padding:10px;
+  border-radius:10px;
+  background:#f8fafc;
+  margin:7px 0;
 }
-
-.dark .info{
-  background:#293239;
+.dark .slot{background:#25323b}
+.slot-title{
+  font-weight:bold;
+  margin-bottom:5px;
 }
-
-.section-title{
-  margin:22px 0 10px;
-}
-
 .modal{
+  display:none;
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.65);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  z-index:100;
   padding:15px;
-  z-index:1000;
-}
-
-.modal-box{
-  background:white;
-  color:#17202a;
-  width:100%;
-  max-width:750px;
-  max-height:92vh;
   overflow:auto;
-  border-radius:15px;
-  padding:18px;
 }
-
+.modal-box{
+  max-width:750px;
+  margin:30px auto;
+  background:white;
+  border-radius:18px;
+  padding:20px;
+}
 .dark .modal-box{
-  background:#1d252b;
-  color:#f1f3f5;
+  background:#17232b;
 }
-
-.hidden{
-  display:none!important;
-}
-
 .close{
   float:right;
-  background:#eee;
+  background:#dc2626;
 }
-
-.dark .close{
-  background:#343a40;
-  color:white;
-}
-
-.day{
-  border:1px solid #d8dee2;
-  border-radius:12px;
-  padding:12px;
+.steps li{
   margin-bottom:10px;
 }
-
-.dark .day{
-  border-color:#414b53;
+.progress{
+  height:10px;
+  background:#e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
 }
-
-.day h3{
-  margin-top:0;
+.progress div{
+  height:100%;
+  background:#0f766e;
+  width:0%;
 }
-
-.meal{
-  display:grid;
-  grid-template-columns:85px 1fr;
-  gap:8px;
-  align-items:center;
-  margin:8px 0;
-}
-
-.meal-label{
-  font-weight:bold;
+.small{
   font-size:13px;
+  opacity:.8;
 }
-
-.step{
-  background:#f1f3f5;
-  border-left:4px solid #087f8c;
-  padding:12px;
-  border-radius:8px;
-  margin:8px 0;
+.hidden{display:none}
+hr{
+  border:0;
+  border-top:1px solid #ddd;
+  margin:15px 0;
 }
-
-.dark .step{
-  background:#293239;
-}
-
-.timer{
-  text-align:center;
-  font-size:40px;
-  font-weight:bold;
-  margin:15px;
-}
-
-.stock-row{
-  display:grid;
-  grid-template-columns:1fr 110px 100px;
-  gap:8px;
-  align-items:center;
-  margin-bottom:8px;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-}
-
-th,td{
-  border:1px solid #d8dee2;
-  padding:7px;
-}
-
-.dark th,
-.dark td{
-  border-color:#465159;
-}
-
-.total{
-  font-size:18px;
-  font-weight:bold;
-  margin-top:15px;
-}
-
-@media(max-width:650px){
-  .toolbar{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .toolbar input{
-    grid-column:1/-1;
-  }
-
-  .info-grid{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .meal{
-    grid-template-columns:75px 1fr;
-  }
-
-  .stock-row{
-    grid-template-columns:1fr 80px 70px;
-  }
-}
-
-@media print{
-  header,
-  .toolbar,
-  .recipe-actions,
-  button{
-    display:none!important;
-  }
-
-  body{
-    background:white;
-  }
-
-  .modal{
-    position:static;
-    background:white;
-  }
-
-  .modal-box{
-    max-height:none;
-    box-shadow:none;
-  }
+@media(max-width:600px){
+  header h1{font-size:21px}
+  .container{padding:10px}
+  button{font-size:13px}
 }
 </style>
 </head>
@@ -336,2745 +189,1566 @@ th,td{
 <body>
 
 <header>
-  <h1>🍳 Dapur Kapal V12.1</h1>
-  <p>Menu • Resep • Sarapan • Stok • Belanja • Laporan</p>
+  <h1>🚢 Dapur Kapal V13</h1>
+  <p>Asisten dapur untuk menu, resep, stok & belanja kapal</p>
 </header>
 
 <div class="container">
 
-  <div class="toolbar">
-    <input
-      id="search"
-      type="text"
-      placeholder="🔎 Cari resep..."
-    >
+<!-- DASHBOARD -->
+<div class="card">
+  <h2>📊 Dashboard</h2>
 
-    <select id="category">
-      <option value="">Semua kategori</option>
-      <option value="Sarapan">🌅 Sarapan</option>
-      <option value="Ikan">🐟 Ikan</option>
-      <option value="Ayam">🍗 Ayam</option>
-      <option value="Praktis">🍳 Praktis</option>
-      <option value="Lainnya">🍲 Lainnya</option>
-    </select>
+  <div class="grid">
+    <div class="stat">
+      👨‍✈️ Kru
+      <b id="crewStat">9</b>
+    </div>
 
-    <button class="btn" id="darkBtn">🌙 Mode</button>
-  </div>
+    <div class="stat">
+      🍳 Resep
+      <b id="recipeStat">0</b>
+    </div>
 
-  <div class="card">
-    <b>👨‍🍳 Jumlah Kru</b>
+    <div class="stat">
+      ⭐ Favorit
+      <b id="favStat">0</b>
+    </div>
 
-    <div style="display:flex;gap:8px;margin-top:8px">
-      <input
-        id="crew"
-        type="number"
-        min="1"
-        value="9"
-      >
-
-      <button class="green" id="addRecipeBtn">
-        ➕ Resep
-      </button>
+    <div class="stat">
+      📦 Stok
+      <b id="stockStat">0</b>
     </div>
   </div>
 
-  <div class="recipe-actions">
-    <button class="btn" id="weeklyBtn">
-      📅 Menu 7 Hari
-    </button>
+  <label>Jumlah Kru</label>
+  <input type="number" id="crew" min="1" value="9" onchange="saveCrew()">
 
-    <button class="orange" id="stockBtn">
-      📦 Stok
-    </button>
-
-    <button class="green" id="shoppingBtn">
-      🛒 Belanja
-    </button>
-
-    <button class="gray" id="reportBtn">
-      📊 Laporan
-    </button>
-  </div>
-
-  <h2 class="section-title">
-    🍽️ Koleksi Resep
-  </h2>
-
-  <div id="recipes" class="recipe-grid"></div>
-
+  <button onclick="toggleDark()">🌙 Mode Gelap</button>
+  <button class="blue" onclick="generateMenu()">🎲 Buat Menu Otomatis</button>
 </div>
 
-<div id="modal" class="modal hidden">
 
+<!-- SEARCH -->
+<div class="card">
+  <h2>🔎 Cari Resep</h2>
+
+  <input
+    id="search"
+    placeholder="Contoh: ayam, ikan, nasi..."
+    oninput="renderRecipes()"
+  >
+
+  <select id="category" onchange="renderRecipes()">
+    <option value="">Semua Kategori</option>
+    <option value="Sarapan">🌅 Sarapan</option>
+    <option value="Ikan">🐟 Ikan</option>
+    <option value="Ayam">🍗 Ayam</option>
+    <option value="Praktis">🍜 Praktis</option>
+    <option value="Tempe">🥢 Tempe/Tahu</option>
+    <option value="Telur">🥚 Telur</option>
+    <option value="Lainnya">🍛 Lainnya</option>
+  </select>
+
+  <button onclick="openAddRecipe()">➕ Tambah Resep</button>
+</div>
+
+
+<!-- RESEP -->
+<div class="card">
+  <h2>🍳 Koleksi Resep</h2>
+  <div id="recipes"></div>
+</div>
+
+
+<!-- MENU MINGGUAN -->
+<div class="card">
+  <h2>📅 Menu 7 Hari</h2>
+
+  <button onclick="generateMenu()">🎲 Generate Otomatis</button>
+  <button class="secondary" onclick="clearMenu()">🗑️ Kosongkan</button>
+
+  <div id="weekly"></div>
+
+  <button class="blue" onclick="showShopping()">🛒 Buat Daftar Belanja</button>
+  <button class="warning" onclick="showReport()">📊 Laporan Mingguan</button>
+</div>
+
+
+<!-- STOK -->
+<div class="card">
+  <h2>📦 Stok Bahan Kapal</h2>
+
+  <input id="stockName" placeholder="Nama bahan, contoh: Beras">
+  <input id="stockQty" type="number" placeholder="Jumlah stok">
+  <input id="stockUnit" placeholder="Satuan, contoh: kg">
+  <button onclick="addStock()">➕ Tambah Stok</button>
+
+  <div id="stockList"></div>
+</div>
+
+
+<!-- HARGA -->
+<div class="card">
+  <h2>💰 Harga Bahan</h2>
+
+  <p class="small">
+    Masukkan harga bahan untuk menghitung perkiraan biaya menu mingguan.
+  </p>
+
+  <div id="priceList"></div>
+</div>
+
+
+<!-- MODAL RESEP -->
+<div class="modal" id="recipeModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('recipeModal')">✕</button>
+    <div id="recipeDetail"></div>
+  </div>
+</div>
+
+
+<!-- MODAL CHEF -->
+<div class="modal" id="chefModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('chefModal')">✕</button>
+    <div id="chefContent"></div>
+  </div>
+</div>
+
+
+<!-- MODAL ADD -->
+<div class="modal" id="addModal">
   <div class="modal-box">
 
-    <button class="close" id="closeModal">
-      ✕
-    </button>
+    <button class="close" onclick="closeModal('addModal')">✕</button>
 
-    <div id="modalContent"></div>
+    <h2>➕ Tambah Resep</h2>
+
+    <label>Nama Resep</label>
+    <input id="newName">
+
+    <label>Kategori</label>
+    <select id="newCategory">
+      <option>Sarapan</option>
+      <option>Ikan</option>
+      <option>Ayam</option>
+      <option>Praktis</option>
+      <option>Tempe</option>
+      <option>Telur</option>
+      <option>Lainnya</option>
+    </select>
+
+    <label>Bahan</label>
+    <textarea id="newIngredients" rows="6"
+      placeholder="Contoh:
+Ikan 1 kg
+Bawang merah 8 siung
+Cabai 10 buah"></textarea>
+
+    <label>Langkah memasak</label>
+    <textarea id="newSteps" rows="8"
+      placeholder="1. Bersihkan bahan.
+2. Tumis bumbu.
+3. Masukkan bahan utama.
+4. Masak sampai matang."></textarea>
+
+    <button onclick="saveCustomRecipe()">💾 Simpan Resep</button>
 
   </div>
+</div>
+
+
+<!-- MODAL SHOPPING -->
+<div class="modal" id="shoppingModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('shoppingModal')">✕</button>
+    <div id="shoppingContent"></div>
+  </div>
+</div>
+
+
+<!-- MODAL REPORT -->
+<div class="modal" id="reportModal">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal('reportModal')">✕</button>
+    <div id="reportContent"></div>
+    <button onclick="window.print()">🖨️ Cetak</button>
+  </div>
+</div>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   STORAGE
-===================================================== */
+const DAYS=[
+"Senin","Selasa","Rabu","Kamis",
+"Jumat","Sabtu","Minggu"
+];
 
-const STORAGE = {
-  custom: "dapurKapalCustomV7",
-  favorite: "dapurKapalFavoritesV7",
-  shopping: "dapurKapalShoppingV7",
-  weekly: "dapurKapalWeeklyMenuV8",
-  stock: "dapurKapalStockV9",
-  price: "dapurKapalPricesV10",
-  crew: "dapurKapalCrewV8",
-  dark: "dapurKapalDarkV7"
-};
+const SLOTS=[
+ {key:"breakfast",name:"🌅 Sarapan"},
+ {key:"lunch",name:"🍛 Siang"},
+ {key:"dinner",name:"🌙 Malam"}
+];
 
 
-/* =====================================================
-   SAFE STORAGE
-===================================================== */
+const recipes=[
 
-function loadData(key, fallback){
+{
+ id:1,
+ name:"Pindang Ikan Palembang",
+ category:"Ikan",
+ servings:9,
+ ingredients:[
+  ["Ikan",1,"kg"],
+  ["Bawang merah",8,"siung"],
+  ["Bawang putih",5,"siung"],
+  ["Cabai merah",10,"buah"],
+  ["Lengkuas",3,"cm"],
+  ["Serai",2,"batang"],
+  ["Daun salam",3,"lembar"],
+  ["Asam jawa",2,"sdm"],
+  ["Gula",1,"sdm"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Bersihkan ikan dan potong sesuai porsi.",
+  "Haluskan bawang merah, bawang putih dan cabai.",
+  "Tumis bumbu sampai harum.",
+  "Masukkan serai, lengkuas dan daun salam.",
+  "Tambahkan air secukupnya.",
+  "Masukkan ikan perlahan.",
+  "Masukkan asam jawa, gula dan garam.",
+  "Masak api sedang sekitar 15–20 menit.",
+  "Pastikan ikan matang dan kuah terasa seimbang."
+ ],
+ prep:"±15 menit",
+ cook:"±20 menit",
+ fire:"Sedang",
+ done:"Daging ikan mudah terlepas dan kuah terasa gurih-asam.",
+ tip:"Kalau kapal sedang bergoyang, gunakan api sedang dan jangan terlalu penuh panci."
+},
 
+{
+ id:2,
+ name:"Ayam Rica-Rica",
+ category:"Ayam",
+ servings:9,
+ ingredients:[
+  ["Ayam",1.5,"kg"],
+  ["Bawang merah",10,"siung"],
+  ["Bawang putih",6,"siung"],
+  ["Cabai merah",15,"buah"],
+  ["Serai",2,"batang"],
+  ["Daun jeruk",5,"lembar"],
+  ["Jahe",3,"cm"],
+  ["Garam",2,"sdt"],
+  ["Gula",1,"sdt"]
+ ],
+ steps:[
+  "Potong ayam dan cuci bersih.",
+  "Haluskan bawang, cabai dan jahe.",
+  "Tumis bumbu sampai matang dan harum.",
+  "Masukkan serai dan daun jeruk.",
+  "Masukkan ayam.",
+  "Aduk sampai ayam berubah warna.",
+  "Tambahkan sedikit air.",
+  "Masak sampai ayam matang dan bumbu meresap.",
+  "Koreksi garam dan gula."
+ ],
+ prep:"15 menit",
+ cook:"30–40 menit",
+ fire:"Sedang",
+ done:"Ayam matang sampai bagian dalam dan bumbu menyusut.",
+ tip:"Jangan masak api terlalu besar karena bagian luar ayam cepat gosong."
+},
+
+{
+ id:3,
+ name:"Nasi Goreng Telur",
+ category:"Sarapan",
+ servings:9,
+ ingredients:[
+  ["Nasi putih",2.5,"kg"],
+  ["Telur",9,"butir"],
+  ["Bawang putih",7,"siung"],
+  ["Bawang merah",8,"siung"],
+  ["Cabai",8,"buah"],
+  ["Kecap manis",8,"sdm"],
+  ["Garam",2,"sdt"],
+  ["Minyak",100,"ml"]
+ ],
+ steps:[
+  "Pastikan nasi tidak terlalu basah.",
+  "Kocok telur.",
+  "Tumis telur sampai setengah matang lalu sisihkan.",
+  "Tumis bawang dan cabai.",
+  "Masukkan nasi.",
+  "Tambahkan kecap dan garam.",
+  "Masukkan kembali telur.",
+  "Aduk sampai nasi panas merata.",
+  "Cicipi sebelum diangkat."
+ ],
+ prep:"10 menit",
+ cook:"15 menit",
+ fire:"Besar",
+ done:"Nasi panas, tidak menggumpal dan bumbu merata.",
+ tip:"Masak bertahap jika wajan kecil agar nasi tidak lembek."
+},
+
+{
+ id:4,
+ name:"Ikan Kecap Pedas",
+ category:"Ikan",
+ servings:9,
+ ingredients:[
+  ["Ikan",1.5,"kg"],
+  ["Bawang merah",10,"siung"],
+  ["Bawang putih",5,"siung"],
+  ["Cabai",12,"buah"],
+  ["Kecap manis",10,"sdm"],
+  ["Jahe",2,"cm"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Bersihkan ikan.",
+  "Goreng atau pan-sear ikan sampai matang.",
+  "Tumis bawang, cabai dan jahe.",
+  "Tambahkan kecap.",
+  "Tambahkan sedikit air.",
+  "Masukkan ikan.",
+  "Masak 8–10 menit sampai bumbu meresap."
+ ],
+ prep:"15 menit",
+ cook:"25 menit",
+ fire:"Sedang",
+ done:"Kuah kecap mengental dan ikan matang.",
+ tip:"Gunakan wajan lebar agar ikan tidak mudah hancur."
+},
+
+{
+ id:5,
+ name:"Soto Ayam",
+ category:"Ayam",
+ servings:9,
+ ingredients:[
+  ["Ayam",1.2,"kg"],
+  ["Bawang merah",10,"siung"],
+  ["Bawang putih",6,"siung"],
+  ["Kunyit",3,"cm"],
+  ["Jahe",2,"cm"],
+  ["Serai",2,"batang"],
+  ["Daun salam",3,"lembar"],
+  ["Garam",2,"sdt"],
+  ["Kol",500,"gram"],
+  ["Bihun",500,"gram"]
+ ],
+ steps:[
+  "Rebus ayam sampai matang.",
+  "Angkat ayam dan suwir.",
+  "Haluskan bawang, kunyit dan jahe.",
+  "Tumis bumbu.",
+  "Masukkan bumbu ke kuah ayam.",
+  "Tambahkan serai dan daun salam.",
+  "Masukkan kol.",
+  "Masukkan kembali ayam suwir.",
+  "Koreksi rasa."
+ ],
+ prep:"20 menit",
+ cook:"35 menit",
+ fire:"Sedang",
+ done:"Kuah harum dan ayam matang.",
+ tip:"Jaga panci jangan terlalu penuh saat kapal bergoyang."
+},
+
+{
+ id:6,
+ name:"Mie Goreng",
+ category:"Praktis",
+ servings:9,
+ ingredients:[
+  ["Mie",1,"kg"],
+  ["Telur",6,"butir"],
+  ["Bawang putih",6,"siung"],
+  ["Bawang merah",8,"siung"],
+  ["Kecap manis",8,"sdm"],
+  ["Garam",2,"sdt"],
+  ["Minyak",80,"ml"]
+ ],
+ steps:[
+  "Rebus mie sampai hampir matang.",
+  "Tiriskan.",
+  "Tumis bawang.",
+  "Masukkan telur.",
+  "Masukkan mie.",
+  "Tambahkan kecap dan garam.",
+  "Aduk sampai rata dan panas."
+ ],
+ prep:"10 menit",
+ cook:"15 menit",
+ fire:"Besar",
+ done:"Mie matang tetapi tidak lembek.",
+ tip:"Jangan merebus mie terlalu lama."
+},
+
+{
+ id:7,
+ name:"Gulai Ayam",
+ category:"Ayam",
+ servings:9,
+ ingredients:[
+  ["Ayam",1.5,"kg"],
+  ["Santan",1,"liter"],
+  ["Bawang merah",10,"siung"],
+  ["Bawang putih",6,"siung"],
+  ["Kunyit",3,"cm"],
+  ["Jahe",2,"cm"],
+  ["Lengkuas",3,"cm"],
+  ["Serai",2,"batang"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Potong ayam.",
+  "Haluskan bumbu.",
+  "Tumis bumbu sampai harum.",
+  "Masukkan ayam.",
+  "Aduk sampai berubah warna.",
+  "Tuangkan santan.",
+  "Masak api kecil.",
+  "Aduk berkala agar santan tidak pecah.",
+  "Masak sampai ayam matang."
+ ],
+ prep:"15 menit",
+ cook:"35 menit",
+ fire:"Kecil",
+ done:"Ayam matang dan kuah gurih."
+},
+
+{
+ id:8,
+ name:"Ikan Woku",
+ category:"Ikan",
+ servings:9,
+ ingredients:[
+  ["Ikan",1.5,"kg"],
+  ["Bawang merah",10,"siung"],
+  ["Bawang putih",5,"siung"],
+  ["Cabai",12,"buah"],
+  ["Kunyit",3,"cm"],
+  ["Serai",2,"batang"],
+  ["Daun jeruk",5,"lembar"],
+  ["Daun kemangi",2,"ikat"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Bersihkan ikan.",
+  "Haluskan bumbu.",
+  "Tumis bumbu.",
+  "Masukkan serai dan daun jeruk.",
+  "Tambahkan air.",
+  "Masukkan ikan.",
+  "Masak sampai ikan matang.",
+  "Masukkan kemangi terakhir.",
+  "Koreksi rasa."
+ ],
+ prep:"15 menit",
+ cook:"25 menit",
+ fire:"Sedang",
+ done:"Ikan matang dan aroma kemangi keluar."
+},
+
+{
+ id:9,
+ name:"Orek Tempe Tahu Pedas Manis",
+ category:"Tempe",
+ servings:9,
+ ingredients:[
+  ["Tempe",800,"gram"],
+  ["Tahu",600,"gram"],
+  ["Bawang merah",8,"siung"],
+  ["Bawang putih",5,"siung"],
+  ["Cabai",10,"buah"],
+  ["Kecap manis",8,"sdm"],
+  ["Gula",1,"sdm"],
+  ["Garam",1,"sdt"]
+ ],
+ steps:[
+  "Potong tempe dan tahu.",
+  "Goreng sampai kecokelatan.",
+  "Tumis bawang dan cabai.",
+  "Tambahkan kecap, gula dan garam.",
+  "Masukkan tempe dan tahu.",
+  "Aduk sampai bumbu merata.",
+  "Masak sebentar sampai agak kering."
+ ],
+ prep:"10 menit",
+ cook:"20 menit",
+ fire:"Sedang",
+ done:"Tempe dan tahu terlapisi bumbu."
+},
+
+{
+ id:10,
+ name:"Bihun Goreng Telur",
+ category:"Sarapan",
+ servings:9,
+ ingredients:[
+  ["Bihun",700,"gram"],
+  ["Telur",8,"butir"],
+  ["Bawang putih",6,"siung"],
+  ["Bawang merah",7,"siung"],
+  ["Kecap",6,"sdm"],
+  ["Garam",2,"sdt"],
+  ["Minyak",80,"ml"]
+ ],
+ steps:[
+  "Rendam bihun dengan air hangat.",
+  "Tiriskan.",
+  "Tumis bawang.",
+  "Masukkan telur.",
+  "Masukkan bihun.",
+  "Tambahkan kecap dan garam.",
+  "Aduk sampai rata."
+ ],
+ prep:"10 menit",
+ cook:"15 menit",
+ fire:"Sedang",
+ done:"Bihun lembut tetapi tidak hancur."
+},
+
+{
+ id:11,
+ name:"Nasi Kuning Sederhana + Telur",
+ category:"Sarapan",
+ servings:9,
+ ingredients:[
+  ["Beras",1.2,"kg"],
+  ["Santan",500,"ml"],
+  ["Kunyit",3,"cm"],
+  ["Daun salam",3,"lembar"],
+  ["Serai",2,"batang"],
+  ["Telur",9,"butir"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Cuci beras.",
+  "Campurkan santan, kunyit dan garam.",
+  "Masukkan beras.",
+  "Masak bersama daun salam dan serai.",
+  "Aduk sesekali.",
+  "Masak sampai nasi matang.",
+  "Rebus telur sampai matang."
+ ],
+ prep:"15 menit",
+ cook:"30 menit",
+ fire:"Sedang",
+ done:"Nasi pulen dan warna kuning merata."
+},
+
+{
+ id:12,
+ name:"Telur Balado",
+ category:"Telur",
+ servings:9,
+ ingredients:[
+  ["Telur",12,"butir"],
+  ["Cabai merah",15,"buah"],
+  ["Bawang merah",10,"siung"],
+  ["Bawang putih",5,"siung"],
+  ["Tomat",2,"buah"],
+  ["Garam",2,"sdt"],
+  ["Gula",1,"sdt"]
+ ],
+ steps:[
+  "Rebus telur.",
+  "Kupas telur.",
+  "Goreng telur sebentar.",
+  "Haluskan cabai dan bawang.",
+  "Tumis sampai matang.",
+  "Tambahkan garam dan gula.",
+  "Masukkan telur.",
+  "Aduk sampai bumbu menempel."
+ ],
+ prep:"15 menit",
+ cook:"20 menit",
+ fire:"Sedang",
+ done:"Bumbu matang dan telur terlapisi sambal."
+},
+
+{
+ id:13,
+ name:"Tempe Goreng + Sambal",
+ category:"Tempe",
+ servings:9,
+ ingredients:[
+  ["Tempe",1,"kg"],
+  ["Bawang putih",5,"siung"],
+  ["Ketumbar",1,"sdm"],
+  ["Garam",2,"sdt"],
+  ["Cabai",15,"buah"],
+  ["Bawang merah",6,"siung"]
+ ],
+ steps:[
+  "Potong tempe.",
+  "Haluskan bawang putih, ketumbar dan garam.",
+  "Rendam tempe sebentar.",
+  "Goreng sampai kecokelatan.",
+  "Haluskan cabai dan bawang untuk sambal.",
+  "Sajikan bersama tempe."
+ ],
+ prep:"10 menit",
+ cook:"15 menit",
+ fire:"Sedang",
+ done:"Tempe renyah di luar dan matang."
+},
+
+{
+ id:14,
+ name:"Nasi Kecap Telur",
+ category:"Sarapan",
+ servings:9,
+ ingredients:[
+  ["Nasi",2.5,"kg"],
+  ["Telur",9,"butir"],
+  ["Bawang putih",6,"siung"],
+  ["Bawang merah",7,"siung"],
+  ["Kecap manis",10,"sdm"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Tumis bawang.",
+  "Masukkan telur.",
+  "Masukkan nasi.",
+  "Tambahkan kecap.",
+  "Tambahkan garam.",
+  "Aduk sampai rata.",
+  "Masak sampai panas merata."
+ ],
+ prep:"10 menit",
+ cook:"15 menit",
+ fire:"Besar",
+ done:"Nasi panas dan kecap merata."
+},
+
+{
+ id:15,
+ name:"Mie Tumis Telur",
+ category:"Praktis",
+ servings:9,
+ ingredients:[
+  ["Mie",900,"gram"],
+  ["Telur",8,"butir"],
+  ["Bawang putih",6,"siung"],
+  ["Bawang merah",6,"siung"],
+  ["Cabai",8,"buah"],
+  ["Kecap",7,"sdm"],
+  ["Garam",2,"sdt"]
+ ],
+ steps:[
+  "Rebus mie sebentar.",
+  "Tumis bawang dan cabai.",
+  "Masukkan telur.",
+  "Masukkan mie.",
+  "Tambahkan kecap dan garam.",
+  "Aduk sampai matang."
+ ],
+ prep:"10 menit",
+ cook:"15 menit",
+ fire:"Sedang",
+ done:"Mie matang dan bumbu rata."
+}
+
+];
+
+
+let customRecipes=load("dapurKapalCustomV13",[]);
+let favorites=load("dapurKapalFavoritesV13",[]);
+let shopping=load("dapurKapalShoppingV13",{});
+let weekly=load("dapurKapalWeeklyMenuV13",{});
+let stock=load("dapurKapalStockV13",[]);
+let prices=load("dapurKapalPricesV13",{});
+let crew=Number(localStorage.getItem("dapurKapalCrewV13"))||9;
+let dark=localStorage.getItem("dapurKapalDarkV13")==="1";
+
+document.getElementById("crew").value=crew;
+
+if(dark) document.body.classList.add("dark");
+
+
+function load(key,fallback){
   try{
-
-    const data = localStorage.getItem(key);
-
-    if(data === null){
-      return fallback;
-    }
-
-    return JSON.parse(data);
-
-  }catch(error){
-
-    console.log("Storage error:", error);
-
+    const x=localStorage.getItem(key);
+    return x?JSON.parse(x):fallback;
+  }catch(e){
     return fallback;
   }
 }
 
 
-function saveData(key, value){
-
-  try{
-
-    localStorage.setItem(
-      key,
-      JSON.stringify(value)
-    );
-
-  }catch(error){
-
-    console.log("Save error:", error);
-  }
+function save(key,value){
+  localStorage.setItem(key,JSON.stringify(value));
 }
 
 
-/* =====================================================
-   RECIPES
-===================================================== */
-
-const recipes = [
-
-{
-id:1,
-name:"Pindang Ikan",
-category:"Ikan",
-servings:9,
-prep:"15 menit",
-fire:"Sedang",
-done:"Ikan matang dan kuah terasa gurih, asam, pedas",
-ship:"Saat kapal bergoyang, gunakan api sedang agar kuah tidak mudah tumpah.",
-ingredients:[
-["Ikan tongkol/nila",2,"kg"],
-["Bawang merah",150,"gram"],
-["Bawang putih",70,"gram"],
-["Cabai merah",100,"gram"],
-["Kunyit",40,"gram"],
-["Jahe",30,"gram"],
-["Serai",3,"batang"],
-["Daun salam",4,"lembar"],
-["Air",2,"liter"],
-["Garam",25,"gram"],
-["Gula",15,"gram"],
-["Asam jawa",30,"gram"],
-["Minyak",50,"ml"]
-],
-steps:[
-"Bersihkan ikan lalu potong sesuai porsi.",
-"Lumuri ikan dengan sedikit garam dan diamkan sekitar 5 menit.",
-"Haluskan bawang merah, bawang putih, cabai, kunyit, dan jahe.",
-"Panaskan minyak lalu tumis bumbu sampai harum dan matang.",
-"Masukkan serai dan daun salam.",
-"Tuangkan air perlahan dan tunggu sampai mendidih.",
-"Masukkan ikan dengan hati-hati.",
-"Tambahkan garam, gula, dan asam jawa.",
-"Masak 10–15 menit dengan api sedang.",
-"Cicipi kuah dan sesuaikan rasa sebelum disajikan."
-]
-},
-
-{
-id:2,
-name:"Ayam Rica-Rica",
-category:"Ayam",
-servings:9,
-prep:"20 menit",
-fire:"Sedang",
-done:"Ayam empuk dan bumbu meresap",
-ship:"Potong ayam tidak terlalu besar supaya cepat matang.",
-ingredients:[
-["Ayam",2,"kg"],
-["Bawang merah",150,"gram"],
-["Bawang putih",70,"gram"],
-["Cabai merah",120,"gram"],
-["Cabai rawit",50,"gram"],
-["Jahe",40,"gram"],
-["Serai",3,"batang"],
-["Daun jeruk",6,"lembar"],
-["Garam",25,"gram"],
-["Gula",15,"gram"],
-["Air",400,"ml"],
-["Minyak",100,"ml"]
-],
-steps:[
-"Potong ayam dan bersihkan.",
-"Haluskan bawang merah, bawang putih, cabai, dan jahe.",
-"Tumis bumbu sampai harum dan matang.",
-"Masukkan serai dan daun jeruk.",
-"Masukkan ayam lalu aduk sampai berubah warna.",
-"Tambahkan air.",
-"Tutup panci dan masak sekitar 25–30 menit.",
-"Buka tutup lalu masak sampai kuah menyusut.",
-"Cicipi dan koreksi rasa.",
-"Matikan api ketika bumbu sudah menempel pada ayam."
-]
-},
-
-{
-id:3,
-name:"Nasi Goreng Telur",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Besar",
-done:"Nasi terpisah dan tidak lembek",
-ship:"Gunakan nasi dingin agar hasil nasi goreng lebih bagus.",
-ingredients:[
-["Nasi putih dingin",1.8,"kg"],
-["Telur",9,"butir"],
-["Bawang putih",50,"gram"],
-["Bawang merah",100,"gram"],
-["Cabai",50,"gram"],
-["Kecap manis",100,"ml"],
-["Garam",15,"gram"],
-["Kaldu bubuk",15,"gram"],
-["Minyak",100,"ml"]
-],
-steps:[
-"Siapkan nasi dingin dan pisahkan gumpalannya.",
-"Iris bawang merah, bawang putih, dan cabai.",
-"Panaskan minyak dengan api besar.",
-"Masukkan telur dan orak-arik sampai matang.",
-"Masukkan bawang dan cabai lalu tumis sampai harum.",
-"Masukkan nasi.",
-"Tambahkan kecap, garam, dan kaldu.",
-"Aduk cepat dengan api besar.",
-"Masak sekitar 4–6 menit.",
-"Angkat ketika nasi sudah kering dan harum."
-]
-},
-
-{
-id:4,
-name:"Ikan Kecap Pedas",
-category:"Ikan",
-servings:9,
-prep:"15 menit",
-fire:"Sedang",
-done:"Bumbu mengental dan menempel pada ikan",
-ship:"Jangan terlalu sering membalik ikan.",
-ingredients:[
-["Ikan",2,"kg"],
-["Bawang merah",120,"gram"],
-["Bawang putih",50,"gram"],
-["Cabai",100,"gram"],
-["Kecap manis",150,"ml"],
-["Air",400,"ml"],
-["Garam",15,"gram"],
-["Gula",10,"gram"],
-["Minyak",100,"ml"]
-],
-steps:[
-"Bersihkan dan potong ikan.",
-"Goreng ikan sampai matang atau setengah matang.",
-"Tumis bawang dan cabai sampai harum.",
-"Tambahkan kecap dan air.",
-"Masukkan garam dan gula.",
-"Masukkan ikan perlahan.",
-"Masak dengan api sedang.",
-"Balik ikan satu kali.",
-"Masak sampai kuah mengental.",
-"Matikan api dan sajikan."
-]
-},
-
-{
-id:5,
-name:"Soto Ayam",
-category:"Ayam",
-servings:9,
-prep:"25 menit",
-fire:"Sedang",
-done:"Ayam matang dan kuah harum",
-ship:"Siapkan pelengkap sambil kuah dimasak.",
-ingredients:[
-["Ayam",1.5,"kg"],
-["Bawang merah",120,"gram"],
-["Bawang putih",60,"gram"],
-["Kunyit",40,"gram"],
-["Jahe",25,"gram"],
-["Serai",3,"batang"],
-["Daun salam",3,"lembar"],
-["Air",3,"liter"],
-["Garam",25,"gram"],
-["Kaldu",15,"gram"],
-["Minyak",60,"ml"]
-],
-steps:[
-"Rebus ayam sampai matang.",
-"Angkat ayam dan sisihkan.",
-"Haluskan bawang merah, bawang putih, kunyit, dan jahe.",
-"Tumis bumbu sampai harum.",
-"Masukkan serai dan daun salam.",
-"Masukkan bumbu ke dalam kuah.",
-"Tambahkan garam dan kaldu.",
-"Masukkan kembali ayam.",
-"Masak sekitar 15 menit.",
-"Suwir ayam dan sajikan dengan kuah."
-]
-},
-
-{
-id:6,
-name:"Mie Goreng",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Besar",
-done:"Mie matang tetapi tidak lembek",
-ship:"Jangan merebus mie terlalu lama.",
-ingredients:[
-["Mie",9,"porsi"],
-["Telur",9,"butir"],
-["Bawang putih",50,"gram"],
-["Bawang merah",80,"gram"],
-["Cabai",50,"gram"],
-["Kecap manis",100,"ml"],
-["Garam",15,"gram"],
-["Minyak",80,"ml"]
-],
-steps:[
-"Rebus mie sampai hampir matang.",
-"Tiriskan dan beri sedikit minyak.",
-"Iris bawang dan cabai.",
-"Panaskan minyak.",
-"Orak-arik telur sampai matang.",
-"Masukkan bawang dan cabai.",
-"Masukkan mie.",
-"Tambahkan kecap dan garam.",
-"Aduk dengan api besar 3–5 menit.",
-"Angkat segera agar mie tidak lembek."
-]
-},
-
-{
-id:7,
-name:"Gulai Ayam",
-category:"Ayam",
-servings:9,
-prep:"20 menit",
-fire:"Kecil-Sedang",
-done:"Ayam empuk dan santan matang",
-ship:"Setelah santan masuk jangan menggunakan api terlalu besar.",
-ingredients:[
-["Ayam",2,"kg"],
-["Santan",1,"liter"],
-["Bawang merah",150,"gram"],
-["Bawang putih",60,"gram"],
-["Cabai",80,"gram"],
-["Kunyit",40,"gram"],
-["Jahe",30,"gram"],
-["Serai",2,"batang"],
-["Daun salam",3,"lembar"],
-["Garam",25,"gram"],
-["Air",700,"ml"],
-["Minyak",70,"ml"]
-],
-steps:[
-"Potong ayam dan bersihkan.",
-"Haluskan bumbu.",
-"Tumis bumbu sampai matang.",
-"Masukkan serai dan daun salam.",
-"Masukkan ayam.",
-"Tambahkan air.",
-"Masak sampai ayam hampir empuk.",
-"Masukkan santan.",
-"Aduk perlahan.",
-"Masak sampai ayam empuk dan santan matang.",
-"Koreksi rasa lalu matikan api."
-]
-},
-
-{
-id:8,
-name:"Ikan Woku",
-category:"Ikan",
-servings:9,
-prep:"20 menit",
-fire:"Sedang",
-done:"Ikan matang dan bumbu harum",
-ship:"Masukkan ikan setelah bumbu benar-benar matang.",
-ingredients:[
-["Ikan",2,"kg"],
-["Bawang merah",150,"gram"],
-["Bawang putih",60,"gram"],
-["Cabai",100,"gram"],
-["Kunyit",35,"gram"],
-["Jahe",30,"gram"],
-["Serai",3,"batang"],
-["Daun jeruk",6,"lembar"],
-["Air",500,"ml"],
-["Garam",25,"gram"],
-["Minyak",70,"ml"]
-],
-steps:[
-"Bersihkan ikan.",
-"Haluskan bawang, cabai, kunyit, dan jahe.",
-"Tumis bumbu sampai harum.",
-"Masukkan serai dan daun jeruk.",
-"Tambahkan air.",
-"Tunggu sampai mendidih.",
-"Masukkan ikan.",
-"Masak 10–15 menit.",
-"Balik ikan dengan hati-hati.",
-"Cicipi dan sajikan."
-]
-},
-
-{
-id:9,
-name:"Orek Tempe Tahu Pedas Manis",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Sedang",
-done:"Bumbu meresap dan tempe tahu kecokelatan",
-ship:"Goreng tempe dan tahu terlebih dahulu supaya proses akhir cepat.",
-ingredients:[
-["Tempe",700,"gram"],
-["Tahu",700,"gram"],
-["Bawang merah",100,"gram"],
-["Bawang putih",50,"gram"],
-["Cabai",70,"gram"],
-["Kecap manis",120,"ml"],
-["Gula",20,"gram"],
-["Garam",12,"gram"],
-["Air",150,"ml"],
-["Minyak",150,"ml"]
-],
-steps:[
-"Potong tempe dan tahu.",
-"Goreng sampai bagian luar kecokelatan.",
-"Tumis bawang sampai harum.",
-"Masukkan cabai.",
-"Tambahkan kecap, gula, garam, dan air.",
-"Tunggu sampai mendidih.",
-"Masukkan tempe dan tahu.",
-"Aduk sampai bumbu meresap.",
-"Masak sampai air hampir habis.",
-"Sajikan dengan nasi hangat."
-]
-},
-
-{
-id:10,
-name:"Bihun Goreng Telur",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Besar",
-done:"Bihun matang dan tidak hancur",
-ship:"Jangan merendam bihun terlalu lama.",
-ingredients:[
-["Bihun",700,"gram"],
-["Telur",9,"butir"],
-["Bawang putih",50,"gram"],
-["Bawang merah",80,"gram"],
-["Cabai",40,"gram"],
-["Kecap manis",80,"ml"],
-["Garam",15,"gram"],
-["Kaldu",10,"gram"],
-["Minyak",90,"ml"]
-],
-steps:[
-"Rendam bihun dengan air hangat.",
-"Tiriskan.",
-"Kocok telur.",
-"Panaskan minyak dan orak-arik telur.",
-"Masukkan bawang dan cabai.",
-"Tumis sampai harum.",
-"Masukkan bihun.",
-"Tambahkan kecap, garam, dan kaldu.",
-"Aduk dengan api besar.",
-"Angkat sebelum bihun terlalu lembek."
-]
-},
-
-{
-id:11,
-name:"Nasi Kuning Sederhana + Telur",
-category:"Sarapan",
-servings:9,
-prep:"25 menit",
-fire:"Sedang",
-done:"Nasi matang dan pulen",
-ship:"Gunakan takaran air seperti biasanya saat memasak nasi di kapal.",
-ingredients:[
-["Beras",1.2,"kg"],
-["Santan",500,"ml"],
-["Kunyit",30,"gram"],
-["Serai",2,"batang"],
-["Daun salam",3,"lembar"],
-["Garam",20,"gram"],
-["Telur",9,"butir"]
-],
-steps:[
-"Cuci beras sampai bersih.",
-"Haluskan kunyit.",
-"Masukkan beras ke rice cooker.",
-"Tambahkan santan.",
-"Tambahkan air sesuai takaran nasi.",
-"Masukkan kunyit, garam, serai, dan daun salam.",
-"Masak seperti nasi biasa.",
-"Setelah matang diamkan sekitar 10 menit.",
-"Rebus telur sampai matang.",
-"Sajikan nasi kuning bersama telur."
-]
-},
-
-{
-id:12,
-name:"Telur Balado",
-category:"Sarapan",
-servings:9,
-prep:"20 menit",
-fire:"Sedang",
-done:"Sambal matang dan minyak mulai keluar",
-ship:"Jangan membuat sambal terlalu encer.",
-ingredients:[
-["Telur",18,"butir"],
-["Cabai merah",150,"gram"],
-["Cabai rawit",50,"gram"],
-["Bawang merah",120,"gram"],
-["Bawang putih",50,"gram"],
-["Tomat",150,"gram"],
-["Garam",20,"gram"],
-["Gula",15,"gram"],
-["Minyak",150,"ml"]
-],
-steps:[
-"Rebus telur sampai matang.",
-"Kupas telur.",
-"Goreng telur sebentar sampai permukaan agak berkulit.",
-"Haluskan cabai, bawang, dan tomat.",
-"Tumis sambal sampai matang.",
-"Tambahkan garam dan gula.",
-"Masak sampai sambal tidak berbau mentah.",
-"Masukkan telur.",
-"Aduk perlahan.",
-"Masak 3–5 menit lalu sajikan."
-]
-},
-
-{
-id:13,
-name:"Tempe Goreng + Sambal",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Sedang",
-done:"Tempe kuning kecokelatan",
-ship:"Praktis untuk sarapan ketika waktu memasak terbatas.",
-ingredients:[
-["Tempe",1,"kg"],
-["Bawang putih",40,"gram"],
-["Ketumbar",15,"gram"],
-["Garam",20,"gram"],
-["Air",500,"ml"],
-["Cabai",100,"gram"],
-["Bawang merah",70,"gram"],
-["Minyak",250,"ml"]
-],
-steps:[
-"Potong tempe.",
-"Haluskan bawang putih, ketumbar, dan garam.",
-"Campurkan dengan air.",
-"Rendam tempe sekitar 5–10 menit.",
-"Panaskan minyak.",
-"Goreng tempe sampai kecokelatan.",
-"Goreng sebentar cabai dan bawang.",
-"Ulek cabai dan bawang.",
-"Tambahkan garam secukupnya.",
-"Sajikan bersama nasi."
-]
-},
-
-{
-id:14,
-name:"Nasi Kecap Telur",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Sedang",
-done:"Nasi kering dan bumbu merata",
-ship:"Menu cepat menggunakan bahan sederhana.",
-ingredients:[
-["Nasi putih",1.8,"kg"],
-["Telur",9,"butir"],
-["Bawang merah",100,"gram"],
-["Bawang putih",50,"gram"],
-["Cabai",50,"gram"],
-["Kecap manis",120,"ml"],
-["Garam",12,"gram"],
-["Kaldu",10,"gram"],
-["Minyak",90,"ml"]
-],
-steps:[
-"Siapkan nasi.",
-"Iris bawang dan cabai.",
-"Panaskan minyak.",
-"Orak-arik telur.",
-"Masukkan bawang dan cabai.",
-"Tumis sampai harum.",
-"Masukkan nasi.",
-"Tambahkan kecap, garam, dan kaldu.",
-"Aduk sampai warna nasi merata.",
-"Masak 4–5 menit lalu sajikan."
-]
-},
-
-{
-id:15,
-name:"Mie Tumis Telur",
-category:"Sarapan",
-servings:9,
-prep:"15 menit",
-fire:"Besar",
-done:"Mie matang dan bumbu meresap",
-ship:"Gunakan sedikit air agar mie tidak terlalu kering.",
-ingredients:[
-["Mie",9,"porsi"],
-["Telur",9,"butir"],
-["Bawang putih",50,"gram"],
-["Bawang merah",80,"gram"],
-["Cabai",50,"gram"],
-["Kecap manis",80,"ml"],
-["Garam",15,"gram"],
-["Air",200,"ml"],
-["Minyak",80,"ml"]
-],
-steps:[
-"Rebus mie sampai setengah matang.",
-"Tiriskan mie.",
-"Panaskan minyak.",
-"Orak-arik telur.",
-"Masukkan bawang dan cabai.",
-"Tumis sampai harum.",
-"Masukkan mie.",
-"Tambahkan kecap dan garam.",
-"Tambahkan sedikit air.",
-"Aduk dengan api besar sampai air habis.",
-"Sajikan selagi panas."
-]
-}
-
-];
-
-
-/* =====================================================
-   CUSTOM RECIPES
-===================================================== */
-
-let customRecipes = loadData(
-  STORAGE.custom,
-  []
-);
-
-if(!Array.isArray(customRecipes)){
-  customRecipes=[];
-}
-
-let allRecipes = recipes.concat(customRecipes);
-
-let favorites = loadData(
-  STORAGE.favorite,
-  []
-);
-
-if(!Array.isArray(favorites)){
-  favorites=[];
-}
-
-let shopping = loadData(
-  STORAGE.shopping,
-  []
-);
-
-if(!Array.isArray(shopping)){
-  shopping=[];
-}
-
-let stock = loadData(
-  STORAGE.stock,
-  {}
-);
-
-let prices = loadData(
-  STORAGE.price,
-  {}
-);
-
-let weekly = loadData(
-  STORAGE.weekly,
-  {}
-);
-
-
-/* =====================================================
-   DAYS
-===================================================== */
-
-const days=[
-  "Senin",
-  "Selasa",
-  "Rabu",
-  "Kamis",
-  "Jumat",
-  "Sabtu",
-  "Minggu"
-];
-
-
-const meals=[
-  {
-    key:"breakfast",
-    label:"🌅 Sarapan"
-  },
-  {
-    key:"lunch",
-    label:"🍛 Siang"
-  },
-  {
-    key:"dinner",
-    label:"🌙 Malam"
-  }
-];
-
-
-/* =====================================================
-   NORMALIZE WEEKLY
-===================================================== */
-
-function normalizeWeekly(){
-
-  days.forEach(function(day){
-
-    const current=weekly[day];
-
-    if(
-      !current ||
-      typeof current !== "object" ||
-      Array.isArray(current)
-    ){
-
-      weekly[day]={
-        breakfast:"",
-        lunch:current ? String(current) : "",
-        dinner:""
-      };
-
-    }else{
-
-      weekly[day]={
-        breakfast:current.breakfast || "",
-        lunch:current.lunch || "",
-        dinner:current.dinner || ""
-      };
-
-    }
-
-  });
-
-  saveData(STORAGE.weekly,weekly);
+function allRecipes(){
+  return [...recipes,...customRecipes];
 }
 
 
-/* =====================================================
-   CREW
-===================================================== */
-
-const savedCrew=localStorage.getItem(
-  STORAGE.crew
-);
-
-if(savedCrew){
-  document.getElementById("crew").value=savedCrew;
+function saveCrew(){
+  crew=Math.max(1,Number(document.getElementById("crew").value)||9);
+  localStorage.setItem("dapurKapalCrewV13",crew);
+  renderAll();
 }
 
 
-function getCrew(){
-
-  const value=parseInt(
-    document.getElementById("crew").value,
-    10
-  );
-
-  return value>0 ? value : 9;
+function toggleDark(){
+  dark=!dark;
+  document.body.classList.toggle("dark",dark);
+  localStorage.setItem("dapurKapalDarkV13",dark?"1":"0");
 }
 
-
-document.getElementById("crew").addEventListener(
-  "change",
-  function(){
-
-    localStorage.setItem(
-      STORAGE.crew,
-      getCrew()
-    );
-
-    renderRecipes();
-  }
-);
-
-
-/* =====================================================
-   DARK MODE
-===================================================== */
-
-if(
-  localStorage.getItem(STORAGE.dark)==="1"
-){
-  document.body.classList.add("dark");
-}
-
-
-document.getElementById("darkBtn").addEventListener(
-  "click",
-  function(){
-
-    document.body.classList.toggle("dark");
-
-    localStorage.setItem(
-      STORAGE.dark,
-      document.body.classList.contains("dark")
-        ? "1"
-        : "0"
-    );
-
-  }
-);
-
-
-/* =====================================================
-   ESCAPE TEXT
-===================================================== */
-
-function safeText(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-/* =====================================================
-   FIND RECIPE
-===================================================== */
-
-function getRecipe(id){
-
-  return allRecipes.find(
-    function(recipe){
-      return String(recipe.id)===String(id);
-    }
-  );
-}
-
-
-/* =====================================================
-   FORMAT NUMBER
-===================================================== */
-
-function numberFormat(value){
-
-  return Number(value).toLocaleString(
-    "id-ID",
-    {
-      maximumFractionDigits:2
-    }
-  );
-}
-
-
-/* =====================================================
-   RENDER RECIPES
-===================================================== */
 
 function renderRecipes(){
 
-  const container=
-    document.getElementById("recipes");
+  const q=(document.getElementById("search").value||"").toLowerCase();
+  const cat=document.getElementById("category").value;
 
-  const search=
-    document.getElementById("search")
-      .value
-      .toLowerCase()
-      .trim();
+  let list=allRecipes().filter(r=>{
+    const matchText=
+      r.name.toLowerCase().includes(q) ||
+      r.category.toLowerCase().includes(q);
 
-  const category=
-    document.getElementById("category")
-      .value;
+    const matchCat=!cat || r.category===cat;
 
-  const filtered=allRecipes.filter(
-    function(recipe){
+    return matchText && matchCat;
+  });
 
-      const textMatch=
-        recipe.name.toLowerCase().includes(search) ||
-        recipe.category.toLowerCase().includes(search);
+  document.getElementById("recipes").innerHTML=list.map(r=>{
 
-      const categoryMatch=
-        !category ||
-        recipe.category===category;
+    const fav=favorites.includes(r.id);
 
-      return textMatch && categoryMatch;
-    }
-  );
+    return `
+      <div class="recipe">
+        <h3>${fav?"⭐ ":""}${r.name}</h3>
 
+        <span class="badge">${r.category}</span>
+        <span class="badge">${r.servings} orang</span>
 
-  if(filtered.length===0){
+        <p class="small">
+          ⏱️ ${r.prep} persiapan · ${r.cook} memasak
+        </p>
 
-    container.innerHTML=
-      '<div class="card">❌ Resep tidak ditemukan.</div>';
+        <button onclick="viewRecipe(${r.id})">👀 Lihat</button>
+        <button class="blue" onclick="chefMode(${r.id})">👨‍🍳 Chef</button>
+        <button onclick="toggleFavorite(${r.id})">
+          ${fav?"💔 Hapus Favorit":"⭐ Favorit"}
+        </button>
 
-    return;
-  }
+        ${
+          r.id>1000
+          ? `<button class="danger" onclick="deleteRecipe(${r.id})">🗑️ Hapus</button>`
+          :""
+        }
+      </div>
+    `;
+  }).join("");
 
-
-  container.innerHTML=
-    filtered.map(
-      function(recipe){
-
-        const isFavorite=
-          favorites.includes(recipe.id);
-
-        return `
-        <div class="card">
-
-          <h3>
-            ${safeText(recipe.name)}
-          </h3>
-
-          <span class="badge">
-            ${safeText(recipe.category)}
-          </span>
-
-          <span class="badge">
-            👥 ${recipe.servings} orang
-          </span>
-
-          <div class="info-grid">
-
-            <div class="info">
-              ⏱ ${safeText(recipe.prep)}
-            </div>
-
-            <div class="info">
-              🔥 ${safeText(recipe.fire)}
-            </div>
-
-            <div class="info">
-              ✓ ${safeText(recipe.done)}
-            </div>
-
-          </div>
-
-          <div class="recipe-actions">
-
-            <button
-              class="btn"
-              onclick="showRecipe(${recipe.id})"
-            >
-              📖 Lihat Resep
-            </button>
-
-            <button
-              class="orange"
-              onclick="chefMode(${recipe.id})"
-            >
-              👨‍🍳 Mode Chef
-            </button>
-
-            <button
-              class="gray"
-              onclick="toggleFavorite(${recipe.id})"
-            >
-              ${isFavorite ? "⭐" : "☆"} Favorit
-            </button>
-
-            ${
-              recipe.id>=100000
-              ?
-              `
-              <button
-                class="gray"
-                onclick="editRecipe(${recipe.id})"
-              >
-                ✏️ Edit
-              </button>
-
-              <button
-                class="red"
-                onclick="deleteRecipe(${recipe.id})"
-              >
-                🗑️
-              </button>
-              `
-              :
-              ""
-            }
-
-          </div>
-
-        </div>
-        `;
-
-      }
-    ).join("");
-
+  updateStats();
 }
 
 
-/* =====================================================
-   FAVORITE
-===================================================== */
+function findRecipe(id){
+  return allRecipes().find(r=>Number(r.id)===Number(id));
+}
 
-function toggleFavorite(id){
 
-  if(favorites.includes(id)){
+function scaleIngredient(item,r){
 
-    favorites=
-      favorites.filter(
-        function(x){
-          return x!==id;
-        }
-      );
+  const factor=crew/r.servings;
 
+  const amount=Number(item[1])*factor;
+
+  let text=amount;
+
+  if(Number.isInteger(amount)){
+    text=amount;
   }else{
-
-    favorites.push(id);
-
+    text=amount.toFixed(2).replace(/\.?0+$/,"");
   }
 
-  saveData(
-    STORAGE.favorite,
-    favorites
-  );
-
-  renderRecipes();
+  return `${text} ${item[2]} ${item[0]}`;
 }
 
 
-/* =====================================================
-   MODAL
-===================================================== */
+function viewRecipe(id){
 
-function openModal(){
+  const r=findRecipe(id);
 
-  document
-    .getElementById("modal")
-    .classList
-    .remove("hidden");
+  if(!r)return;
 
-}
+  const note=localStorage.getItem("dapurKapalNote_"+id)||"";
 
+  document.getElementById("recipeDetail").innerHTML=`
 
-function closeModal(){
+    <h2>${r.name}</h2>
 
-  document
-    .getElementById("modal")
-    .classList
-    .add("hidden");
+    <span class="badge">${r.category}</span>
 
-}
+    <p>
+      👨‍✈️ Porsi: <b>${crew} orang</b><br>
+      🔥 Api: ${r.fire}<br>
+      ⏱️ Persiapan: ${r.prep}<br>
+      ⏱️ Masak: ${r.cook}
+    </p>
 
+    <hr>
 
-document
-  .getElementById("closeModal")
-  .addEventListener(
-    "click",
-    closeModal
-  );
-
-
-document
-  .getElementById("modal")
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target===
-        document.getElementById("modal")
-      ){
-        closeModal();
-      }
-
-    }
-  );
-
-
-/* =====================================================
-   SHOW RECIPE
-===================================================== */
-
-function showRecipe(id){
-
-  const recipe=getRecipe(id);
-
-  if(!recipe){
-    alert("Resep tidak ditemukan.");
-    return;
-  }
-
-
-  const ratio=
-    getCrew()/recipe.servings;
-
-
-  const ingredientHTML=
-    recipe.ingredients.map(
-      function(item){
-
-        let amount=item[1];
-
-        if(typeof amount==="number"){
-          amount=
-            Math.round(
-              amount*ratio*100
-            )/100;
-        }
-
-        return `
-          <li>
-            ${safeText(item[0])}:
-            <b>${safeText(amount)}</b>
-            ${safeText(item[2])}
-          </li>
-        `;
-
-      }
-    ).join("");
-
-
-  const stepsHTML=
-    recipe.steps.map(
-      function(step,index){
-
-        return `
-          <li>
-            ${safeText(step)}
-          </li>
-        `;
-
-      }
-    ).join("");
-
-
-  const noteKey=
-    "dapurKapalNote_"+recipe.id;
-
-  const note=
-    localStorage.getItem(noteKey) || "";
-
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=`
-
-    <h2>
-      ${safeText(recipe.name)}
-    </h2>
-
-    <span class="badge">
-      ${safeText(recipe.category)}
-    </span>
-
-    <span class="badge">
-      👥 ${getCrew()} orang
-    </span>
-
-    <div class="info-grid">
-
-      <div class="info">
-        ⏱ ${safeText(recipe.prep)}
-      </div>
-
-      <div class="info">
-        🔥 ${safeText(recipe.fire)}
-      </div>
-
-      <div class="info">
-        ✓ ${safeText(recipe.done)}
-      </div>
-
-    </div>
-
-    <h3>🥘 Bahan</h3>
+    <h3>🛒 Bahan</h3>
 
     <ul>
-      ${ingredientHTML}
+      ${r.ingredients.map(x=>`
+        <li>${scaleIngredient(x,r)}</li>
+      `).join("")}
     </ul>
 
     <h3>👨‍🍳 Cara Memasak</h3>
 
-    <ol>
-      ${stepsHTML}
+    <ol class="steps">
+      ${r.steps.map(x=>`<li>${x}</li>`).join("")}
     </ol>
 
-    <h3>🚢 Tips Kapal</h3>
+    <h3>✅ Tanda Matang</h3>
+    <p>${r.done||"Pastikan bahan matang sempurna."}</p>
 
-    <div class="step">
-      ${safeText(recipe.ship)}
-    </div>
+    <h3>🚢 Tips Dapur Kapal</h3>
+    <p>${r.tip||"Masak dengan aman dan sesuaikan kondisi kapal."}</p>
+
+    <hr>
 
     <h3>📝 Catatan</h3>
 
     <textarea
       id="recipeNote"
       rows="4"
-      placeholder="Catatan untuk resep ini..."
-    >${safeText(note)}</textarea>
+      placeholder="Contoh: kru kurang suka pedas..."
+    >${note}</textarea>
 
-    <br><br>
+    <button onclick="saveNote(${id})">💾 Simpan Catatan</button>
 
-    <button
-      class="green"
-      onclick="saveNote(${recipe.id})"
-    >
-      💾 Simpan Catatan
-    </button>
-
-    <button
-      class="orange"
-      onclick="chefMode(${recipe.id})"
-    >
-      👨‍🍳 Mode Chef
-    </button>
   `;
 
-
-  openModal();
-
+  document.getElementById("recipeModal").style.display="block";
 }
 
 
 function saveNote(id){
 
-  const element=
-    document.getElementById("recipeNote");
+  const note=document.getElementById("recipeNote").value;
 
-  if(!element)return;
+  localStorage.setItem("dapurKapalNote_"+id,note);
 
-  localStorage.setItem(
-    "dapurKapalNote_"+id,
-    element.value
-  );
-
-  alert("Catatan berhasil disimpan.");
-
+  alert("Catatan disimpan 👍");
 }
-
-
-/* =====================================================
-   CHEF MODE
-===================================================== */
-
-let chefTimer=null;
-let chefSeconds=0;
 
 
 function chefMode(id){
 
-  const recipe=getRecipe(id);
+  const r=findRecipe(id);
 
-  if(!recipe)return;
+  if(!r)return;
 
+  let current=0;
 
-  let currentStep=0;
+  function render(){
 
+    const total=r.steps.length;
+    const progress=((current+1)/total)*100;
 
-  function renderChef(){
-
-    document.getElementById(
-      "modalContent"
-    ).innerHTML=`
+    document.getElementById("chefContent").innerHTML=`
 
       <h2>👨‍🍳 Mode Chef</h2>
 
-      <h3>
-        ${safeText(recipe.name)}
-      </h3>
+      <h3>${r.name}</h3>
 
       <p>
-        Langkah
-        <b>${currentStep+1}</b>
-        dari
-        <b>${recipe.steps.length}</b>
+        Langkah <b>${current+1}</b> dari ${total}
       </p>
 
-      <div class="step">
-        ${safeText(recipe.steps[currentStep])}
+      <div class="progress">
+        <div style="width:${progress}%"></div>
       </div>
 
-      <div
-        class="timer"
-        id="chefTimer"
-      >
-        00:00
+      <div class="card">
+        <h2>${r.steps[current]}</h2>
       </div>
 
-      <div class="recipe-actions">
+      <button
+        ${current===0?"disabled":""}
+        onclick="chefBack()">
+        ⬅️ Sebelumnya
+      </button>
 
-        <button
-          class="orange"
-          onclick="startTimer()"
-        >
-          ▶️ Timer
-        </button>
+      <button onclick="chefNext()">
+        ${current===total-1?"✅ Selesai":"➡️ Berikutnya"}
+      </button>
 
-        <button
-          class="gray"
-          onclick="resetTimer()"
-        >
-          ↺ Reset
-        </button>
+      <hr>
 
-      </div>
+      <h3>⏱️ Timer</h3>
 
-      <br>
+      <input id="timerMinutes" type="number" value="5" min="1">
 
-      <div class="recipe-actions">
+      <button onclick="startTimer()">▶️ Mulai Timer</button>
 
-        <button
-          class="gray"
-          onclick="previousStep()"
-        >
-          ⬅️ Sebelumnya
-        </button>
-
-        <button
-          class="btn"
-          onclick="nextStep()"
-        >
-          Berikutnya ➡️
-        </button>
-
-      </div>
+      <h2 id="timerDisplay">05:00</h2>
     `;
 
-
-    window.nextStep=function(){
-
-      if(
-        currentStep<
-        recipe.steps.length-1
-      ){
-
-        currentStep++;
-
-        resetTimer();
-
-        renderChef();
-
-      }else{
-
-        resetTimer();
-
-        document.getElementById(
-          "modalContent"
-        ).innerHTML=`
-
-          <h2>🎉 Masakan Selesai!</h2>
-
-          <p>
-            <b>${safeText(recipe.name)}</b>
-            sudah selesai dimasak.
-          </p>
-
-          <div class="step">
-            Cek rasa sekali lagi sebelum disajikan.
-          </div>
-
-          <button
-            class="green"
-            onclick="closeModal()"
-          >
-            ✓ Selesai
-          </button>
-        `;
-
-      }
-
-    };
-
-
-    window.previousStep=function(){
-
-      if(currentStep>0){
-
-        currentStep--;
-
-        resetTimer();
-
-        renderChef();
-
-      }
-
-    };
-
+    window.currentChefStep=current;
+    window.currentChefRecipe=id;
   }
 
+  window.chefBack=function(){
+    if(current>0){
+      current--;
+      render();
+    }
+  };
 
-  renderChef();
+  window.chefNext=function(){
+    if(current<r.steps.length-1){
+      current++;
+      render();
+    }else{
+      alert("Masakan selesai! 🔥");
+    }
+  };
 
-  openModal();
+  render();
 
+  document.getElementById("chefModal").style.display="block";
 }
+
+
+let timerInterval=null;
+let timerSeconds=0;
 
 
 function startTimer(){
 
-  if(chefTimer)return;
+  clearInterval(timerInterval);
 
-  chefTimer=setInterval(
-    function(){
+  let minutes=Number(document.getElementById("timerMinutes").value)||5;
 
-      chefSeconds++;
+  timerSeconds=minutes*60;
 
-      const minutes=
-        Math.floor(
-          chefSeconds/60
-        );
+  timerInterval=setInterval(()=>{
 
-      const seconds=
-        chefSeconds%60;
+    timerSeconds--;
 
-      const element=
-        document.getElementById("chefTimer");
+    const m=Math.floor(timerSeconds/60);
+    const s=timerSeconds%60;
 
-      if(element){
+    const el=document.getElementById("timerDisplay");
 
-        element.textContent=
-          String(minutes).padStart(2,"0")+
-          ":"+
-          String(seconds).padStart(2,"0");
+    if(el){
+      el.textContent=
+        String(m).padStart(2,"0")+":"+
+        String(s).padStart(2,"0");
+    }
 
-      }
+    if(timerSeconds<=0){
+      clearInterval(timerInterval);
+      alert("⏰ TIMER SELESAI!");
+    }
 
-    },
-    1000
-  );
-
+  },1000);
 }
 
 
-function resetTimer(){
+function toggleFavorite(id){
 
-  clearInterval(chefTimer);
+  id=Number(id);
 
-  chefTimer=null;
-
-  chefSeconds=0;
-
-  const element=
-    document.getElementById("chefTimer");
-
-  if(element){
-    element.textContent="00:00";
+  if(favorites.includes(id)){
+    favorites=favorites.filter(x=>x!==id);
+  }else{
+    favorites.push(id);
   }
 
+  save("dapurKapalFavoritesV13",favorites);
+
+  renderRecipes();
 }
 
 
-/* =====================================================
-   ADD / EDIT RECIPE
-===================================================== */
-
-function showAddRecipe(){
-
-  editRecipe(null);
-
+function openAddRecipe(){
+  document.getElementById("addModal").style.display="block";
 }
 
 
-function editRecipe(id){
+function saveCustomRecipe(){
 
-  const recipe=
-    id ? getRecipe(id) : null;
-
-
-  const categoryOptions=[
-    "Sarapan",
-    "Ikan",
-    "Ayam",
-    "Praktis",
-    "Lainnya"
-  ];
-
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=`
-
-    <h2>
-      ${recipe ? "✏️ Edit Resep" : "➕ Tambah Resep"}
-    </h2>
-
-    <input
-      id="recipeName"
-      placeholder="Nama resep"
-      value="${recipe ? safeText(recipe.name) : ""}"
-    >
-
-    <br><br>
-
-    <select id="recipeCategory">
-
-      ${
-        categoryOptions.map(
-          function(category){
-
-            return `
-              <option
-                value="${category}"
-                ${
-                  recipe &&
-                  recipe.category===category
-                  ? "selected"
-                  : ""
-                }
-              >
-                ${category}
-              </option>
-            `;
-
-          }
-        ).join("")
-      }
-
-    </select>
-
-    <br><br>
-
-    <input
-      id="recipeServings"
-      type="number"
-      min="1"
-      value="${recipe ? recipe.servings : 9}"
-      placeholder="Jumlah porsi"
-    >
-
-    <br><br>
-
-    <input
-      id="recipePrep"
-      placeholder="Waktu"
-      value="${recipe ? safeText(recipe.prep) : "15 menit"}"
-    >
-
-    <br><br>
-
-    <input
-      id="recipeFire"
-      placeholder="Api"
-      value="${recipe ? safeText(recipe.fire) : "Sedang"}"
-    >
-
-    <br><br>
-
-    <textarea
-      id="recipeIngredients"
-      rows="8"
-      placeholder="Satu bahan per baris.
-
-Contoh:
-Tempe | 700 | gram
-Telur | 9 | butir
-Minyak | 100 | ml"
-    >${
-      recipe
-      ?
-      recipe.ingredients
-        .map(function(item){
-          return item.join(" | ");
-        })
-        .join("\n")
-      :
-      ""
-    }</textarea>
-
-    <br><br>
-
-    <textarea
-      id="recipeSteps"
-      rows="10"
-      placeholder="Satu langkah per baris"
-    >${
-      recipe
-      ?
-      recipe.steps.join("\n")
-      :
-      ""
-    }</textarea>
-
-    <br><br>
-
-    <textarea
-      id="recipeShip"
-      rows="4"
-      placeholder="Tips untuk dapur kapal"
-    >${recipe ? safeText(recipe.ship) : ""}</textarea>
-
-    <br><br>
-
-    <button
-      class="green"
-      onclick="saveRecipe(${id || 0})"
-    >
-      💾 Simpan Resep
-    </button>
-  `;
-
-
-  openModal();
-
-}
-
-
-function saveRecipe(id){
-
-  const name=
-    document.getElementById(
-      "recipeName"
-    ).value.trim();
-
+  const name=document.getElementById("newName").value.trim();
 
   if(!name){
-
     alert("Nama resep belum diisi.");
-
     return;
   }
 
+  const ingredientText=
+    document.getElementById("newIngredients").value.trim();
 
-  const ingredients=
-    document.getElementById(
-      "recipeIngredients"
-    ).value
+  const stepsText=
+    document.getElementById("newSteps").value.trim();
+
+  const ingredients=ingredientText
     .split("\n")
-    .map(function(line){
-
-      return line.trim();
-
-    })
     .filter(Boolean)
-    .map(function(line){
+    .map(line=>{
 
-      const parts=
-        line.split("|")
-        .map(function(x){
-          return x.trim();
-        });
+      const parts=line.trim().split(/\s+/);
 
-
-      let amount=
-        Number(parts[1]);
-
-
-      if(Number.isNaN(amount)){
-        amount=parts[1] || "";
-      }
-
+      const amount=Number(parts[1])||1;
 
       return [
-        parts[0] || "",
+        parts.slice(2).join(" ")||parts[0],
         amount,
-        parts[2] || ""
+        parts[1] && isNaN(parts[1])?"":(parts[2]||"buah")
       ];
 
     });
 
-
-  const steps=
-    document.getElementById(
-      "recipeSteps"
-    ).value
+  const steps=stepsText
     .split("\n")
-    .map(function(x){
-      return x.trim();
-    })
+    .map(x=>x.replace(/^\d+\.\s*/,""))
     .filter(Boolean);
 
+  const recipe={
+    id:Date.now(),
+    name,
+    category:document.getElementById("newCategory").value,
+    servings:9,
+    ingredients,
+    steps,
+    prep:"10 menit",
+    cook:"20 menit",
+    fire:"Sedang",
+    done:"Pastikan matang sempurna.",
+    tip:"Sesuaikan dengan kondisi dapur kapal."
+  };
 
-  if(id){
+  customRecipes.push(recipe);
 
-    const recipe=getRecipe(id);
+  save("dapurKapalCustomV13",customRecipes);
 
-    if(recipe){
+  closeModal("addModal");
 
-      recipe.name=name;
+  document.getElementById("newName").value="";
+  document.getElementById("newIngredients").value="";
+  document.getElementById("newSteps").value="";
 
-      recipe.category=
-        document.getElementById(
-          "recipeCategory"
-        ).value;
+  renderAll();
 
-      recipe.servings=
-        Number(
-          document.getElementById(
-            "recipeServings"
-          ).value
-        ) || 9;
-
-      recipe.prep=
-        document.getElementById(
-          "recipePrep"
-        ).value;
-
-      recipe.fire=
-        document.getElementById(
-          "recipeFire"
-        ).value;
-
-      recipe.done=
-        "Masakan matang dan rasa sudah sesuai";
-
-      recipe.ship=
-        document.getElementById(
-          "recipeShip"
-        ).value;
-
-      recipe.ingredients=
-        ingredients;
-
-      recipe.steps=
-        steps;
-
-    }
-
-  }else{
-
-    const newRecipe={
-
-      id:Date.now(),
-
-      name:name,
-
-      category:
-        document.getElementById(
-          "recipeCategory"
-        ).value,
-
-      servings:
-        Number(
-          document.getElementById(
-            "recipeServings"
-          ).value
-        ) || 9,
-
-      prep:
-        document.getElementById(
-          "recipePrep"
-        ).value,
-
-      fire:
-        document.getElementById(
-          "recipeFire"
-        ).value,
-
-      done:
-        "Masakan matang dan rasa sudah sesuai",
-
-      ship:
-        document.getElementById(
-          "recipeShip"
-        ).value,
-
-      ingredients:ingredients,
-
-      steps:steps
-
-    };
-
-
-    customRecipes.push(newRecipe);
-
-  }
-
-
-  allRecipes=
-    recipes.concat(customRecipes);
-
-
-  saveData(
-    STORAGE.custom,
-    customRecipes
-  );
-
-
-  closeModal();
-
-  renderRecipes();
-
-  alert("Resep berhasil disimpan.");
-
+  alert("Resep berhasil ditambahkan 👍");
 }
 
 
 function deleteRecipe(id){
 
-  if(
-    !confirm("Yakin ingin menghapus resep ini?")
-  ){
-    return;
-  }
-
+  if(!confirm("Hapus resep ini?"))return;
 
   customRecipes=
-    customRecipes.filter(
-      function(recipe){
-        return recipe.id!==id;
-      }
-    );
+    customRecipes.filter(r=>Number(r.id)!==Number(id));
 
+  save("dapurKapalCustomV13",customRecipes);
 
-  allRecipes=
-    recipes.concat(customRecipes);
-
-
-  saveData(
-    STORAGE.custom,
-    customRecipes
-  );
-
-
-  renderRecipes();
-
+  renderAll();
 }
 
 
-/* =====================================================
-   WEEKLY MENU
-===================================================== */
+function normalizeWeekly(){
 
-function showWeekly(){
+  DAYS.forEach(day=>{
+
+    if(!weekly[day]){
+      weekly[day]={
+        breakfast:"",
+        lunch:"",
+        dinner:""
+      };
+    }
+
+    if(typeof weekly[day]!=="object"){
+      weekly[day]={
+        breakfast:"",
+        lunch:weekly[day]||"",
+        dinner:""
+      };
+    }
+
+  });
+
+  save("dapurKapalWeeklyMenuV13",weekly);
+}
+
+
+function renderWeekly(){
 
   normalizeWeekly();
 
+  const list=allRecipes();
 
-  let html=`
+  document.getElementById("weekly").innerHTML=
+    DAYS.map(day=>{
 
-    <h2>📅 Menu 7 Hari</h2>
-
-    <div class="card">
-
-      <b>👨‍🍳 Jumlah kru:</b>
-      ${getCrew()} orang
-
-      <p>
-        Pilih menu untuk sarapan, siang, dan malam.
-      </p>
-
-    </div>
-  `;
-
-
-  days.forEach(
-    function(day){
-
-      html+=`
-
+      return `
         <div class="day">
 
-          <h3>
-            📆 ${day}
-          </h3>
-      `;
+          <h3>📅 ${day}</h3>
 
+          ${SLOTS.map(slot=>{
 
-      meals.forEach(
-        function(meal){
+            const selected=weekly[day][slot.key]||"";
 
-          const selected=
-            weekly[day][meal.key] || "";
+            return `
+              <div class="slot">
 
+                <div class="slot-title">
+                  ${slot.name}
+                </div>
 
-          html+=`
+                <select
+                  onchange="setMenu('${day}','${slot.key}',this.value)"
+                >
 
-            <div class="meal">
+                  <option value="">-- Pilih menu --</option>
 
-              <div class="meal-label">
-                ${meal.label}
+                  ${list.map(r=>`
+                    <option
+                      value="${r.id}"
+                      ${String(selected)===String(r.id)?"selected":""}
+                    >
+                      ${r.name}
+                    </option>
+                  `).join("")}
+
+                </select>
+
               </div>
+            `;
 
-              <select
-                onchange="
-                  changeWeekly(
-                    '${day}',
-                    '${meal.key}',
-                    this.value
-                  )
-                "
-              >
+          }).join("")}
 
-                <option value="">
-                  -- Pilih menu --
-                </option>
-
-                ${
-                  allRecipes.map(
-                    function(recipe){
-
-                      return `
-                        <option
-                          value="${recipe.id}"
-                          ${
-                            String(recipe.id)===
-                            String(selected)
-                            ? "selected"
-                            : ""
-                          }
-                        >
-                          ${safeText(recipe.name)}
-                        </option>
-                      `;
-
-                    }
-                  ).join("")
-                }
-
-              </select>
-
-            </div>
-          `;
-
-        }
-      );
-
-
-      html+=`
         </div>
       `;
 
-    }
-  );
-
-
-  html+=`
-
-    <button
-      class="green"
-      onclick="createWeeklyShopping()"
-    >
-      🛒 Buat Daftar Belanja
-    </button>
-
-    <button
-      class="btn"
-      onclick="showReport()"
-    >
-      📊 Laporan
-    </button>
-  `;
-
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=html;
-
-
-  openModal();
-
+    }).join("");
 }
 
 
-function changeWeekly(day,meal,id){
+function setMenu(day,slot,id){
 
-  normalizeWeekly();
+  weekly[day][slot]=id;
 
-  weekly[day][meal]=id;
+  save("dapurKapalWeeklyMenuV13",weekly);
 
-  saveData(
-    STORAGE.weekly,
-    weekly
-  );
-
+  renderWeekly();
 }
 
 
-/* =====================================================
-   WEEKLY REQUIREMENTS
-===================================================== */
+function randomRecipe(category){
 
-function getWeeklyRequirements(){
+  let list=allRecipes();
 
-  normalizeWeekly();
+  if(category){
+    const filtered=list.filter(r=>r.category===category);
 
+    if(filtered.length)list=filtered;
+  }
 
-  const requirements={};
-
-
-  days.forEach(
-    function(day){
-
-      meals.forEach(
-        function(meal){
-
-          const id=
-            weekly[day][meal.key];
-
-
-          if(!id)return;
-
-
-          const recipe=
-            getRecipe(id);
-
-
-          if(!recipe)return;
-
-
-          const ratio=
-            getCrew()/recipe.servings;
-
-
-          recipe.ingredients.forEach(
-            function(item){
-
-              const name=item[0];
-
-              const amount=item[1];
-
-              const unit=item[2];
-
-
-              if(
-                typeof amount!=="number"
-              ){
-                return;
-              }
-
-
-              const key=
-                name+"|"+unit;
-
-
-              if(!requirements[key]){
-
-                requirements[key]={
-                  name:name,
-                  unit:unit,
-                  amount:0
-                };
-
-              }
-
-
-              requirements[key].amount +=
-                amount*ratio;
-
-            }
-          );
-
-        }
-      );
-
-    }
-  );
-
-
-  return requirements;
-
+  return list[Math.floor(Math.random()*list.length)];
 }
 
 
-/* =====================================================
-   SHOPPING
-===================================================== */
+function generateMenu(){
 
-function createWeeklyShopping(){
+  const breakfast=
+    allRecipes().filter(r=>r.category==="Sarapan");
 
-  const requirements=
-    getWeeklyRequirements();
-
-
-  shopping=
-    Object.values(requirements)
-    .map(
-      function(item){
-
-        return {
-          name:item.name,
-          unit:item.unit,
-          amount:
-            Math.round(
-              item.amount*100
-            )/100,
-          checked:false
-        };
-
-      }
+  const normal=
+    allRecipes().filter(r=>
+      r.category!=="Sarapan"
     );
 
+  DAYS.forEach(day=>{
 
-  saveData(
-    STORAGE.shopping,
-    shopping
-  );
+    let b=breakfast.length
+      ? breakfast[Math.floor(Math.random()*breakfast.length)]
+      : randomRecipe();
+
+    let l=normal[Math.floor(Math.random()*normal.length)];
+
+    let d=normal[Math.floor(Math.random()*normal.length)];
+
+    weekly[day]={
+      breakfast:b.id,
+      lunch:l.id,
+      dinner:d.id
+    };
+
+  });
+
+  save("dapurKapalWeeklyMenuV13",weekly);
+
+  renderWeekly();
+
+  alert("Menu 7 hari berhasil dibuat 🎲");
+}
 
 
-  alert(
-    "Daftar belanja berhasil dibuat dari menu Sarapan + Siang + Malam."
-  );
+function clearMenu(){
+
+  if(!confirm("Kosongkan semua menu minggu ini?"))return;
+
+  weekly={};
+
+  normalizeWeekly();
+
+  renderWeekly();
+}
 
 
-  showShopping();
+function addStock(){
 
+  const name=document.getElementById("stockName").value.trim();
+  const qty=Number(document.getElementById("stockQty").value);
+  const unit=document.getElementById("stockUnit").value.trim();
+
+  if(!name||!qty){
+    alert("Isi nama dan jumlah stok.");
+    return;
+  }
+
+  stock.push({
+    id:Date.now(),
+    name,
+    qty,
+    unit
+  });
+
+  save("dapurKapalStockV13",stock);
+
+  document.getElementById("stockName").value="";
+  document.getElementById("stockQty").value="";
+  document.getElementById("stockUnit").value="";
+
+  renderStock();
+}
+
+
+function renderStock(){
+
+  const el=document.getElementById("stockList");
+
+  if(!stock.length){
+    el.innerHTML="<p>Belum ada stok.</p>";
+    return;
+  }
+
+  el.innerHTML=stock.map(s=>`
+
+    <div class="recipe">
+
+      <b>${s.name}</b>
+
+      <p>
+        Stok: ${s.qty} ${s.unit}
+      </p>
+
+      <button
+        onclick="changeStock(${s.id},1)">
+        ➕
+      </button>
+
+      <button
+        class="secondary"
+        onclick="changeStock(${s.id},-1)">
+        ➖
+      </button>
+
+      <button
+        class="danger"
+        onclick="deleteStock(${s.id})">
+        🗑️
+      </button>
+
+    </div>
+
+  `).join("");
+}
+
+
+function changeStock(id,value){
+
+  const s=stock.find(x=>x.id===id);
+
+  if(!s)return;
+
+  s.qty=Math.max(0,s.qty+value);
+
+  save("dapurKapalStockV13",stock);
+
+  renderStock();
+}
+
+
+function deleteStock(id){
+
+  stock=stock.filter(s=>s.id!==id);
+
+  save("dapurKapalStockV13",stock);
+
+  renderStock();
+}
+
+
+function collectWeeklyIngredients(){
+
+  const totals={};
+
+  DAYS.forEach(day=>{
+
+    SLOTS.forEach(slot=>{
+
+      const id=weekly[day][slot.key];
+
+      if(!id)return;
+
+      const r=findRecipe(id);
+
+      if(!r)return;
+
+      r.ingredients.forEach(item=>{
+
+        const name=item[0].toLowerCase();
+        const amount=
+          Number(item[1])*
+          crew/
+          r.servings;
+
+        const unit=item[2];
+
+        const key=name+"|"+unit;
+
+        if(!totals[key]){
+          totals[key]={
+            name:item[0],
+            qty:0,
+            unit
+          };
+        }
+
+        totals[key].qty+=amount;
+
+      });
+
+    });
+
+  });
+
+  return Object.values(totals);
 }
 
 
 function showShopping(){
 
-  if(!shopping.length){
+  const items=collectWeeklyIngredients();
 
-    createWeeklyShopping();
+  document.getElementById("shoppingContent").innerHTML=`
 
-    return;
-  }
-
-
-  let html=`
-
-    <h2>🛒 Daftar Belanja</h2>
+    <h2>🛒 Daftar Belanja 7 Hari</h2>
 
     <p>
-      Untuk ${getCrew()} kru.
+      Untuk <b>${crew} kru</b>
     </p>
-  `;
 
+    <ul>
+      ${items.map(x=>`
+        <li>
+          <b>${x.name}</b> —
+          ${x.qty.toFixed(2)} ${x.unit}
+        </li>
+      `).join("")}
+    </ul>
 
-  shopping.forEach(
-    function(item,index){
-
-      html+=`
-
-        <div class="stock-row">
-
-          <label>
-            <input
-              type="checkbox"
-              ${
-                item.checked
-                ? "checked"
-                : ""
-              }
-              onchange="
-                toggleShopping(${index})
-              "
-            >
-
-            ${safeText(item.name)}
-          </label>
-
-          <b>
-            ${numberFormat(item.amount)}
-          </b>
-
-          <span>
-            ${safeText(item.unit)}
-          </span>
-
-        </div>
-      `;
-
+    ${
+      !items.length
+      ? "<p>Belum ada menu mingguan.</p>"
+      :""
     }
-  );
 
-
-  html+=`
-
-    <br>
-
-    <button
-      class="green"
-      onclick="createWeeklyShopping()"
-    >
-      🔄 Hitung Ulang
-    </button>
-
-    <button
-      class="orange"
-      onclick="showStock()"
-    >
-      📦 Cek Stok
-    </button>
   `;
 
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=html;
-
-
-  openModal();
-
+  document.getElementById("shoppingModal").style.display="block";
 }
 
-
-function toggleShopping(index){
-
-  shopping[index].checked=
-    !shopping[index].checked;
-
-
-  saveData(
-    STORAGE.shopping,
-    shopping
-  );
-
-}
-
-
-/* =====================================================
-   STOCK
-===================================================== */
-
-function showStock(){
-
-  if(!shopping.length){
-
-    createWeeklyShopping();
-
-    return;
-  }
-
-
-  let html=`
-
-    <h2>📦 Stok Kapal</h2>
-
-    <p>
-      Masukkan stok bahan yang tersedia.
-    </p>
-  `;
-
-
-  shopping.forEach(
-    function(item){
-
-      const key=
-        item.name+"|"+item.unit;
-
-
-      const current=
-        Number(stock[key] || 0);
-
-
-      html+=`
-
-        <div class="stock-row">
-
-          <b>
-            ${safeText(item.name)}
-          </b>
-
-          <input
-            type="number"
-            min="0"
-            value="${current}"
-            onchange="
-              saveStock(
-                '${encodeURIComponent(key)}',
-                this.value
-              )
-            "
-          >
-
-          <span>
-            ${safeText(item.unit)}
-          </span>
-
-        </div>
-      `;
-
-    }
-  );
-
-
-  html+=`
-
-    <br>
-
-    <button
-      class="orange"
-      onclick="showStockNeed()"
-    >
-      🛒 Cek Kekurangan
-    </button>
-  `;
-
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=html;
-
-
-  openModal();
-
-}
-
-
-function saveStock(encoded,value){
-
-  const key=
-    decodeURIComponent(encoded);
-
-
-  stock[key]=
-    Number(value) || 0;
-
-
-  saveData(
-    STORAGE.stock,
-    stock
-  );
-
-}
-
-
-function showStockNeed(){
-
-  let html=`
-
-    <h2>🛒 Bahan yang Kurang</h2>
-  `;
-
-
-  let found=false;
-
-
-  shopping.forEach(
-    function(item){
-
-      const key=
-        item.name+"|"+item.unit;
-
-
-      const available=
-        Number(stock[key] || 0);
-
-
-      const need=
-        Math.max(
-          0,
-          item.amount-available
-        );
-
-
-      if(need>0){
-
-        found=true;
-
-
-        html+=`
-
-          <div class="card">
-
-            <b>
-              ${safeText(item.name)}
-            </b>
-
-            <br>
-
-            Butuh:
-            ${numberFormat(item.amount)}
-            ${safeText(item.unit)}
-
-            <br>
-
-            Stok:
-            ${numberFormat(available)}
-            ${safeText(item.unit)}
-
-            <br>
-
-            <b>
-              Kurang:
-              ${numberFormat(need)}
-              ${safeText(item.unit)}
-            </b>
-
-          </div>
-        `;
-
-      }
-
-    }
-  );
-
-
-  if(!found){
-
-    html+=`
-
-      <div class="card">
-        ✅ Stok cukup untuk semua kebutuhan.
-      </div>
-    `;
-
-  }
-
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=html;
-
-
-  openModal();
-
-}
-
-
-/* =====================================================
-   REPORT
-===================================================== */
 
 function showReport(){
 
-  normalizeWeekly();
+  const items=collectWeeklyIngredients();
 
+  let totalCost=0;
 
-  const requirements=
-    getWeeklyRequirements();
+  const rows=items.map(x=>{
 
+    const key=x.name.toLowerCase();
 
-  let total=0;
+    const price=Number(prices[key])||0;
 
+    const cost=price*x.qty;
 
-  let html=`
+    totalCost+=cost;
+
+    return `
+      <tr>
+        <td>${x.name}</td>
+        <td>${x.qty.toFixed(2)} ${x.unit}</td>
+        <td>Rp ${formatMoney(price)}</td>
+        <td>Rp ${formatMoney(cost)}</td>
+      </tr>
+    `;
+
+  }).join("");
+
+  const menuRows=DAYS.map(day=>{
+
+    const b=findRecipe(weekly[day].breakfast);
+    const l=findRecipe(weekly[day].lunch);
+    const d=findRecipe(weekly[day].dinner);
+
+    return `
+      <tr>
+        <td>${day}</td>
+        <td>${b?b.name:"-"}</td>
+        <td>${l?l.name:"-"}</td>
+        <td>${d?d.name:"-"}</td>
+      </tr>
+    `;
+
+  }).join("");
+
+  document.getElementById("reportContent").innerHTML=`
 
     <h2>📊 Laporan Dapur Kapal</h2>
 
-    <div class="card">
-
-      <b>👨‍🍳 Kru:</b>
-      ${getCrew()} orang
-
-      <br>
-
-      <b>🍽️ Waktu makan:</b>
-      Sarapan + Siang + Malam
-
-    </div>
+    <p>
+      Jumlah kru: <b>${crew}</b><br>
+      Perkiraan belanja:
+      <b>Rp ${formatMoney(totalCost)}</b>
+    </p>
 
     <h3>📅 Menu Mingguan</h3>
 
-    <table>
-
+    <table border="1" cellpadding="7" width="100%">
       <tr>
         <th>Hari</th>
-        <th>🌅 Sarapan</th>
-        <th>🍛 Siang</th>
-        <th>🌙 Malam</th>
+        <th>Sarapan</th>
+        <th>Siang</th>
+        <th>Malam</th>
       </tr>
-  `;
-
-
-  days.forEach(
-    function(day){
-
-      const menu=
-        weekly[day];
-
-
-      html+=`
-
-        <tr>
-
-          <td>
-            <b>${day}</b>
-          </td>
-
-          <td>
-            ${getRecipeName(menu.breakfast)}
-          </td>
-
-          <td>
-            ${getRecipeName(menu.lunch)}
-          </td>
-
-          <td>
-            ${getRecipeName(menu.dinner)}
-          </td>
-
-        </tr>
-      `;
-
-    }
-  );
-
-
-  html+=`
+      ${menuRows}
     </table>
 
-    <h3>🧾 Kebutuhan Bahan</h3>
+    <h3>🛒 Kebutuhan Bahan</h3>
 
-    <table>
-
+    <table border="1" cellpadding="7" width="100%">
       <tr>
         <th>Bahan</th>
-        <th>Jumlah</th>
-        <th>Harga</th>
-        <th>Total</th>
+        <th>Kebutuhan</th>
+        <th>Harga/unit</th>
+        <th>Perkiraan</th>
       </tr>
-  `;
-
-
-  Object.values(requirements)
-    .forEach(
-      function(item){
-
-        const key=
-          item.name+"|"+item.unit;
-
-
-        const price=
-          Number(prices[key] || 0);
-
-
-        const subtotal=
-          item.amount*price;
-
-
-        total+=subtotal;
-
-
-        html+=`
-
-          <tr>
-
-            <td>
-              ${safeText(item.name)}
-            </td>
-
-            <td>
-              ${numberFormat(item.amount)}
-              ${safeText(item.unit)}
-            </td>
-
-            <td>
-
-              <input
-                type="number"
-                value="${price}"
-                placeholder="Harga"
-                onchange="
-                  savePrice(
-                    '${encodeURIComponent(key)}',
-                    this.value
-                  )
-                "
-              >
-
-            </td>
-
-            <td>
-              Rp ${formatRupiah(subtotal)}
-            </td>
-
-          </tr>
-        `;
-
-      }
-    );
-
-
-  html+=`
-
+      ${rows}
     </table>
 
-    <div class="total">
-      💰 Estimasi Total:
-      Rp ${formatRupiah(total)}
-    </div>
-
-    <br>
-
-    <button
-      class="green"
-      onclick="window.print()"
-    >
-      🖨️ Cetak Laporan
-    </button>
   `;
 
-
-  document.getElementById(
-    "modalContent"
-  ).innerHTML=html;
-
-
-  openModal();
-
+  document.getElementById("reportModal").style.display="block";
 }
 
 
-function getRecipeName(id){
+function formatMoney(n){
+  return Math.round(n).toLocaleString("id-ID");
+}
 
-  if(!id){
-    return "-";
+
+function renderPrices(){
+
+  const items=collectWeeklyIngredients();
+
+  document.getElementById("priceList").innerHTML=
+    items.map(x=>{
+
+      const key=x.name.toLowerCase();
+
+      return `
+        <label>${x.name}</label>
+
+        <input
+          type="number"
+          placeholder="Harga per ${x.unit}"
+          value="${prices[key]||""}"
+          onchange="setPrice('${key}',this.value)"
+        >
+      `;
+
+    }).join("");
+
+  if(!items.length){
+    document.getElementById("priceList").innerHTML=
+      "<p>Buat menu mingguan terlebih dahulu.</p>";
   }
+}
 
 
-  const recipe=
-    getRecipe(id);
+function setPrice(key,value){
+
+  prices[key]=Number(value)||0;
+
+  save("dapurKapalPricesV13",prices);
+}
 
 
-  return recipe
-    ? safeText(recipe.name)
-    : "-";
+function updateStats(){
+
+  document.getElementById("crewStat").textContent=crew;
+  document.getElementById("recipeStat").textContent=allRecipes().length;
+  document.getElementById("favStat").textContent=favorites.length;
+  document.getElementById("stockStat").textContent=stock.length;
+}
+
+
+function closeModal(id){
+  document.getElementById(id).style.display="none";
+}
+
+
+function renderAll(){
+
+  renderRecipes();
+  renderWeekly();
+  renderStock();
+  renderPrices();
+  updateStats();
 
 }
 
 
-function savePrice(encoded,value){
-
-  const key=
-    decodeURIComponent(encoded);
-
-
-  prices[key]=
-    Number(value) || 0;
-
-
-  saveData(
-    STORAGE.price,
-    prices
-  );
-
-}
-
-
-function formatRupiah(value){
-
-  return Number(
-    value || 0
-  ).toLocaleString(
-    "id-ID"
-  );
-
-}
-
-
-/* =====================================================
-   BUTTON EVENTS
-===================================================== */
-
-document
-  .getElementById("search")
-  .addEventListener(
-    "input",
-    renderRecipes
-  );
-
-
-document
-  .getElementById("category")
-  .addEventListener(
-    "change",
-    renderRecipes
-  );
-
-
-document
-  .getElementById("weeklyBtn")
-  .addEventListener(
-    "click",
-    showWeekly
-  );
-
-
-document
-  .getElementById("stockBtn")
-  .addEventListener(
-    "click",
-    showStock
-  );
-
-
-document
-  .getElementById("shoppingBtn")
-  .addEventListener(
-    "click",
-    showShopping
-  );
-
-
-document
-  .getElementById("reportBtn")
-  .addEventListener(
-    "click",
-    showReport
-  );
-
-
-document
-  .getElementById("addRecipeBtn")
-  .addEventListener(
-    "click",
-    showAddRecipe
-  );
-
-
-/* =====================================================
-   START APP
-===================================================== */
-
-normalizeWeekly();
-
-renderRecipes();
+renderAll();
 
 </script>
 
