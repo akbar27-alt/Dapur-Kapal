@@ -3,848 +3,1034 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dapur Kapal V3 ⚓</title>
+<title>Dapur Kapal V4 ⚓</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef4f7;
-    color: #222;
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+  padding-bottom:40px;
 }
 
-header {
-    background: linear-gradient(135deg, #063b5c, #087ca7);
-    color: white;
-    text-align: center;
-    padding: 35px 20px;
+header{
+  background:linear-gradient(135deg,#0b3558,#087f8c);
+  color:white;
+  padding:28px 18px 35px;
+  border-radius:0 0 28px 28px;
 }
 
-header h1 {
-    margin: 0;
-    font-size: 35px;
+.header-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:25px;
 }
 
-header p {
-    margin-bottom: 0;
+.logo{
+  font-size:24px;
+  font-weight:bold;
 }
 
-.container {
-    max-width: 850px;
-    margin: auto;
-    padding: 20px;
+.logo span{
+  display:block;
+  font-size:13px;
+  font-weight:normal;
+  opacity:.85;
+  margin-top:4px;
 }
 
-.search {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+#darkBtn{
+  border:none;
+  background:rgba(255,255,255,.18);
+  color:white;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  font-size:20px;
 }
 
-.kru {
-    width: 100%;
-    padding: 14px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 16px;
+.hero h1{
+  font-size:30px;
+  line-height:1.15;
+  margin-bottom:10px;
 }
 
-.kru-box {
-    background: white;
-    padding: 18px;
-    margin-top: 15px;
-    border-radius: 12px;
+.hero p{
+  font-size:14px;
+  opacity:.9;
 }
 
-.kategori {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    margin: 20px 0;
+.search{
+  margin-top:22px;
+  position:relative;
 }
 
-.kategori button {
-    border: none;
-    padding: 11px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    white-space: nowrap;
+.search input{
+  width:100%;
+  padding:16px 18px;
+  border:none;
+  border-radius:15px;
+  font-size:15px;
+  outline:none;
 }
 
-.recipe {
-    background: white;
-    padding: 22px;
-    margin-bottom: 25px;
-    border-radius: 16px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.08);
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 15px;
 }
 
-.recipe h2 {
-    color: #075985;
-    margin-top: 0;
+.control-box{
+  background:white;
+  padding:17px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
 }
 
-.recipe h3 {
-    margin-top: 20px;
+.control-title{
+  font-weight:bold;
+  margin-bottom:10px;
 }
 
-.recipe li {
-    margin-bottom: 9px;
-    line-height: 1.5;
+.crew{
+  display:flex;
+  gap:10px;
+  align-items:center;
 }
 
-.favorit {
-    float: right;
-    border: none;
-    background: none;
-    font-size: 25px;
-    cursor: pointer;
+.crew input{
+  width:90px;
+  padding:11px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:16px;
+  text-align:center;
 }
 
-.masak {
-    background: #087ca7;
-    color: white;
-    border: none;
-    padding: 13px 18px;
-    border-radius: 9px;
-    cursor: pointer;
-    margin-top: 10px;
+.categories{
+  display:flex;
+  gap:9px;
+  overflow-x:auto;
+  padding-bottom:4px;
 }
 
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #777;
+.categories button{
+  white-space:nowrap;
+  border:none;
+  padding:10px 15px;
+  border-radius:20px;
+  background:#e8eef4;
+  color:#34495e;
+  font-weight:bold;
 }
 
+.categories button.active{
+  background:#087f8c;
+  color:white;
+}
+
+.section-title{
+  font-size:22px;
+  margin:25px 0 15px;
+}
+
+.recipes{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.card{
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 6px 22px rgba(0,0,0,.07);
+  position:relative;
+}
+
+.food-img{
+  height:145px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:65px;
+  background:linear-gradient(135deg,#dceff4,#f7f9fa);
+}
+
+.card-body{
+  padding:15px;
+}
+
+.badge{
+  display:inline-block;
+  font-size:11px;
+  padding:5px 9px;
+  border-radius:10px;
+  background:#e5f4f5;
+  color:#087f8c;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+.card h3{
+  font-size:17px;
+  margin-bottom:7px;
+}
+
+.card p{
+  font-size:12px;
+  color:#687386;
+  line-height:1.5;
+  margin-bottom:13px;
+}
+
+.recipe-info{
+  display:flex;
+  gap:10px;
+  font-size:11px;
+  color:#697586;
+  margin-bottom:13px;
+}
+
+.view-btn{
+  width:100%;
+  padding:11px;
+  border:none;
+  border-radius:11px;
+  background:#0b3558;
+  color:white;
+  font-weight:bold;
+}
+
+.favorite{
+  position:absolute;
+  top:10px;
+  right:10px;
+  border:none;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:white;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);
+  font-size:19px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.55);
+  z-index:10;
+  padding:20px;
+  overflow-y:auto;
+}
+
+.modal-content{
+  max-width:650px;
+  margin:30px auto;
+  background:white;
+  border-radius:24px;
+  padding:22px;
+}
+
+.close{
+  float:right;
+  border:none;
+  background:#eef2f5;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  font-size:20px;
+}
+
+.detail-icon{
+  font-size:65px;
+  text-align:center;
+  padding:15px;
+}
+
+.modal h2{
+  margin:10px 0;
+  font-size:25px;
+}
+
+.detail-meta{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+  font-size:13px;
+  color:#657184;
+  margin-bottom:20px;
+}
+
+.ingredients{
+  background:#f4f7fa;
+  padding:16px;
+  border-radius:15px;
+  margin:15px 0;
+}
+
+.ingredients h3,
+.steps h3{
+  margin-bottom:12px;
+}
+
+.ingredients li{
+  margin:8px 0;
+  margin-left:20px;
+}
+
+.steps ol{
+  padding-left:22px;
+}
+
+.steps li{
+  margin-bottom:14px;
+  line-height:1.6;
+}
+
+.start-btn{
+  width:100%;
+  margin-top:20px;
+  padding:15px;
+  border:none;
+  border-radius:14px;
+  background:#087f8c;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  color:#7c8796;
+  font-size:12px;
+  margin-top:35px;
+}
+
+/* DARK MODE */
+body.dark{
+  background:#101820;
+  color:#edf3f7;
+}
+
+body.dark .control-box,
+body.dark .card,
+body.dark .modal-content{
+  background:#18232d;
+}
+
+body.dark .categories button{
+  background:#263642;
+  color:#dce7ed;
+}
+
+body.dark .ingredients{
+  background:#111b23;
+}
+
+body.dark .card p,
+body.dark .recipe-info,
+body.dark .detail-meta{
+  color:#aab8c3;
+}
+
+body.dark .food-img{
+  background:#263642;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .recipes{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .food-img{
+    height:120px;
+    font-size:52px;
+  }
+
+  .card-body{
+    padding:12px;
+  }
+
+  .card h3{
+    font-size:15px;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+}
+
+@media(max-width:390px){
+  .recipes{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 
 <body>
 
 <header>
+  <div class="header-top">
+    <div class="logo">
+      ⚓ Dapur Kapal
+      <span>Resep praktis untuk kru kapal</span>
+    </div>
 
-<h1>⚓ Dapur Kapal V3</h1>
+    <button id="darkBtn" onclick="toggleDark()">🌙</button>
+  </div>
 
-<p>Masak enak, kru senang!</p>
+  <div class="hero">
+    <h1>Masak enak,<br>meski di tengah laut.</h1>
+    <p>Kumpulan resep sederhana yang cocok untuk dapur kapal.</p>
+  </div>
 
+  <div class="search">
+    <input type="text" id="searchInput"
+    placeholder="🔎 Cari resep..." oninput="cariResep()">
+  </div>
 </header>
-
 
 <div class="container">
 
-<input
-    id="search"
-    class="search"
-    type="text"
-    placeholder="🔎 Cari resep..."
-    onkeyup="cariResep()"
->
+  <div class="control-box">
+    <div class="control-title">👨‍🍳 Masak untuk berapa kru?</div>
 
+    <div class="crew">
+      <input type="number" id="jumlahKru" value="9" min="1"
+      onchange="hitungBahan()">
+      <span>orang</span>
+    </div>
+  </div>
 
-<div class="kru-box">
+  <div class="categories">
+    <button class="active" onclick="filterKategori('semua',this)">Semua</button>
+    <button onclick="filterKategori('ikan',this)">🐟 Ikan</button>
+    <button onclick="filterKategori('ayam',this)">🍗 Ayam</button>
+    <button onclick="filterKategori('praktis',this)">🍳 Praktis</button>
+  </div>
 
-<b>👨‍🍳 Jumlah kru</b>
+  <h2 class="section-title">🍽️ Pilihan resep</h2>
 
-<input
-    id="jumlahKru"
-    class="kru"
-    type="number"
-    value="9"
-    min="1"
-    oninput="hitungBahan()"
->
+  <div class="recipes" id="recipes">
 
-<p>
-Takaran bahan otomatis menyesuaikan jumlah kru.
-</p>
+    <!-- PINDANG -->
+    <div class="card" data-kategori="ikan" data-nama="pindang ikan">
+      <div class="food-img">🐟</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">IKAN</span>
+        <h3>Pindang Ikan</h3>
+        <p>Kuah segar dan gurih, cocok dimakan dengan nasi hangat.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 35 mnt</span>
+          <span>👨‍🍳 Mudah</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('pindang')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- RICA -->
+    <div class="card" data-kategori="ayam" data-nama="ayam rica rica">
+      <div class="food-img">🍗</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">AYAM</span>
+        <h3>Ayam Rica-Rica</h3>
+        <p>Pedas gurih dengan aroma rempah yang kuat.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 45 mnt</span>
+          <span>👨‍🍳 Mudah</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('rica')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- NASGOR -->
+    <div class="card" data-kategori="praktis" data-nama="nasi goreng">
+      <div class="food-img">🍳</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">PRAKTIS</span>
+        <h3>Nasi Goreng</h3>
+        <p>Menu cepat untuk sarapan kru kapal.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 20 mnt</span>
+          <span>👨‍🍳 Sangat mudah</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('nasgor')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- IKAN KECAP -->
+    <div class="card" data-kategori="ikan" data-nama="ikan kecap pedas">
+      <div class="food-img">🐟</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">IKAN</span>
+        <h3>Ikan Kecap Pedas</h3>
+        <p>Manis, gurih dan pedas. Cocok untuk lauk nasi.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 30 mnt</span>
+          <span>👨‍🍳 Mudah</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('kecap')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- SOTO -->
+    <div class="card" data-kategori="ayam" data-nama="soto ayam">
+      <div class="food-img">🍲</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">AYAM</span>
+        <h3>Soto Ayam</h3>
+        <p>Kuah hangat dengan aroma rempah yang menggugah selera.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 50 mnt</span>
+          <span>👨‍🍳 Sedang</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('soto')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- MIE -->
+    <div class="card" data-kategori="praktis" data-nama="mie goreng">
+      <div class="food-img">🍜</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">PRAKTIS</span>
+        <h3>Mie Goreng</h3>
+        <p>Praktis, cepat dan cocok untuk sarapan kru.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 20 mnt</span>
+          <span>👨‍🍳 Mudah</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('mie')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- GULAI -->
+    <div class="card" data-kategori="ayam" data-nama="gulai ayam">
+      <div class="food-img">🥘</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">AYAM</span>
+        <h3>Gulai Ayam</h3>
+        <p>Kuah santan gurih dengan bumbu rempah.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 50 mnt</span>
+          <span>👨‍🍳 Sedang</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('gulai')">Lihat Resep</button>
+      </div>
+    </div>
+
+    <!-- WOKU -->
+    <div class="card" data-kategori="ikan" data-nama="ikan woku">
+      <div class="food-img">🐟</div>
+      <button class="favorite" onclick="favorit(this)">♡</button>
+
+      <div class="card-body">
+        <span class="badge">IKAN</span>
+        <h3>Ikan Woku</h3>
+        <p>Ikan dengan bumbu wangi dan rasa pedas segar.</p>
+
+        <div class="recipe-info">
+          <span>⏱️ 40 mnt</span>
+          <span>👨‍🍳 Sedang</span>
+        </div>
+
+        <button class="view-btn"
+        onclick="bukaResep('woku')">Lihat Resep</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    ⚓ Dapur Kapal V4<br>
+    Resep sederhana untuk kru, dibuat untuk dapur di tengah laut.
+  </footer>
 
 </div>
 
 
-<div class="kategori">
+<!-- MODAL RESEP -->
 
-<button onclick="filterKategori('semua')">
-Semua
-</button>
+<div class="modal" id="modal">
+  <div class="modal-content">
 
-<button onclick="filterKategori('ikan')">
-🐟 Ikan
-</button>
+    <button class="close" onclick="tutupResep()">×</button>
 
-<button onclick="filterKategori('ayam')">
-🍗 Ayam
-</button>
+    <div class="detail-icon" id="detailIcon">🍲</div>
 
-<button onclick="filterKategori('praktis')">
-🍳 Praktis
-</button>
+    <h2 id="detailTitle"></h2>
 
+    <div class="detail-meta">
+      <span id="detailTime"></span>
+      <span>👨‍🍳 Untuk <b id="detailKru">9</b> kru</span>
+    </div>
+
+    <div class="ingredients">
+      <h3>🛒 Bahan</h3>
+      <ul id="ingredientList"></ul>
+    </div>
+
+    <div class="steps">
+      <h3>👨‍🍳 Cara Memasak</h3>
+      <ol id="stepList"></ol>
+    </div>
+
+    <button class="start-btn" onclick="tutupResep()">
+      ✅ Selesai Membaca
+    </button>
+
+  </div>
 </div>
-
-
-
-<!-- RESEP 1 -->
-
-<div class="recipe ikan">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🐟 Pindang Ikan</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ikan</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> cabai merah</li>
-
-<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
-
-<li><span class="bahan" data-jumlah="3">3</span> daun salam</li>
-
-<li><span class="bahan" data-jumlah="2">2</span> cm lengkuas</li>
-
-<li>Garam secukupnya</li>
-
-<li>Gula secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Bersihkan ikan, buang bagian dalam dan cuci sampai bersih.</li>
-
-<li>Potong ikan sesuai ukuran yang diinginkan.</li>
-
-<li>Haluskan bawang merah, bawang putih dan cabai.</li>
-
-<li>Tumis bumbu sampai harum dan matang.</li>
-
-<li>Masukkan serai, daun salam dan lengkuas.</li>
-
-<li>Tambahkan air secukupnya dan tunggu sampai mendidih.</li>
-
-<li>Masukkan ikan secara perlahan agar tidak hancur.</li>
-
-<li>Tambahkan garam dan gula.</li>
-
-<li>Masak dengan api sedang sampai ikan matang dan bumbu meresap.</li>
-
-<li>Koreksi rasa sebelum disajikan.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Pindang ikan siap disajikan! ⚓')">
-
-👨‍🍳 Mulai Masak
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 2 -->
-
-<div class="recipe ayam">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🍗 Ayam Rica-Rica</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ayam</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="15">15</span> cabai merah</li>
-
-<li><span class="bahan" data-jumlah="5">5</span> cabai rawit</li>
-
-<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
-
-<li><span class="bahan" data-jumlah="4">4</span> daun jeruk</li>
-
-<li>Garam secukupnya</li>
-
-<li>Gula secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Potong ayam menjadi beberapa bagian lalu cuci bersih.</li>
-
-<li>Haluskan bawang merah, bawang putih dan cabai.</li>
-
-<li>Tumis bumbu sampai benar-benar harum.</li>
-
-<li>Masukkan serai dan daun jeruk.</li>
-
-<li>Masukkan potongan ayam lalu aduk sampai ayam berubah warna.</li>
-
-<li>Tambahkan sedikit air.</li>
-
-<li>Masukkan garam dan gula.</li>
-
-<li>Tutup wajan dan masak sampai ayam matang.</li>
-
-<li>Buka tutup dan masak sampai kuah menyusut.</li>
-
-<li>Koreksi rasa kemudian sajikan.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Ayam rica-rica siap! 🍗')">
-
-🍗 Masak Sekarang
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 3 -->
-
-<div class="recipe praktis">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🍳 Nasi Goreng</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.5">1.5</span> kg nasi</li>
-
-<li><span class="bahan" data-jumlah="9">9</span> butir telur</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="8">8</span> cabai</li>
-
-<li>Kecap secukupnya</li>
-
-<li>Garam secukupnya</li>
-
-<li>Minyak secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Siapkan nasi yang sudah dingin agar nasi goreng tidak lembek.</li>
-
-<li>Haluskan bawang dan cabai.</li>
-
-<li>Panaskan minyak di wajan.</li>
-
-<li>Tumis bumbu sampai harum.</li>
-
-<li>Masukkan telur lalu orak-arik sampai matang.</li>
-
-<li>Masukkan nasi.</li>
-
-<li>Tambahkan kecap dan garam.</li>
-
-<li>Aduk terus sampai semua bumbu tercampur rata.</li>
-
-<li>Masak sampai nasi terasa panas dan harum.</li>
-
-<li>Koreksi rasa kemudian sajikan.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Nasi goreng siap! 🍳')">
-
-🍳 Masak Sekarang
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 4 -->
-
-<div class="recipe ikan">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🐟 Ikan Kecap Pedas</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ikan</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> cabai</li>
-
-<li><span class="bahan" data-jumlah="8">8</span> sendok makan kecap manis</li>
-
-<li>Garam secukupnya</li>
-
-<li>Air secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Bersihkan ikan lalu potong sesuai kebutuhan.</li>
-
-<li>Goreng ikan sebentar sampai bagian luarnya cukup kokoh.</li>
-
-<li>Haluskan bawang merah, bawang putih dan cabai.</li>
-
-<li>Tumis bumbu sampai harum.</li>
-
-<li>Tambahkan kecap manis dan sedikit air.</li>
-
-<li>Masukkan ikan dengan hati-hati.</li>
-
-<li>Masak sampai kuah mengental dan bumbu meresap.</li>
-
-<li>Koreksi rasa.</li>
-
-<li>Angkat dan sajikan dengan nasi hangat.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Ikan kecap pedas siap! 🐟')">
-
-🐟 Masak Sekarang
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 5 -->
-
-<div class="recipe ayam">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🍲 Soto Ayam</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.2">1.2</span> kg ayam</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="4">4</span> cm kunyit</li>
-
-<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
-
-<li><span class="bahan" data-jumlah="4">4</span> daun jeruk</li>
-
-<li>Garam secukupnya</li>
-
-<li>Air secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Rebus ayam sampai matang.</li>
-
-<li>Angkat ayam dan sisihkan kaldunya.</li>
-
-<li>Haluskan bawang dan kunyit.</li>
-
-<li>Tumis bumbu sampai harum.</li>
-
-<li>Masukkan serai dan daun jeruk.</li>
-
-<li>Masukkan bumbu ke dalam kaldu ayam.</li>
-
-<li>Masak sampai kuah mendidih dan harum.</li>
-
-<li>Suwir ayam yang sudah matang.</li>
-
-<li>Masukkan kembali ayam atau sajikan sebagai topping.</li>
-
-<li>Koreksi rasa lalu sajikan.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Soto ayam siap! 🍲')">
-
-🍲 Sajikan Soto
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 6 -->
-
-<div class="recipe praktis">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🍜 Mie Goreng</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="9">9</span> bungkus mie</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> telur</li>
-
-<li><span class="bahan" data-jumlah="8">8</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="5">5</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> cabai</li>
-
-<li>Kecap secukupnya</li>
-
-<li>Garam secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Rebus mie sampai setengah matang lalu tiriskan.</li>
-
-<li>Haluskan bawang dan cabai.</li>
-
-<li>Tumis bumbu sampai harum.</li>
-
-<li>Masukkan telur dan orak-arik.</li>
-
-<li>Masukkan mie.</li>
-
-<li>Tambahkan kecap dan garam.</li>
-
-<li>Aduk sampai bumbu merata.</li>
-
-<li>Masak beberapa menit sampai mie matang.</li>
-
-<li>Koreksi rasa dan sajikan.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Mie goreng siap! 🍜')">
-
-🍜 Masak Sekarang
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 7 -->
-
-<div class="recipe ayam">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🥘 Gulai Ayam</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ayam</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="5">5</span> cabai</li>
-
-<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
-
-<li><span class="bahan" data-jumlah="3">3</span> daun salam</li>
-
-<li>Santan secukupnya</li>
-
-<li>Garam secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Potong dan bersihkan ayam.</li>
-
-<li>Haluskan bawang dan cabai.</li>
-
-<li>Tumis bumbu sampai harum.</li>
-
-<li>Masukkan serai dan daun salam.</li>
-
-<li>Masukkan ayam lalu aduk.</li>
-
-<li>Tambahkan air secukupnya.</li>
-
-<li>Masak sampai ayam hampir matang.</li>
-
-<li>Masukkan santan.</li>
-
-<li>Aduk perlahan agar santan tidak pecah.</li>
-
-<li>Masak sampai ayam matang dan kuah mengental.</li>
-
-<li>Koreksi rasa dan sajikan.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Gulai ayam siap! 🥘')">
-
-🥘 Sajikan
-
-</button>
-
-</div>
-
-
-
-<!-- RESEP 8 -->
-
-<div class="recipe ikan">
-
-<button class="favorit" onclick="favorit(this)">♡</button>
-
-<h2>🐟 Ikan Woku</h2>
-
-<p><b>Untuk 9 orang</b></p>
-
-<h3>🥘 Bahan</h3>
-
-<ul>
-
-<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ikan</li>
-
-<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
-
-<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
-
-<li><span class="bahan" data-jumlah="12">12</span> cabai</li>
-
-<li><span class="bahan" data-jumlah="3">3</span> cm kunyit</li>
-
-<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
-
-<li><span class="bahan" data-jumlah="4">4</span> daun jeruk</li>
-
-<li>Garam secukupnya</li>
-
-</ul>
-
-<h3>👨‍🍳 Cara Memasak</h3>
-
-<ol>
-
-<li>Bersihkan ikan dan potong sesuai kebutuhan.</li>
-
-<li>Haluskan bawang, cabai dan kunyit.</li>
-
-<li>Tumis bumbu sampai harum.</li>
-
-<li>Masukkan serai dan daun jeruk.</li>
-
-<li>Tambahkan sedikit air.</li>
-
-<li>Masukkan ikan.</li>
-
-<li>Masak dengan api sedang sampai ikan matang.</li>
-
-<li>Balik ikan dengan hati-hati agar tidak hancur.</li>
-
-<li>Koreksi rasa.</li>
-
-<li>Angkat dan sajikan selagi hangat.</li>
-
-</ol>
-
-<button class="masak"
-onclick="alert('Ikan woku siap! 🐟')">
-
-🐟 Sajikan
-
-</button>
-
-</div>
-
-
-</div>
-
-
-<footer>
-
-⚓ Dapur Kapal V3<br>
-Dibuat untuk kru kapal 👨‍🍳
-
-</footer>
-
 
 
 <script>
 
-function hitungBahan() {
+const resep = {
 
-let kru =
-Number(document.getElementById("jumlahKru").value);
+pindang:{
+judul:"Pindang Ikan",
+icon:"🐟",
+waktu:"⏱️ 35 menit",
+bahan:[
+["Ikan", "1.5 kg"],
+["Air","2.5 liter"],
+["Bawang merah","15 siung"],
+["Bawang putih","8 siung"],
+["Cabai merah","10 buah"],
+["Serai","3 batang"],
+["Lengkuas","4 cm"],
+["Daun salam","4 lembar"],
+["Garam","2 sdm"],
+["Gula","1 sdm"],
+["Asam jawa","secukupnya"]
+],
+langkah:[
+"Bersihkan ikan, potong sesuai ukuran dan cuci sampai bersih.",
+"Haluskan bawang merah, bawang putih dan cabai.",
+"Tumis bumbu sampai harum.",
+"Masukkan serai, lengkuas dan daun salam. Aduk sebentar.",
+"Tambahkan air dan masak sampai mendidih.",
+"Masukkan ikan secara perlahan.",
+"Tambahkan garam, gula dan asam jawa.",
+"Masak dengan api sedang sekitar 15–20 menit sampai ikan matang.",
+"Cicipi kuah dan sesuaikan rasa.",
+"Matikan api dan sajikan bersama nasi hangat."
+]
+},
 
-if (kru < 1) return;
+rica:{
+judul:"Ayam Rica-Rica",
+icon:"🍗",
+waktu:"⏱️ 45 menit",
+bahan:[
+["Ayam","2 kg"],
+["Bawang merah","15 siung"],
+["Bawang putih","8 siung"],
+["Cabai merah","15 buah"],
+["Cabai rawit","10 buah"],
+["Serai","3 batang"],
+["Daun jeruk","5 lembar"],
+["Jahe","4 cm"],
+["Garam","2 sdm"],
+["Gula","1 sdm"],
+["Air","700 ml"],
+["Minyak","secukupnya"]
+],
+langkah:[
+"Potong ayam menjadi bagian yang sesuai untuk porsi kru.",
+"Lumuri ayam dengan sedikit garam lalu diamkan beberapa menit.",
+"Haluskan bawang merah, bawang putih, cabai dan jahe.",
+"Tumis bumbu sampai benar-benar harum dan matang.",
+"Masukkan serai dan daun jeruk.",
+"Masukkan ayam lalu aduk sampai seluruh permukaan ayam terkena bumbu.",
+"Tambahkan air.",
+"Masak dengan api sedang sampai ayam empuk dan bumbu meresap.",
+"Tambahkan garam dan gula. Koreksi rasa.",
+"Masak sampai kuah menyusut dan bumbu terlihat berminyak.",
+"Sajikan panas dengan nasi."
+]
+},
 
-document.querySelectorAll(".bahan").forEach(function(item) {
+nasgor:{
+judul:"Nasi Goreng",
+icon:"🍳",
+waktu:"⏱️ 20 menit",
+bahan:[
+["Nasi putih","2 kg"],
+["Telur","9 butir"],
+["Bawang merah","10 siung"],
+["Bawang putih","6 siung"],
+["Cabai","8 buah"],
+["Kecap manis","8 sdm"],
+["Garam","secukupnya"],
+["Merica","secukupnya"],
+["Minyak","secukupnya"]
+],
+langkah:[
+"Gunakan nasi yang sudah dingin agar nasi goreng tidak lembek.",
+"Haluskan bawang merah, bawang putih dan cabai.",
+"Panaskan minyak dalam wajan besar.",
+"Masukkan telur dan orak-arik sampai matang.",
+"Masukkan bumbu halus lalu tumis sampai harum.",
+"Masukkan nasi dan aduk dengan api besar.",
+"Tambahkan kecap manis, garam dan merica.",
+"Aduk terus sampai bumbu tercampur rata.",
+"Cicipi rasa dan sesuaikan.",
+"Sajikan segera selagi panas."
+]
+},
 
-let dasar =
-Number(item.dataset.jumlah);
+kecap:{
+judul:"Ikan Kecap Pedas",
+icon:"🐟",
+waktu:"⏱️ 30 menit",
+bahan:[
+["Ikan","1.5 kg"],
+["Bawang merah","12 siung"],
+["Bawang putih","6 siung"],
+["Cabai","12 buah"],
+["Kecap manis","10 sdm"],
+["Air","500 ml"],
+["Garam","1 sdm"],
+["Gula","1 sdm"],
+["Jahe","3 cm"]
+],
+langkah:[
+"Bersihkan ikan lalu potong sesuai kebutuhan.",
+"Goreng ikan sampai matang dan sisihkan.",
+"Haluskan bawang merah, bawang putih, cabai dan jahe.",
+"Tumis bumbu sampai harum.",
+"Tambahkan air dan kecap manis.",
+"Masukkan garam dan gula.",
+"Masukkan ikan goreng.",
+"Masak sampai kuah menyusut dan meresap.",
+"Koreksi rasa.",
+"Sajikan bersama nasi hangat."
+]
+},
 
-let hasil =
-dasar * kru / 9;
+soto:{
+judul:"Soto Ayam",
+icon:"🍲",
+waktu:"⏱️ 50 menit",
+bahan:[
+["Ayam","1.5 kg"],
+["Air","3 liter"],
+["Bawang merah","12 siung"],
+["Bawang putih","7 siung"],
+["Kunyit","4 cm"],
+["Jahe","3 cm"],
+["Serai","3 batang"],
+["Daun salam","3 lembar"],
+["Daun jeruk","5 lembar"],
+["Garam","2 sdm"]
+],
+langkah:[
+"Rebus ayam sampai matang. Simpan air rebusannya sebagai kuah.",
+"Haluskan bawang merah, bawang putih, kunyit dan jahe.",
+"Tumis bumbu sampai harum.",
+"Masukkan serai, daun salam dan daun jeruk.",
+"Masukkan tumisan bumbu ke dalam air kaldu.",
+"Masak kuah sampai mendidih dan aromanya keluar.",
+"Masukkan garam dan koreksi rasa.",
+"Suwir ayam yang sudah matang.",
+"Masukkan suwiran ayam ke dalam mangkuk.",
+"Tuangkan kuah soto panas dan sajikan."
+]
+},
 
-item.innerText =
-Number(hasil.toFixed(2));
+mie:{
+judul:"Mie Goreng",
+icon:"🍜",
+waktu:"⏱️ 20 menit",
+bahan:[
+["Mie","9 bungkus"],
+["Telur","6 butir"],
+["Bawang putih","6 siung"],
+["Bawang merah","8 siung"],
+["Cabai","8 buah"],
+["Kecap manis","7 sdm"],
+["Garam","secukupnya"],
+["Minyak","secukupnya"]
+],
+langkah:[
+"Rebus mie sampai setengah matang lalu tiriskan.",
+"Haluskan bawang merah, bawang putih dan cabai.",
+"Panaskan minyak dalam wajan besar.",
+"Orak-arik telur sampai matang.",
+"Masukkan bumbu dan tumis sampai harum.",
+"Masukkan mie.",
+"Tambahkan kecap manis dan garam.",
+"Aduk sampai semua bumbu tercampur rata.",
+"Masak beberapa menit sampai mie matang sempurna.",
+"Sajikan panas."
+]
+},
 
-});
+gulai:{
+judul:"Gulai Ayam",
+icon:"🥘",
+waktu:"⏱️ 50 menit",
+bahan:[
+["Ayam","2 kg"],
+["Santan","1.5 liter"],
+["Bawang merah","15 siung"],
+["Bawang putih","8 siung"],
+["Cabai","10 buah"],
+["Kunyit","4 cm"],
+["Jahe","3 cm"],
+["Serai","3 batang"],
+["Daun salam","3 lembar"],
+["Garam","2 sdm"]
+],
+langkah:[
+"Potong ayam dan cuci sampai bersih.",
+"Haluskan bawang merah, bawang putih, cabai, kunyit dan jahe.",
+"Tumis bumbu sampai matang dan harum.",
+"Masukkan serai dan daun salam.",
+"Masukkan ayam lalu aduk sampai berubah warna.",
+"Tuangkan santan secara perlahan.",
+"Masak dengan api sedang sambil sesekali diaduk.",
+"Pastikan santan tidak pecah.",
+"Masak sampai ayam empuk dan kuah mengental.",
+"Tambahkan garam dan koreksi rasa.",
+"Sajikan dengan nasi hangat."
+]
+},
+
+woku:{
+judul:"Ikan Woku",
+icon:"🐟",
+waktu:"⏱️ 40 menit",
+bahan:[
+["Ikan","1.5 kg"],
+["Bawang merah","12 siung"],
+["Bawang putih","6 siung"],
+["Cabai","15 buah"],
+["Kunyit","4 cm"],
+["Jahe","3 cm"],
+["Serai","3 batang"],
+["Daun jeruk","5 lembar"],
+["Air","700 ml"],
+["Garam","2 sdm"]
+],
+langkah:[
+"Bersihkan ikan dan potong sesuai porsi.",
+"Haluskan bawang merah, bawang putih, cabai, kunyit dan jahe.",
+"Tumis bumbu sampai harum dan matang.",
+"Masukkan serai dan daun jeruk.",
+"Tambahkan air dan masak sampai mendidih.",
+"Masukkan ikan dengan hati-hati.",
+"Masak menggunakan api sedang sampai ikan matang.",
+"Tambahkan garam dan koreksi rasa.",
+"Masak sampai kuah sedikit menyusut.",
+"Sajikan panas dengan nasi."
+]
+}
+
+};
+
+
+function bukaResep(nama){
+
+  const r = resep[nama];
+
+  if(!r) return;
+
+  document.getElementById("detailIcon").innerText=r.icon;
+  document.getElementById("detailTitle").innerText=r.judul;
+  document.getElementById("detailTime").innerText=r.waktu;
+
+  const kru=parseInt(document.getElementById("jumlahKru").value)||9;
+
+  document.getElementById("detailKru").innerText=kru;
+
+  const daftarBahan=document.getElementById("ingredientList");
+  daftarBahan.innerHTML="";
+
+  r.bahan.forEach(item=>{
+
+    let jumlah=parseFloat(item[1]);
+
+    if(!isNaN(jumlah)){
+      jumlah=jumlah*(kru/9);
+
+      let teks=jumlah.toFixed(2)
+      .replace(/\.00$/,"")
+      .replace(/(\.\d)0$/,"");
+
+      daftarBahan.innerHTML+=
+      `<li><b>${teks}</b> ${item[0]}</li>`;
+
+    }else{
+      daftarBahan.innerHTML+=
+      `<li>${item[1]} ${item[0]}</li>`;
+    }
+
+  });
+
+  const langkah=document.getElementById("stepList");
+  langkah.innerHTML="";
+
+  r.langkah.forEach((x)=>{
+    langkah.innerHTML+=`<li>${x}</li>`;
+  });
+
+  document.getElementById("modal").style.display="block";
+  document.body.style.overflow="hidden";
+}
+
+
+function tutupResep(){
+
+  document.getElementById("modal").style.display="none";
+  document.body.style.overflow="auto";
 
 }
 
 
-function cariResep() {
-
-let kata =
-document.getElementById("search")
-.value
-.toLowerCase();
-
-document.querySelectorAll(".recipe").forEach(function(resep) {
-
-if (
-resep.innerText
-.toLowerCase()
-.includes(kata)
-) {
-
-resep.style.display = "block";
-
-} else {
-
-resep.style.display = "none";
-
+function hitungBahan(){
+  const kru=parseInt(document.getElementById("jumlahKru").value)||9;
+  document.getElementById("detailKru").innerText=kru;
 }
 
-});
+
+function cariResep(){
+
+  const keyword=
+  document.getElementById("searchInput")
+  .value.toLowerCase();
+
+  document.querySelectorAll(".card").forEach(card=>{
+
+    const nama=card.dataset.nama;
+
+    card.style.display=
+    nama.includes(keyword)?"block":"none";
+
+  });
 
 }
 
 
-function filterKategori(kategori) {
+function filterKategori(kategori,tombol){
 
-document.querySelectorAll(".recipe").forEach(function(resep) {
+  document.querySelectorAll(".categories button")
+  .forEach(btn=>btn.classList.remove("active"));
 
-if (
-kategori === "semua" ||
-resep.classList.contains(kategori)
-) {
+  tombol.classList.add("active");
 
-resep.style.display = "block";
+  document.querySelectorAll(".card").forEach(card=>{
 
-} else {
+    if(kategori==="semua" ||
+       card.dataset.kategori===kategori){
 
-resep.style.display = "none";
+      card.style.display="block";
+
+    }else{
+
+      card.style.display="none";
+
+    }
+
+  });
+
+}
+
+
+function favorit(tombol){
+
+  if(tombol.innerText==="♡"){
+
+    tombol.innerText="♥";
+
+  }else{
+
+    tombol.innerText="♡";
+
+  }
 
 }
 
-});
+
+function toggleDark(){
+
+  document.body.classList.toggle("dark");
+
+  const tombol=document.getElementById("darkBtn");
+
+  if(document.body.classList.contains("dark")){
+
+    tombol.innerText="☀️";
+
+  }else{
+
+    tombol.innerText="🌙";
+
+  }
 
 }
 
 
-function favorit(tombol) {
+window.onclick=function(event){
 
-if (tombol.innerText === "♡") {
+  const modal=document.getElementById("modal");
 
-tombol.innerText = "❤️";
+  if(event.target===modal){
 
-} else {
+    tutupResep();
 
-tombol.innerText = "♡";
-
-}
+  }
 
 }
 
 </script>
 
 </body>
-</html> 
+</html>
