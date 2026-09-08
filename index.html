@@ -3,98 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dapur Kapal v2 ⚓</title>
+
+<title>Dapur Kapal V3 ⚓</title>
 
 <style>
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f2f6f8;
+    background: #eef4f7;
+    color: #222;
 }
 
 header {
-    background: #075985;
+    background: linear-gradient(135deg, #063b5c, #087ca7);
     color: white;
     text-align: center;
-    padding: 30px 15px;
+    padding: 35px 20px;
 }
 
 header h1 {
     margin: 0;
+    font-size: 35px;
+}
+
+header p {
+    margin-bottom: 0;
 }
 
 .container {
-    max-width: 750px;
+    max-width: 850px;
     margin: auto;
     padding: 20px;
 }
 
-.search,
+.search {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+}
+
 .kru {
     width: 100%;
     padding: 14px;
-    margin-bottom: 15px;
-    box-sizing: border-box;
-    border-radius: 10px;
+    margin-top: 10px;
     border: 1px solid #ccc;
+    border-radius: 10px;
     font-size: 16px;
+}
+
+.kru-box {
+    background: white;
+    padding: 18px;
+    margin-top: 15px;
+    border-radius: 12px;
 }
 
 .kategori {
     display: flex;
     gap: 8px;
-    margin-bottom: 20px;
+    overflow-x: auto;
+    margin: 20px 0;
 }
 
 .kategori button {
-    padding: 10px 15px;
     border: none;
+    padding: 11px 18px;
     border-radius: 20px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .recipe {
     background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.1);
+    padding: 22px;
+    margin-bottom: 25px;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(0,0,0,.08);
 }
 
 .recipe h2 {
     color: #075985;
+    margin-top: 0;
+}
+
+.recipe h3 {
+    margin-top: 20px;
 }
 
 .recipe li {
-    margin-bottom: 7px;
+    margin-bottom: 9px;
+    line-height: 1.5;
 }
 
-button {
+.favorit {
+    float: right;
+    border: none;
+    background: none;
+    font-size: 25px;
     cursor: pointer;
 }
 
 .masak {
-    background: #075985;
+    background: #087ca7;
     color: white;
     border: none;
-    padding: 12px 18px;
-    border-radius: 8px;
+    padding: 13px 18px;
+    border-radius: 9px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 footer {
     text-align: center;
-    padding: 25px;
+    padding: 30px;
     color: #777;
 }
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h1>⚓ Dapur Kapal</h1>
+
+<h1>⚓ Dapur Kapal V3</h1>
+
 <p>Masak enak, kru senang!</p>
+
 </header>
+
 
 <div class="container">
 
@@ -106,7 +151,10 @@ footer {
     onkeyup="cariResep()"
 >
 
-<label><b>👨‍🍳 Jumlah kru</b></label>
+
+<div class="kru-box">
+
+<b>👨‍🍳 Jumlah kru</b>
 
 <input
     id="jumlahKru"
@@ -116,6 +164,13 @@ footer {
     min="1"
     oninput="hitungBahan()"
 >
+
+<p>
+Takaran bahan otomatis menyesuaikan jumlah kru.
+</p>
+
+</div>
+
 
 <div class="kategori">
 
@@ -138,148 +193,375 @@ Semua
 </div>
 
 
+
+<!-- RESEP 1 -->
+
 <div class="recipe ikan">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
 
 <h2>🐟 Pindang Ikan</h2>
 
-<p>Resep dasar: 9 orang</p>
+<p><b>Untuk 9 orang</b></p>
 
 <h3>🥘 Bahan</h3>
 
 <ul>
 
-<li>
-<span class="bahan" data-jumlah="1.5">1.5</span> kg ikan
-</li>
+<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ikan</li>
 
-<li>
-<span class="bahan" data-jumlah="10">10</span> siung bawang merah
-</li>
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
 
-<li>
-<span class="bahan" data-jumlah="6">6</span> siung bawang putih
-</li>
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
 
-<li>
-<span class="bahan" data-jumlah="10">10</span> cabai
-</li>
+<li><span class="bahan" data-jumlah="10">10</span> cabai merah</li>
 
-<li>
-<span class="bahan" data-jumlah="2">2</span> batang serai
-</li>
+<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
 
-<li>
-<span class="bahan" data-jumlah="3">3</span> daun salam
-</li>
+<li><span class="bahan" data-jumlah="3">3</span> daun salam</li>
+
+<li><span class="bahan" data-jumlah="2">2</span> cm lengkuas</li>
 
 <li>Garam secukupnya</li>
 
+<li>Gula secukupnya</li>
+
 </ul>
 
-<h3>👨‍🍳 Cara memasak</h3>
+<h3>👨‍🍳 Cara Memasak</h3>
 
 <ol>
-<li>Bersihkan ikan.</li>
-<li>Tumis bumbu sampai harum.</li>
-<li>Tambahkan air dan rempah.</li>
-<li>Masukkan ikan.</li>
-<li>Masak sampai matang.</li>
+
+<li>Bersihkan ikan, buang bagian dalam dan cuci sampai bersih.</li>
+
+<li>Potong ikan sesuai ukuran yang diinginkan.</li>
+
+<li>Haluskan bawang merah, bawang putih dan cabai.</li>
+
+<li>Tumis bumbu sampai harum dan matang.</li>
+
+<li>Masukkan serai, daun salam dan lengkuas.</li>
+
+<li>Tambahkan air secukupnya dan tunggu sampai mendidih.</li>
+
+<li>Masukkan ikan secara perlahan agar tidak hancur.</li>
+
+<li>Tambahkan garam dan gula.</li>
+
+<li>Masak dengan api sedang sampai ikan matang dan bumbu meresap.</li>
+
+<li>Koreksi rasa sebelum disajikan.</li>
+
 </ol>
 
 <button class="masak"
-onclick="alert('Selamat memasak! ⚓')">
+onclick="alert('Pindang ikan siap disajikan! ⚓')">
+
 👨‍🍳 Mulai Masak
+
 </button>
 
 </div>
 
 
+
+<!-- RESEP 2 -->
+
 <div class="recipe ayam">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
 
 <h2>🍗 Ayam Rica-Rica</h2>
 
-<p>Resep dasar: 9 orang</p>
+<p><b>Untuk 9 orang</b></p>
 
 <h3>🥘 Bahan</h3>
 
 <ul>
 
-<li>
-<span class="bahan" data-jumlah="1.5">1.5</span> kg ayam
-</li>
+<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ayam</li>
 
-<li>
-<span class="bahan" data-jumlah="10">10</span> siung bawang merah
-</li>
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
 
-<li>
-<span class="bahan" data-jumlah="6">6</span> siung bawang putih
-</li>
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
 
-<li>
-<span class="bahan" data-jumlah="15">15</span> cabai
-</li>
+<li><span class="bahan" data-jumlah="15">15</span> cabai merah</li>
 
-<li>
-<span class="bahan" data-jumlah="2">2</span> batang serai
-</li>
+<li><span class="bahan" data-jumlah="5">5</span> cabai rawit</li>
 
-<li>
-<span class="bahan" data-jumlah="3">3</span> daun jeruk
-</li>
+<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
+
+<li><span class="bahan" data-jumlah="4">4</span> daun jeruk</li>
 
 <li>Garam secukupnya</li>
 
+<li>Gula secukupnya</li>
+
 </ul>
 
-<h3>👨‍🍳 Cara memasak</h3>
+<h3>👨‍🍳 Cara Memasak</h3>
 
 <ol>
-<li>Potong ayam.</li>
-<li>Tumis bumbu.</li>
+
+<li>Potong ayam menjadi beberapa bagian lalu cuci bersih.</li>
+
+<li>Haluskan bawang merah, bawang putih dan cabai.</li>
+
+<li>Tumis bumbu sampai benar-benar harum.</li>
+
 <li>Masukkan serai dan daun jeruk.</li>
-<li>Masukkan ayam.</li>
-<li>Tambahkan air.</li>
-<li>Masak sampai matang.</li>
+
+<li>Masukkan potongan ayam lalu aduk sampai ayam berubah warna.</li>
+
+<li>Tambahkan sedikit air.</li>
+
+<li>Masukkan garam dan gula.</li>
+
+<li>Tutup wajan dan masak sampai ayam matang.</li>
+
+<li>Buka tutup dan masak sampai kuah menyusut.</li>
+
+<li>Koreksi rasa kemudian sajikan.</li>
+
 </ol>
 
 <button class="masak"
 onclick="alert('Ayam rica-rica siap! 🍗')">
+
 🍗 Masak Sekarang
+
 </button>
 
 </div>
 
 
+
+<!-- RESEP 3 -->
+
 <div class="recipe praktis">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
 
 <h2>🍳 Nasi Goreng</h2>
 
-<p>Resep dasar: 9 orang</p>
+<p><b>Untuk 9 orang</b></p>
 
 <h3>🥘 Bahan</h3>
 
 <ul>
 
-<li>
-<span class="bahan" data-jumlah="1.5">1.5</span> kg nasi
-</li>
+<li><span class="bahan" data-jumlah="1.5">1.5</span> kg nasi</li>
 
-<li>
-<span class="bahan" data-jumlah="9">9</span> telur
-</li>
+<li><span class="bahan" data-jumlah="9">9</span> butir telur</li>
 
-<li>
-<span class="bahan" data-jumlah="10">10</span> siung bawang merah
-</li>
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
 
-<li>
-<span class="bahan" data-jumlah="6">6</span> siung bawang putih
-</li>
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
 
-<li>
-<span class="bahan" data-jumlah="8">8</span> cabai
-</li>
+<li><span class="bahan" data-jumlah="8">8</span> cabai</li>
+
+<li>Kecap secukupnya</li>
+
+<li>Garam secukupnya</li>
+
+<li>Minyak secukupnya</li>
+
+</ul>
+
+<h3>👨‍🍳 Cara Memasak</h3>
+
+<ol>
+
+<li>Siapkan nasi yang sudah dingin agar nasi goreng tidak lembek.</li>
+
+<li>Haluskan bawang dan cabai.</li>
+
+<li>Panaskan minyak di wajan.</li>
+
+<li>Tumis bumbu sampai harum.</li>
+
+<li>Masukkan telur lalu orak-arik sampai matang.</li>
+
+<li>Masukkan nasi.</li>
+
+<li>Tambahkan kecap dan garam.</li>
+
+<li>Aduk terus sampai semua bumbu tercampur rata.</li>
+
+<li>Masak sampai nasi terasa panas dan harum.</li>
+
+<li>Koreksi rasa kemudian sajikan.</li>
+
+</ol>
+
+<button class="masak"
+onclick="alert('Nasi goreng siap! 🍳')">
+
+🍳 Masak Sekarang
+
+</button>
+
+</div>
+
+
+
+<!-- RESEP 4 -->
+
+<div class="recipe ikan">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
+
+<h2>🐟 Ikan Kecap Pedas</h2>
+
+<p><b>Untuk 9 orang</b></p>
+
+<h3>🥘 Bahan</h3>
+
+<ul>
+
+<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ikan</li>
+
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
+
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
+
+<li><span class="bahan" data-jumlah="10">10</span> cabai</li>
+
+<li><span class="bahan" data-jumlah="8">8</span> sendok makan kecap manis</li>
+
+<li>Garam secukupnya</li>
+
+<li>Air secukupnya</li>
+
+</ul>
+
+<h3>👨‍🍳 Cara Memasak</h3>
+
+<ol>
+
+<li>Bersihkan ikan lalu potong sesuai kebutuhan.</li>
+
+<li>Goreng ikan sebentar sampai bagian luarnya cukup kokoh.</li>
+
+<li>Haluskan bawang merah, bawang putih dan cabai.</li>
+
+<li>Tumis bumbu sampai harum.</li>
+
+<li>Tambahkan kecap manis dan sedikit air.</li>
+
+<li>Masukkan ikan dengan hati-hati.</li>
+
+<li>Masak sampai kuah mengental dan bumbu meresap.</li>
+
+<li>Koreksi rasa.</li>
+
+<li>Angkat dan sajikan dengan nasi hangat.</li>
+
+</ol>
+
+<button class="masak"
+onclick="alert('Ikan kecap pedas siap! 🐟')">
+
+🐟 Masak Sekarang
+
+</button>
+
+</div>
+
+
+
+<!-- RESEP 5 -->
+
+<div class="recipe ayam">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
+
+<h2>🍲 Soto Ayam</h2>
+
+<p><b>Untuk 9 orang</b></p>
+
+<h3>🥘 Bahan</h3>
+
+<ul>
+
+<li><span class="bahan" data-jumlah="1.2">1.2</span> kg ayam</li>
+
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
+
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
+
+<li><span class="bahan" data-jumlah="4">4</span> cm kunyit</li>
+
+<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
+
+<li><span class="bahan" data-jumlah="4">4</span> daun jeruk</li>
+
+<li>Garam secukupnya</li>
+
+<li>Air secukupnya</li>
+
+</ul>
+
+<h3>👨‍🍳 Cara Memasak</h3>
+
+<ol>
+
+<li>Rebus ayam sampai matang.</li>
+
+<li>Angkat ayam dan sisihkan kaldunya.</li>
+
+<li>Haluskan bawang dan kunyit.</li>
+
+<li>Tumis bumbu sampai harum.</li>
+
+<li>Masukkan serai dan daun jeruk.</li>
+
+<li>Masukkan bumbu ke dalam kaldu ayam.</li>
+
+<li>Masak sampai kuah mendidih dan harum.</li>
+
+<li>Suwir ayam yang sudah matang.</li>
+
+<li>Masukkan kembali ayam atau sajikan sebagai topping.</li>
+
+<li>Koreksi rasa lalu sajikan.</li>
+
+</ol>
+
+<button class="masak"
+onclick="alert('Soto ayam siap! 🍲')">
+
+🍲 Sajikan Soto
+
+</button>
+
+</div>
+
+
+
+<!-- RESEP 6 -->
+
+<div class="recipe praktis">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
+
+<h2>🍜 Mie Goreng</h2>
+
+<p><b>Untuk 9 orang</b></p>
+
+<h3>🥘 Bahan</h3>
+
+<ul>
+
+<li><span class="bahan" data-jumlah="9">9</span> bungkus mie</li>
+
+<li><span class="bahan" data-jumlah="6">6</span> telur</li>
+
+<li><span class="bahan" data-jumlah="8">8</span> bawang merah</li>
+
+<li><span class="bahan" data-jumlah="5">5</span> bawang putih</li>
+
+<li><span class="bahan" data-jumlah="6">6</span> cabai</li>
 
 <li>Kecap secukupnya</li>
 
@@ -287,90 +569,282 @@ onclick="alert('Ayam rica-rica siap! 🍗')">
 
 </ul>
 
-<h3>👨‍🍳 Cara memasak</h3>
+<h3>👨‍🍳 Cara Memasak</h3>
 
 <ol>
-<li>Tumis bawang dan cabai.</li>
-<li>Masukkan telur.</li>
-<li>Masukkan nasi.</li>
+
+<li>Rebus mie sampai setengah matang lalu tiriskan.</li>
+
+<li>Haluskan bawang dan cabai.</li>
+
+<li>Tumis bumbu sampai harum.</li>
+
+<li>Masukkan telur dan orak-arik.</li>
+
+<li>Masukkan mie.</li>
+
 <li>Tambahkan kecap dan garam.</li>
-<li>Aduk sampai rata.</li>
+
+<li>Aduk sampai bumbu merata.</li>
+
+<li>Masak beberapa menit sampai mie matang.</li>
+
+<li>Koreksi rasa dan sajikan.</li>
+
 </ol>
 
 <button class="masak"
-onclick="alert('Nasi goreng siap! 🍳')">
-🍳 Masak Sekarang
+onclick="alert('Mie goreng siap! 🍜')">
+
+🍜 Masak Sekarang
+
 </button>
 
 </div>
 
+
+
+<!-- RESEP 7 -->
+
+<div class="recipe ayam">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
+
+<h2>🥘 Gulai Ayam</h2>
+
+<p><b>Untuk 9 orang</b></p>
+
+<h3>🥘 Bahan</h3>
+
+<ul>
+
+<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ayam</li>
+
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
+
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
+
+<li><span class="bahan" data-jumlah="5">5</span> cabai</li>
+
+<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
+
+<li><span class="bahan" data-jumlah="3">3</span> daun salam</li>
+
+<li>Santan secukupnya</li>
+
+<li>Garam secukupnya</li>
+
+</ul>
+
+<h3>👨‍🍳 Cara Memasak</h3>
+
+<ol>
+
+<li>Potong dan bersihkan ayam.</li>
+
+<li>Haluskan bawang dan cabai.</li>
+
+<li>Tumis bumbu sampai harum.</li>
+
+<li>Masukkan serai dan daun salam.</li>
+
+<li>Masukkan ayam lalu aduk.</li>
+
+<li>Tambahkan air secukupnya.</li>
+
+<li>Masak sampai ayam hampir matang.</li>
+
+<li>Masukkan santan.</li>
+
+<li>Aduk perlahan agar santan tidak pecah.</li>
+
+<li>Masak sampai ayam matang dan kuah mengental.</li>
+
+<li>Koreksi rasa dan sajikan.</li>
+
+</ol>
+
+<button class="masak"
+onclick="alert('Gulai ayam siap! 🥘')">
+
+🥘 Sajikan
+
+</button>
+
 </div>
 
+
+
+<!-- RESEP 8 -->
+
+<div class="recipe ikan">
+
+<button class="favorit" onclick="favorit(this)">♡</button>
+
+<h2>🐟 Ikan Woku</h2>
+
+<p><b>Untuk 9 orang</b></p>
+
+<h3>🥘 Bahan</h3>
+
+<ul>
+
+<li><span class="bahan" data-jumlah="1.5">1.5</span> kg ikan</li>
+
+<li><span class="bahan" data-jumlah="10">10</span> bawang merah</li>
+
+<li><span class="bahan" data-jumlah="6">6</span> bawang putih</li>
+
+<li><span class="bahan" data-jumlah="12">12</span> cabai</li>
+
+<li><span class="bahan" data-jumlah="3">3</span> cm kunyit</li>
+
+<li><span class="bahan" data-jumlah="2">2</span> batang serai</li>
+
+<li><span class="bahan" data-jumlah="4">4</span> daun jeruk</li>
+
+<li>Garam secukupnya</li>
+
+</ul>
+
+<h3>👨‍🍳 Cara Memasak</h3>
+
+<ol>
+
+<li>Bersihkan ikan dan potong sesuai kebutuhan.</li>
+
+<li>Haluskan bawang, cabai dan kunyit.</li>
+
+<li>Tumis bumbu sampai harum.</li>
+
+<li>Masukkan serai dan daun jeruk.</li>
+
+<li>Tambahkan sedikit air.</li>
+
+<li>Masukkan ikan.</li>
+
+<li>Masak dengan api sedang sampai ikan matang.</li>
+
+<li>Balik ikan dengan hati-hati agar tidak hancur.</li>
+
+<li>Koreksi rasa.</li>
+
+<li>Angkat dan sajikan selagi hangat.</li>
+
+</ol>
+
+<button class="masak"
+onclick="alert('Ikan woku siap! 🐟')">
+
+🐟 Sajikan
+
+</button>
+
+</div>
+
+
+</div>
+
+
 <footer>
-⚓ Dapur Kapal v2 — Untuk kru kapal
+
+⚓ Dapur Kapal V3<br>
+Dibuat untuk kru kapal 👨‍🍳
+
 </footer>
+
 
 
 <script>
 
 function hitungBahan() {
 
-    let kru = Number(
-        document.getElementById("jumlahKru").value
-    );
+let kru =
+Number(document.getElementById("jumlahKru").value);
 
-    if (kru < 1) return;
+if (kru < 1) return;
 
-    document.querySelectorAll(".bahan").forEach(function(item) {
+document.querySelectorAll(".bahan").forEach(function(item) {
 
-        let dasar = Number(item.dataset.jumlah);
+let dasar =
+Number(item.dataset.jumlah);
 
-        let hasil = dasar * kru / 9;
+let hasil =
+dasar * kru / 9;
 
-        item.innerText = Number(
-            hasil.toFixed(2)
-        );
+item.innerText =
+Number(hasil.toFixed(2));
 
-    });
+});
+
 }
 
 
 function cariResep() {
 
-    let kata = document
-        .getElementById("search")
-        .value
-        .toLowerCase();
+let kata =
+document.getElementById("search")
+.value
+.toLowerCase();
 
-    document.querySelectorAll(".recipe").forEach(function(resep) {
+document.querySelectorAll(".recipe").forEach(function(resep) {
 
-        if (resep.innerText.toLowerCase().includes(kata)) {
-            resep.style.display = "block";
-        } else {
-            resep.style.display = "none";
-        }
+if (
+resep.innerText
+.toLowerCase()
+.includes(kata)
+) {
 
-    });
+resep.style.display = "block";
+
+} else {
+
+resep.style.display = "none";
+
+}
+
+});
+
 }
 
 
 function filterKategori(kategori) {
 
-    document.querySelectorAll(".recipe").forEach(function(resep) {
+document.querySelectorAll(".recipe").forEach(function(resep) {
 
-        if (
-            kategori === "semua" ||
-            resep.classList.contains(kategori)
-        ) {
-            resep.style.display = "block";
-        } else {
-            resep.style.display = "none";
-        }
+if (
+kategori === "semua" ||
+resep.classList.contains(kategori)
+) {
 
-    });
+resep.style.display = "block";
+
+} else {
+
+resep.style.display = "none";
+
+}
+
+});
+
+}
+
+
+function favorit(tombol) {
+
+if (tombol.innerText === "♡") {
+
+tombol.innerText = "❤️";
+
+} else {
+
+tombol.innerText = "♡";
+
+}
+
 }
 
 </script>
 
 </body>
-</html>
+</html> 
