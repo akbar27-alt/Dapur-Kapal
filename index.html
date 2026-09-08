@@ -3,128 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Dapur Kapal v2 ⚓</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
-}
-
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #f2f6f8;
-    color: #222;
 }
 
 header {
-    background: linear-gradient(135deg, #063b5c, #087ca7);
+    background: #075985;
     color: white;
     text-align: center;
-    padding: 35px 20px;
+    padding: 30px 15px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 34px;
-}
-
-header p {
-    margin-bottom: 0;
-    opacity: 0.9;
 }
 
 .container {
-    max-width: 800px;
+    max-width: 750px;
     margin: auto;
     padding: 20px;
 }
 
-.search {
+.search,
+.kru {
     width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.kru-box {
-    background: white;
-    margin-top: 15px;
-    padding: 18px;
-    border-radius: 12px;
-}
-
-.kru-box label {
-    font-weight: bold;
-}
-
-.kru-box input {
-    width: 100%;
-    margin-top: 10px;
-    padding: 12px;
+    padding: 14px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border-radius: 10px;
     border: 1px solid #ccc;
-    border-radius: 8px;
     font-size: 16px;
 }
 
 .kategori {
     display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    margin: 20px 0;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .kategori button {
-    white-space: nowrap;
+    padding: 10px 15px;
     border: none;
-    padding: 11px 18px;
     border-radius: 20px;
-    background: #ddd;
     cursor: pointer;
-}
-
-.kategori button:hover {
-    background: #087ca7;
-    color: white;
 }
 
 .recipe {
     background: white;
+    padding: 20px;
     margin-bottom: 20px;
-    padding: 22px;
     border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 3px 10px rgba(0,0,0,.1);
 }
 
 .recipe h2 {
-    color: #063b5c;
-    margin-top: 0;
-}
-
-.recipe h3 {
-    margin-bottom: 8px;
+    color: #075985;
 }
 
 .recipe li {
     margin-bottom: 7px;
 }
 
+button {
+    cursor: pointer;
+}
+
 .masak {
-    background: #087ca7;
+    background: #075985;
     color: white;
     border: none;
     padding: 12px 18px;
-    border-radius: 9px;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.masak:hover {
-    background: #063b5c;
+    border-radius: 8px;
 }
 
 footer {
@@ -132,46 +86,36 @@ footer {
     padding: 25px;
     color: #777;
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
-
 <h1>⚓ Dapur Kapal</h1>
-
 <p>Masak enak, kru senang!</p>
-
 </header>
-
 
 <div class="container">
 
 <input
-type="text"
-id="search"
-class="search"
-placeholder="🔎 Cari resep..."
-onkeyup="cariResep()"
+    id="search"
+    class="search"
+    type="text"
+    placeholder="🔎 Cari resep..."
+    onkeyup="cariResep()"
 >
 
-
-<div class="kru-box">
-
-<label>👨‍🍳 Jumlah kru</label>
+<label><b>👨‍🍳 Jumlah kru</b></label>
 
 <input
-type="number"
-id="jumlahKru"
-value="9"
-min="1"
-oninput="hitungBahan()"
+    id="jumlahKru"
+    class="kru"
+    type="number"
+    value="9"
+    min="1"
+    oninput="hitungBahan()"
 >
-
-</div>
-
 
 <div class="kategori">
 
@@ -194,13 +138,11 @@ Semua
 </div>
 
 
-<!-- IKAN -->
-
 <div class="recipe ikan">
 
 <h2>🐟 Pindang Ikan</h2>
 
-<p><b>Resep dasar:</b> 9 orang</p>
+<p>Resep dasar: 9 orang</p>
 
 <h3>🥘 Bahan</h3>
 
@@ -219,7 +161,7 @@ Semua
 </li>
 
 <li>
-<span class="bahan" data-jumlah="10">10</span> buah cabai
+<span class="bahan" data-jumlah="10">10</span> cabai
 </li>
 
 <li>
@@ -227,7 +169,7 @@ Semua
 </li>
 
 <li>
-<span class="bahan" data-jumlah="3">3</span> lembar daun salam
+<span class="bahan" data-jumlah="3">3</span> daun salam
 </li>
 
 <li>Garam secukupnya</li>
@@ -237,39 +179,26 @@ Semua
 <h3>👨‍🍳 Cara memasak</h3>
 
 <ol>
-
 <li>Bersihkan ikan.</li>
-
-<li>Haluskan bawang dan cabai.</li>
-
 <li>Tumis bumbu sampai harum.</li>
-
 <li>Tambahkan air dan rempah.</li>
-
 <li>Masukkan ikan.</li>
-
 <li>Masak sampai matang.</li>
-
 </ol>
 
 <button class="masak"
-onclick="alert('Selamat memasak! Kru pasti senang ⚓')">
-
+onclick="alert('Selamat memasak! ⚓')">
 👨‍🍳 Mulai Masak
-
 </button>
 
 </div>
 
 
-
-<!-- AYAM -->
-
 <div class="recipe ayam">
 
 <h2>🍗 Ayam Rica-Rica</h2>
 
-<p><b>Resep dasar:</b> 9 orang</p>
+<p>Resep dasar: 9 orang</p>
 
 <h3>🥘 Bahan</h3>
 
@@ -288,7 +217,7 @@ onclick="alert('Selamat memasak! Kru pasti senang ⚓')">
 </li>
 
 <li>
-<span class="bahan" data-jumlah="15">15</span> cabai merah
+<span class="bahan" data-jumlah="15">15</span> cabai
 </li>
 
 <li>
@@ -296,7 +225,7 @@ onclick="alert('Selamat memasak! Kru pasti senang ⚓')">
 </li>
 
 <li>
-<span class="bahan" data-jumlah="3">3</span> lembar daun jeruk
+<span class="bahan" data-jumlah="3">3</span> daun jeruk
 </li>
 
 <li>Garam secukupnya</li>
@@ -306,39 +235,27 @@ onclick="alert('Selamat memasak! Kru pasti senang ⚓')">
 <h3>👨‍🍳 Cara memasak</h3>
 
 <ol>
-
 <li>Potong ayam.</li>
-
-<li>Tumis bumbu halus.</li>
-
+<li>Tumis bumbu.</li>
 <li>Masukkan serai dan daun jeruk.</li>
-
 <li>Masukkan ayam.</li>
-
-<li>Tambahkan sedikit air.</li>
-
-<li>Masak sampai ayam matang.</li>
-
+<li>Tambahkan air.</li>
+<li>Masak sampai matang.</li>
 </ol>
 
 <button class="masak"
-onclick="alert('Ayam rica-rica siap disajikan! 🍗')">
-
+onclick="alert('Ayam rica-rica siap! 🍗')">
 🍗 Masak Sekarang
-
 </button>
 
 </div>
 
 
-
-<!-- PRAKTIS -->
-
 <div class="recipe praktis">
 
 <h2>🍳 Nasi Goreng</h2>
 
-<p><b>Resep dasar:</b> 9 orang</p>
+<p>Resep dasar: 9 orang</p>
 
 <h3>🥘 Bahan</h3>
 
@@ -349,7 +266,7 @@ onclick="alert('Ayam rica-rica siap disajikan! 🍗')">
 </li>
 
 <li>
-<span class="bahan" data-jumlah="9">9</span> butir telur
+<span class="bahan" data-jumlah="9">9</span> telur
 </li>
 
 <li>
@@ -373,123 +290,84 @@ onclick="alert('Ayam rica-rica siap disajikan! 🍗')">
 <h3>👨‍🍳 Cara memasak</h3>
 
 <ol>
-
 <li>Tumis bawang dan cabai.</li>
-
 <li>Masukkan telur.</li>
-
 <li>Masukkan nasi.</li>
-
 <li>Tambahkan kecap dan garam.</li>
-
 <li>Aduk sampai rata.</li>
-
-<li>Masak sampai harum.</li>
-
 </ol>
 
 <button class="masak"
 onclick="alert('Nasi goreng siap! 🍳')">
-
 🍳 Masak Sekarang
-
 </button>
 
 </div>
 
 </div>
 
-
 <footer>
-
-⚓ Dapur Kapal v2 — Dibuat untuk kru kapal 👨‍🍳
-
+⚓ Dapur Kapal v2 — Untuk kru kapal
 </footer>
-
 
 
 <script>
 
 function hitungBahan() {
 
-let kru =
-Number(document.getElementById("jumlahKru").value);
+    let kru = Number(
+        document.getElementById("jumlahKru").value
+    );
 
-if (kru < 1) return;
+    if (kru < 1) return;
 
-let bahan =
-document.querySelectorAll(".bahan");
+    document.querySelectorAll(".bahan").forEach(function(item) {
 
-bahan.forEach(function(item) {
+        let dasar = Number(item.dataset.jumlah);
 
-let jumlahDasar =
-Number(item.dataset.jumlah);
+        let hasil = dasar * kru / 9;
 
-let hasil =
-jumlahDasar * kru / 9;
+        item.innerText = Number(
+            hasil.toFixed(2)
+        );
 
-item.innerText =
-Number(hasil.toFixed(2));
-
-});
-
+    });
 }
-
 
 
 function cariResep() {
 
-let input =
-document.getElementById("search")
-.value
-.toLowerCase();
+    let kata = document
+        .getElementById("search")
+        .value
+        .toLowerCase();
 
-let resep =
-document.querySelectorAll(".recipe");
+    document.querySelectorAll(".recipe").forEach(function(resep) {
 
-resep.forEach(function(item) {
+        if (resep.innerText.toLowerCase().includes(kata)) {
+            resep.style.display = "block";
+        } else {
+            resep.style.display = "none";
+        }
 
-let text =
-item.innerText.toLowerCase();
-
-if (text.includes(input)) {
-
-item.style.display = "block";
-
-} else {
-
-item.style.display = "none";
-
+    });
 }
-
-});
-
-}
-
 
 
 function filterKategori(kategori) {
 
-let resep =
-document.querySelectorAll(".recipe");
+    document.querySelectorAll(".recipe").forEach(function(resep) {
 
-resep.forEach(function(item) {
+        if (
+            kategori === "semua" ||
+            resep.classList.contains(kategori)
+        ) {
+            resep.style.display = "block";
+        } else {
+            resep.style.display = "none";
+        }
 
-if (
-kategori === "semua" ||
-item.classList.contains(kategori)
-) {
-
-item.style.display = "block";
-
-} else {
-
-item.style.display = "none";
-
-}
-
-});
-
+    });
 }
 
 </script>
