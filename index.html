@@ -1093,14 +1093,39 @@ function renderWeek(){
         <div class="row">
           <div>
             <b>${label}</b><br>
-            <span class="muted">
-              ${recipe?esc(recipe.name):"Belum ada menu"}
+
+            <span class="${recipe?'':'muted'}">
+              ${recipe
+                ? `🍽️ <b>${esc(recipe.name)}</b>`
+                : "Belum ada menu"
+              }
             </span>
           </div>
-          <button class="btn fit"
-            onclick="chooseMenu('${day}','${meal}')">
-            Pilih
-          </button>
+
+          <div class="row" style="flex:0 0 auto">
+
+            ${
+              recipe
+              ? `
+                <button class="btn success fit"
+                  onclick="showRecipe('${recipe.id}')">
+                  👀 Lihat Resep
+                </button>
+
+                <button class="btn secondary fit"
+                  onclick="chooseMenu('${day}','${meal}')">
+                  ✏️ Ganti
+                </button>
+              `
+              : `
+                <button class="btn fit"
+                  onclick="chooseMenu('${day}','${meal}')">
+                  ➕ Pilih
+                </button>
+              `
+            }
+
+          </div>
         </div>
       </div>
       `;
