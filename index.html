@@ -2,2412 +2,928 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#07111f">
-<title>Dapur Kapal V15.4</title>
+<title>Dapur Kapal V15.5</title>
 
 <style>
 *{box-sizing:border-box}
-:root{
-  --bg:#07111f;
-  --card:#0d1b2a;
-  --card2:#122337;
-  --text:#f4f7fb;
-  --muted:#91a4ba;
-  --line:#20344a;
-  --primary:#20c997;
-  --blue:#4dabf7;
-  --yellow:#ffd43b;
-  --red:#ff6b6b;
-  --purple:#b197fc;
-}
 body{
   margin:0;
-  background:linear-gradient(180deg,#07111f,#091827);
-  color:var(--text);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-family:Arial,sans-serif;
+  background:#07111f;
+  color:#eef6ff;
 }
-button,input,textarea,select{font:inherit}
+button,input,select,textarea{font:inherit}
 button{cursor:pointer}
-.app{max-width:760px;margin:auto;padding-bottom:90px}
+.app{max-width:1100px;margin:auto;padding-bottom:90px}
 header{
-  padding:18px 16px 10px;
   position:sticky;
   top:0;
   z-index:10;
-  background:rgba(7,17,31,.94);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line)
+  background:#07111fee;
+  backdrop-filter:blur(12px);
+  padding:14px;
+  border-bottom:1px solid #20344d;
 }
-.top{
+.brand{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:10px
+  align-items:center;
 }
-.brand{font-size:21px;font-weight:800}
-.version{font-size:11px;color:var(--primary);font-weight:800}
-main{padding:14px}
-.page{display:none}
-.page.active{display:block}
-.card{
-  background:linear-gradient(145deg,var(--card),#0a1725);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:15px;
-  margin-bottom:13px;
-  box-shadow:0 8px 25px rgba(0,0,0,.14)
-}
+.brand h1{font-size:20px;margin:0}
+.version{font-size:12px;color:#70b7ff}
+.container{padding:14px}
 .hero{
+  background:linear-gradient(135deg,#102942,#0a1727);
+  border:1px solid #29445f;
+  border-radius:22px;
   padding:18px;
-  background:linear-gradient(135deg,#102b3a,#0c1828)
+  margin-bottom:14px;
 }
 .profile{
   display:flex;
   gap:14px;
-  align-items:center
+  align-items:center;
 }
 .avatar{
-  width:72px;height:72px;border-radius:50%;
-  object-fit:cover;
-  border:3px solid var(--primary);
-  background:#16283b;
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;font-weight:800
+  width:76px;
+  height:76px;
+  border-radius:50%;
+  background:#173451;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  overflow:hidden;
+  border:2px solid #4f89bd;
 }
-h1,h2,h3,p{margin-top:0}
-h2{font-size:18px;margin-bottom:12px}
-h3{font-size:15px;margin-bottom:7px}
-p{color:var(--muted);line-height:1.5}
-.small{font-size:12px;color:var(--muted)}
-.muted{color:var(--muted)}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile h2{margin:0 0 5px}
+.muted{color:#9eb1c4;font-size:13px}
 .grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
 }
-.grid3{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:8px
+.card{
+  background:#0d1b2b;
+  border:1px solid #213a55;
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
 }
-.stat{
-  background:var(--card2);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:13px
-}
-.stat b{display:block;font-size:21px;margin-top:4px}
-.stat span{font-size:11px;color:var(--muted)}
+.stat{text-align:center}
+.stat b{font-size:23px;display:block}
+.stat span{font-size:11px;color:#91a8bd}
+h3{margin:0 0 12px}
 .btn{
   border:0;
-  border-radius:12px;
-  padding:10px 13px;
-  color:white;
-  background:#1c3047;
-  font-weight:700
-}
-.btn.primary{background:var(--primary);color:#031711}
-.btn.blue{background:var(--blue);color:#06131e}
-.btn.red{background:var(--red);color:#250606}
-.btn.yellow{background:var(--yellow);color:#292000}
-.btn.purple{background:var(--purple);color:#150c27}
-.btn.block{width:100%}
-.btn.sm{padding:7px 9px;font-size:12px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-input,textarea,select{
-  width:100%;
-  background:#081522;
-  border:1px solid var(--line);
-  color:var(--text);
   border-radius:11px;
-  padding:11px 12px;
-  outline:none
+  padding:10px 13px;
+  background:#1b5d91;
+  color:white;
+  margin:3px;
 }
-input:focus,textarea:focus,select:focus{border-color:var(--primary)}
+.btn.secondary{background:#20364e}
+.btn.success{background:#267348}
+.btn.danger{background:#873c43}
+.btn.warn{background:#8a691d}
+.btn.small{padding:7px 9px;font-size:12px}
+input,select,textarea{
+  width:100%;
+  background:#091523;
+  color:#eef6ff;
+  border:1px solid #29435d;
+  border-radius:10px;
+  padding:10px;
+  margin:4px 0 8px;
+}
 textarea{min-height:100px;resize:vertical}
 label{
   display:block;
   font-size:12px;
-  color:var(--muted);
-  margin-bottom:5px
-}
-.field{margin-bottom:11px}
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 8px;
-  border-radius:99px;
-  background:#183148;
-  color:#b9d8ef;
-  font-size:11px;
-  font-weight:700
-}
-.badge.green{background:#103d31;color:#62e6bd}
-.badge.red{background:#451d24;color:#ff9b9b}
-.badge.yellow{background:#453c13;color:#ffe57a}
-.badge.blue{background:#123c59;color:#8dccff}
-.badge.purple{background:#33244e;color:#d2baff}
-.item{
-  padding:12px 0;
-  border-bottom:1px solid var(--line)
-}
-.item:last-child{border-bottom:0}
-.row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px
-}
-.recipe-title{font-weight:800;font-size:15px}
-.ingredient{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:7px 0;
-  font-size:13px
-}
-.day{
-  border:1px solid var(--line);
-  border-radius:15px;
-  overflow:hidden;
-  margin-bottom:10px
-}
-.dayhead{
-  padding:11px 13px;
-  background:#11253a;
-  font-weight:800;
-  display:flex;
-  justify-content:space-between
-}
-.meal{
-  padding:11px 13px;
-  border-top:1px solid var(--line)
-}
-.mealname{
-  color:var(--muted);
-  font-size:11px;
-  text-transform:uppercase;
-  font-weight:800
+  color:#a9bdd0;
+  margin-top:7px;
 }
 .nav{
   position:fixed;
-  bottom:0;left:0;right:0;
+  bottom:0;
+  left:0;
+  right:0;
   z-index:20;
-  max-width:760px;
-  margin:auto;
-  background:rgba(7,17,31,.96);
-  border-top:1px solid var(--line);
+  background:#081522f5;
+  border-top:1px solid #263c53;
   display:flex;
-  overflow-x:auto;
-  padding:7px 5px calc(7px + env(safe-area-inset-bottom))
+  justify-content:center;
+  overflow:auto;
 }
 .nav button{
-  flex:1;
-  min-width:70px;
+  min-width:75px;
+  padding:10px 7px;
   background:none;
+  color:#9bb0c4;
   border:0;
-  color:var(--muted);
-  padding:7px 4px;
-  font-size:10px
+  font-size:11px;
 }
-.nav button.active{color:var(--primary);font-weight:800}
-.icon{font-size:18px;display:block;margin-bottom:2px}
-hr{border:0;border-top:1px solid var(--line);margin:13px 0}
-.progress{
-  height:8px;background:#17283a;border-radius:99px;overflow:hidden
-}
-.progress i{
-  display:block;height:100%;background:var(--primary);
-  border-radius:99px
-}
-.warning{
-  border-left:4px solid var(--red);
-  padding:10px 12px;
-  background:#24141a;
-  border-radius:10px;
-  margin-bottom:9px
-}
-.success{
-  border-left:4px solid var(--primary);
-  padding:10px 12px;
-  background:#10271f;
-  border-radius:10px;
-  margin-bottom:9px
-}
-.empty{text-align:center;padding:25px 10px;color:var(--muted)}
-.check{
+.nav button.active{color:#62b6ff}
+.page{display:none}
+.page.active{display:block}
+.row{
   display:flex;
+  gap:8px;
   align-items:center;
-  gap:10px;
-  padding:9px 0
+  flex-wrap:wrap;
 }
-.check input{width:18px;height:18px}
-.photoPreview{
-  width:100px;height:100px;border-radius:16px;
-  object-fit:cover;background:#16283b;
-  border:1px solid var(--line)
+.between{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+.recipe{
+  border:1px solid #263f58;
+  border-radius:15px;
+  padding:13px;
+  margin:8px 0;
+  background:#0a1827;
+}
+.recipe h4{margin:0 0 5px}
+.tag{
+  display:inline-block;
+  background:#17324d;
+  color:#80c4ff;
+  border-radius:20px;
+  padding:4px 8px;
+  font-size:10px;
+  margin:2px;
+}
+.day{
+  border:1px solid #29425b;
+  border-radius:15px;
+  padding:12px;
+  margin:9px 0;
+}
+.meal{
+  background:#091624;
+  border-radius:11px;
+  padding:9px;
+  margin:6px 0;
+}
+.stock-low{color:#ffca65}
+.stock-ok{color:#79d69a}
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#7f94a8;
+}
+.modal{
+  position:fixed;
+  inset:0;
+  background:#000b;
+  z-index:50;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
+}
+.modal.show{display:flex}
+.modalbox{
+  max-width:650px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+  background:#0c1b2b;
+  border:1px solid #34516d;
+  border-radius:18px;
+  padding:18px;
 }
 .timer{
-  font-size:44px;
+  font-size:48px;
   text-align:center;
-  font-weight:900;
-  letter-spacing:2px;
-  padding:15px
+  font-weight:bold;
+  margin:20px 0;
 }
-table{width:100%;border-collapse:collapse;font-size:12px}
-th,td{
-  border-bottom:1px solid var(--line);
-  padding:8px 5px;
-  text-align:left
+.progress{
+  height:8px;
+  background:#17293a;
+  border-radius:10px;
+  overflow:hidden;
 }
-th{color:var(--muted)}
-.stars button{
-  border:0;background:none;color:#48596b;font-size:25px;padding:0 2px
+.progress div{
+  height:100%;
+  background:#45a9ef;
 }
-.stars button.on{color:var(--yellow)}
-.search{margin-bottom:12px}
-@media(min-width:650px){
-  .grid{grid-template-columns:repeat(4,1fr)}
+@media(max-width:700px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .profile{align-items:flex-start}
+}
+@media(min-width:800px){
+  .nav{position:static;margin:0 14px 20px;border:1px solid #263c53;border-radius:15px}
+  .nav button{min-width:100px}
 }
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header>
-  <div class="top">
-    <div>
-      <div class="brand">🍳 Dapur Kapal</div>
-      <div class="version">V15.4 • Smart Galley Management</div>
-    </div>
-    <button class="btn sm" onclick="showPage('backup')">💾</button>
+  <div class="brand">
+    <h1>⚓ Dapur Kapal</h1>
+    <div class="version">V15.5</div>
   </div>
 </header>
 
-<main>
+<main class="container">
 
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
 
-  <div class="card hero">
+  <div class="hero">
     <div class="profile">
-      <div id="avatarBox" class="avatar">A</div>
+      <div class="avatar" id="avatar">👨‍🍳</div>
       <div style="flex:1">
-        <h2 id="dashName" style="margin-bottom:3px">Akbar</h2>
-        <div id="dashRole" class="small">Ship Cook</div>
-        <div id="dashShip" class="small">Dapur Kapal</div>
+        <h2 id="profileName">Akbar</h2>
+        <div class="muted" id="profileRole">Ship Cook</div>
+        <div class="muted" id="profileShip">⚓ Dapur Kapal</div>
       </div>
-      <button class="btn sm" onclick="showPage('profile')">✏️</button>
+      <button class="btn small" onclick="openProfile()">Edit</button>
     </div>
-    <p id="dashBio" style="margin:14px 0 0">Mengatur dapur kapal, menu, stok dan kebutuhan crew.</p>
+
+    <p class="muted" id="profileBio">
+      Mengelola dapur kapal dengan rapi, hemat, dan terencana.
+    </p>
   </div>
 
   <div class="grid">
-    <div class="stat"><span>🍳 Total Masak</span><b id="statCook">0</b></div>
-    <div class="stat"><span>👨‍👨‍👦 Crew</span><b id="statCrew">9</b></div>
-    <div class="stat"><span>⭐ Rating</span><b id="statRating">0.0</b></div>
-    <div class="stat"><span>📖 Resep</span><b id="statRecipe">10</b></div>
-  </div>
-
-  <div class="card">
-    <h2>🏆 Level Chef</h2>
-    <div class="row">
-      <div>
-        <b id="levelName">Chef Pemula</b>
-        <div class="small" id="levelText">0 / 10 masakan</div>
-      </div>
-      <span class="badge green" id="levelBadge">LV 1</span>
+    <div class="card stat">
+      <b id="statCooked">0</b>
+      <span>MASAK</span>
     </div>
-    <div style="margin-top:10px" class="progress">
-      <i id="levelProgress" style="width:0%"></i>
+    <div class="card stat">
+      <b id="statCrew">9</b>
+      <span>CREW</span>
+    </div>
+    <div class="card stat">
+      <b id="statRating">0.0</b>
+      <span>RATING</span>
+    </div>
+    <div class="card stat">
+      <b id="statRecipes">10</b>
+      <span>RESEP</span>
     </div>
   </div>
 
   <div class="card">
-    <h2>⚡ Aksi Cepat</h2>
-    <div class="grid3">
-      <button class="btn primary" onclick="generateSmartWeek()">🧠<br>Smart Menu</button>
-      <button class="btn blue" onclick="showPage('stock')">📦<br>Stok</button>
-      <button class="btn yellow" onclick="showPage('shopping')">🛒<br>Belanja</button>
+    <h3>🏆 Level Chef</h3>
+    <div id="levelText"></div>
+    <div class="progress">
+      <div id="levelProgress" style="width:0%"></div>
     </div>
+    <p class="muted" id="levelNext"></p>
   </div>
 
-  <div id="dashboardWarnings"></div>
+  <div class="card">
+    <div class="between">
+      <h3>📊 Ringkasan Dapur</h3>
+      <button class="btn small" onclick="showPage('report')">Lihat</button>
+    </div>
+    <div id="dashboardSummary"></div>
+  </div>
 
   <div class="card">
-    <h2>📌 Status Dapur</h2>
-    <div id="dashboardStatus"></div>
+    <h3>🏅 Pencapaian</h3>
+    <div id="achievements"></div>
   </div>
 
 </section>
-
 
 <!-- MENU -->
 <section id="menu" class="page">
-  <div class="card">
-    <h2>📅 Menu Mingguan</h2>
-    <p>Senin–Minggu dengan sarapan, makan siang dan makan malam.</p>
-    <div class="actions">
-      <button class="btn primary" onclick="generateSmartWeek()">🧠 Generate Smart Menu</button>
-      <button class="btn" onclick="clearWeek()">🗑️ Reset</button>
-    </div>
-  </div>
-  <div id="weekMenu"></div>
-</section>
 
+  <div class="card">
+    <div class="between">
+      <div>
+        <h3>📅 Menu 7 Hari</h3>
+        <div class="muted">Sarapan • Siang • Malam</div>
+      </div>
+      <button class="btn success" onclick="generateSmartWeek()">🧠 Smart Menu</button>
+    </div>
+
+    <label>Jumlah Crew</label>
+    <input id="crewInput" type="number" min="1" value="9" onchange="saveCrew()">
+
+    <div id="weeklyMenu"></div>
+  </div>
+
+</section>
 
 <!-- STOCK -->
 <section id="stock" class="page">
-  <div class="card">
-    <h2>📦 Manajemen Stok</h2>
 
-    <div class="grid">
-      <div class="field">
-        <label>Nama bahan</label>
-        <input id="stockName" placeholder="Contoh: ikan">
-      </div>
-      <div class="field">
-        <label>Jumlah</label>
-        <input id="stockQty" type="number" step="0.01" placeholder="2">
-      </div>
-      <div class="field">
-        <label>Satuan</label>
-        <select id="stockUnit">
-          <option value="kg">kg</option>
-          <option value="gram">gram</option>
-          <option value="liter">liter</option>
-          <option value="ml">ml</option>
-          <option value="pcs">pcs</option>
-          <option value="buah">buah</option>
-          <option value="ikat">ikat</option>
-          <option value="bungkus">bungkus</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Batas minimum</label>
-        <input id="stockMin" type="number" step="0.01" placeholder="1">
-      </div>
+  <div class="card">
+    <h3>📦 Tambah / Update Stok</h3>
+
+    <input id="stockName" placeholder="Contoh: ikan">
+    <div class="row">
+      <input id="stockQty" type="number" step="0.01" placeholder="Jumlah">
+      <select id="stockUnit">
+        <option>kg</option>
+        <option>gram</option>
+        <option>liter</option>
+        <option>ml</option>
+        <option>pcs</option>
+        <option>batang</option>
+        <option>lembar</option>
+      </select>
     </div>
 
-    <button class="btn primary block" onclick="addStock()">➕ Tambah / Update Stok</button>
+    <input id="stockNote" placeholder="Catatan, contoh: stok awal">
+    <button class="btn success" onclick="addStock()">+ Simpan Stok</button>
   </div>
 
   <div class="card">
-    <h2>📊 Daftar Stok</h2>
-    <input class="search" id="stockSearch" oninput="renderStock()" placeholder="🔎 Cari bahan...">
+    <div class="between">
+      <h3>📦 Stok Sekarang</h3>
+      <button class="btn small" onclick="clearStock()">Reset</button>
+    </div>
     <div id="stockList"></div>
   </div>
 
   <div class="card">
-    <h2>🔄 Riwayat Stok</h2>
+    <h3>🔄 Riwayat Stok</h3>
     <div id="stockHistory"></div>
   </div>
-</section>
 
+</section>
 
 <!-- SHOPPING -->
 <section id="shopping" class="page">
-  <div class="card">
-    <h2>🛒 Belanja Otomatis</h2>
-    <p>Kebutuhan dihitung dari menu mingguan dikurangi stok yang tersedia.</p>
-
-    <div class="grid">
-      <div class="field">
-        <label>Harga default/kg</label>
-        <input id="defaultKg" type="number" placeholder="0">
-      </div>
-      <div class="field">
-        <label>Harga default/liter</label>
-        <input id="defaultLiter" type="number" placeholder="0">
-      </div>
-    </div>
-
-    <button class="btn primary block" onclick="calculateShopping()">🧮 Hitung Kebutuhan Belanja</button>
-  </div>
 
   <div class="card">
-    <div class="row">
-      <h2 style="margin:0">📋 Daftar Belanja</h2>
-      <button class="btn sm" onclick="printShopping()">🖨️</button>
+    <div class="between">
+      <div>
+        <h3>🛒 Belanja Otomatis</h3>
+        <div class="muted">Berdasarkan menu mingguan dan stok</div>
+      </div>
+      <button class="btn success" onclick="calculateShopping()">Hitung</button>
     </div>
+
     <div id="shoppingList"></div>
-  </div>
 
-  <div class="card">
-    <h2>💰 Total Estimasi</h2>
-    <div class="stat">
-      <span>Total belanja</span>
-      <b id="shoppingTotal">Rp0</b>
+    <div class="row">
+      <button class="btn" onclick="printShopping()">🖨️ Print</button>
+      <button class="btn secondary" onclick="copyShopping()">📋 Copy</button>
     </div>
   </div>
 
-  <div class="card">
-    <h2>💵 Harga Bahan</h2>
-    <p>Masukkan harga beli aktual supaya estimasi semakin akurat.</p>
-    <div id="priceList"></div>
-  </div>
 </section>
 
-
-<!-- RECIPES -->
+<!-- RESEP -->
 <section id="recipes" class="page">
-  <div class="card">
-    <h2>📖 Koleksi Resep</h2>
-    <input class="search" id="recipeSearch" oninput="renderRecipes()" placeholder="🔎 Cari resep...">
-    <div class="actions">
-      <select id="recipeCategory" onchange="renderRecipes()" style="max-width:180px">
-        <option value="all">Semua</option>
-        <option value="breakfast">Sarapan</option>
-        <option value="lunch">Makan Siang</option>
-        <option value="dinner">Makan Malam</option>
-      </select>
-      <button class="btn primary" onclick="openCustomRecipe()">➕ Resep Baru</button>
-    </div>
-  </div>
-  <div id="recipeList"></div>
-</section>
 
+  <div class="card">
+    <h3>🍳 Koleksi Resep</h3>
+    <input id="recipeSearch" placeholder="Cari resep..." oninput="renderRecipes()">
+
+    <select id="recipeCategory" onchange="renderRecipes()">
+      <option value="all">Semua kategori</option>
+      <option value="breakfast">Sarapan</option>
+      <option value="lunch">Siang</option>
+      <option value="dinner">Malam</option>
+    </select>
+
+    <button class="btn success" onclick="openCustomRecipe()">+ Tambah Resep</button>
+
+    <div id="recipeList"></div>
+  </div>
+
+</section>
 
 <!-- EXPENSE -->
 <section id="expense" class="page">
+
   <div class="card">
-    <h2>💰 Pengeluaran Dapur</h2>
-
-    <div class="grid">
-      <div class="field">
-        <label>Keterangan</label>
-        <input id="expenseName" placeholder="Belanja ikan">
-      </div>
-      <div class="field">
-        <label>Nominal</label>
-        <input id="expenseAmount" type="number" placeholder="150000">
-      </div>
-    </div>
-
-    <button class="btn primary block" onclick="addExpense()">➕ Tambah Pengeluaran</button>
+    <h3>💸 Pengeluaran Dapur</h3>
+    <input id="expenseName" placeholder="Contoh: Belanja ikan">
+    <input id="expenseAmount" type="number" placeholder="Nominal Rp">
+    <button class="btn success" onclick="addExpense()">+ Tambah</button>
   </div>
 
   <div class="card">
-    <h2>📊 Ringkasan</h2>
-    <div class="grid">
-      <div class="stat"><span>Total</span><b id="expenseTotal">Rp0</b></div>
-      <div class="stat"><span>Transaksi</span><b id="expenseCount">0</b></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📋 Riwayat</h2>
+    <h3>📋 Riwayat Pengeluaran</h3>
     <div id="expenseList"></div>
   </div>
+
 </section>
 
+<!-- CHECKLIST -->
+<section id="checklist" class="page">
+
+  <div class="card">
+    <h3>☑️ Checklist Dapur</h3>
+    <input id="taskInput" placeholder="Contoh: Cek stok beras">
+    <button class="btn success" onclick="addTask()">+ Tambah</button>
+    <div id="taskList"></div>
+  </div>
+
+</section>
+
+<!-- NOTES -->
+<section id="notes" class="page">
+
+  <div class="card">
+    <h3>📝 Catatan Harian</h3>
+    <textarea id="dailyNote" placeholder="Tulis catatan dapur hari ini..."></textarea>
+    <button class="btn success" onclick="saveNote()">Simpan Catatan</button>
+  </div>
+
+</section>
 
 <!-- REPORT -->
 <section id="report" class="page">
+
   <div class="card">
-    <h2>📊 Laporan Dapur</h2>
-    <p>Ringkasan aktivitas dapur kapal.</p>
+    <h3>📊 Laporan Dapur</h3>
     <div id="reportContent"></div>
   </div>
 
   <div class="card">
-    <h2>📈 Statistik Menu</h2>
-    <div id="recipeStats"></div>
+    <h3>🍳 Riwayat Masak</h3>
+    <div id="cookHistory"></div>
   </div>
+
 </section>
-
-
-<!-- CHECKLIST -->
-<section id="checklist" class="page">
-  <div class="card">
-    <h2>✅ Checklist Dapur</h2>
-    <div class="grid">
-      <div class="field">
-        <label>Tugas baru</label>
-        <input id="taskInput" placeholder="Cek stok beras">
-      </div>
-      <div class="field">
-        <label>Kategori</label>
-        <select id="taskCategory">
-          <option>Dapur</option>
-          <option>Stok</option>
-          <option>Belanja</option>
-          <option>Kebersihan</option>
-        </select>
-      </div>
-    </div>
-    <button class="btn primary block" onclick="addTask()">➕ Tambah</button>
-  </div>
-  <div class="card">
-    <div id="taskList"></div>
-  </div>
-</section>
-
-
-<!-- NOTES -->
-<section id="notes" class="page">
-  <div class="card">
-    <h2>📝 Catatan Harian</h2>
-    <textarea id="dailyNote" placeholder="Tulis catatan dapur hari ini..."></textarea>
-    <button class="btn primary block" onclick="saveNote()">💾 Simpan Catatan</button>
-  </div>
-</section>
-
-
-<!-- PROFILE -->
-<section id="profile" class="page">
-  <div class="card">
-    <h2>👨‍🍳 Profil Chef</h2>
-
-    <div class="field">
-      <label>Foto profil</label>
-      <input type="file" id="profilePhoto" accept="image/*" onchange="loadPhoto(event)">
-    </div>
-
-    <img id="profilePreview" class="photoPreview" alt="Preview">
-
-    <div class="field">
-      <label>Nama</label>
-      <input id="profileName">
-    </div>
-
-    <div class="field">
-      <label>Jabatan</label>
-      <input id="profileRole">
-    </div>
-
-    <div class="field">
-      <label>Nama kapal / dapur</label>
-      <input id="profileShip">
-    </div>
-
-    <div class="field">
-      <label>Pengalaman</label>
-      <input id="profileExperience">
-    </div>
-
-    <div class="field">
-      <label>Bio</label>
-      <textarea id="profileBio"></textarea>
-    </div>
-
-    <button class="btn primary block" onclick="saveProfile()">💾 Simpan Profil</button>
-  </div>
-
-  <div class="card">
-    <h2>🏆 Pencapaian</h2>
-    <div id="achievements"></div>
-  </div>
-</section>
-
 
 <!-- BACKUP -->
 <section id="backup" class="page">
-  <div class="card">
-    <h2>💾 Backup & Restore</h2>
-    <p>Simpan seluruh data Dapur Kapal agar aman.</p>
-
-    <button class="btn primary block" onclick="exportData()">📤 Export Backup</button>
-
-    <hr>
-
-    <label>Restore file JSON</label>
-    <input type="file" id="restoreFile" accept=".json,application/json" onchange="restoreData(event)">
-  </div>
 
   <div class="card">
-    <h2>⚠️ Data</h2>
-    <button class="btn red block" onclick="resetAll()">Hapus Semua Data</button>
-  </div>
-</section>
+    <h3>💾 Backup Data</h3>
+    <p class="muted">
+      Simpan seluruh data Dapur Kapal agar aman ketika pindah HP/browser.
+    </p>
 
+    <button class="btn success" onclick="backupData()">⬇️ Backup</button>
 
-<!-- CHEF MODE -->
-<section id="chef" class="page">
-  <div class="card">
-    <h2>👨‍🍳 Mode Chef</h2>
-    <div id="chefRecipe"></div>
-  </div>
+    <label>Restore data</label>
+    <input type="file" id="restoreFile" accept=".json" onchange="restoreData(event)">
 
-  <div class="card">
-    <h2>⏱️ Timer</h2>
-    <div id="timer" class="timer">00:00</div>
-    <div class="grid3">
-      <button class="btn" onclick="setTimer(5)">5 Menit</button>
-      <button class="btn" onclick="setTimer(10)">10 Menit</button>
-      <button class="btn" onclick="setTimer(20)">20 Menit</button>
-    </div>
-    <br>
-    <div class="actions">
-      <button class="btn primary" onclick="startTimer()">▶️ Mulai</button>
-      <button class="btn yellow" onclick="pauseTimer()">⏸️ Pause</button>
-      <button class="btn red" onclick="resetTimer()">↺ Reset</button>
-    </div>
+    <button class="btn danger" onclick="resetAll()">⚠️ Reset Semua Data</button>
   </div>
 
-  <div class="card">
-    <h2>⭐ Rating Menu</h2>
-    <div id="ratingBox"></div>
-  </div>
 </section>
 
 </main>
 
-
+<!-- NAV -->
 <nav class="nav">
-  <button data-page="dashboard" onclick="showPage('dashboard')"><span class="icon">🏠</span>Home</button>
-  <button data-page="menu" onclick="showPage('menu')"><span class="icon">📅</span>Menu</button>
-  <button data-page="stock" onclick="showPage('stock')"><span class="icon">📦</span>Stok</button>
-  <button data-page="shopping" onclick="showPage('shopping')"><span class="icon">🛒</span>Belanja</button>
-  <button data-page="recipes" onclick="showPage('recipes')"><span class="icon">📖</span>Resep</button>
-  <button data-page="report" onclick="showPage('report')"><span class="icon">📊</span>Laporan</button>
+  <button onclick="showPage('dashboard')" class="active">🏠<br>Home</button>
+  <button onclick="showPage('menu')">📅<br>Menu</button>
+  <button onclick="showPage('stock')">📦<br>Stok</button>
+  <button onclick="showPage('shopping')">🛒<br>Belanja</button>
+  <button onclick="showPage('recipes')">🍳<br>Resep</button>
+  <button onclick="showPage('expense')">💸<br>Biaya</button>
+  <button onclick="showPage('checklist')">☑️<br>Tugas</button>
+  <button onclick="showPage('notes')">📝<br>Catatan</button>
+  <button onclick="showPage('report')">📊<br>Laporan</button>
+  <button onclick="showPage('backup')">💾<br>Backup</button>
 </nav>
 
 </div>
 
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+<div class="modalbox">
+
+<div class="between">
+<h3>👨‍🍳 Profil Chef</h3>
+<button class="btn danger small" onclick="closeModal('profileModal')">X</button>
+</div>
+
+<label>Nama</label>
+<input id="pName">
+
+<label>Jabatan</label>
+<input id="pRole">
+
+<label>Nama Kapal / Dapur</label>
+<input id="pShip">
+
+<label>Pengalaman</label>
+<input id="pExperience">
+
+<label>Bio</label>
+<textarea id="pBio"></textarea>
+
+<label>Foto Profil</label>
+<input type="file" id="pPhoto" accept="image/*">
+
+<button class="btn success" onclick="saveProfile()">Simpan Profil</button>
+
+</div>
+</div>
+
+<!-- RECIPE MODAL -->
+<div class="modal" id="recipeModal">
+<div class="modalbox" id="recipeModalContent"></div>
+</div>
+
+<!-- CHEF MODE -->
+<div class="modal" id="chefModal">
+<div class="modalbox">
+
+<div class="between">
+<h3>👨‍🍳 MODE CHEF</h3>
+<button class="btn danger small" onclick="closeModal('chefModal')">X</button>
+</div>
+
+<div id="chefRecipe"></div>
+
+<div class="timer" id="timerDisplay">00:00</div>
+
+<div class="row" style="justify-content:center">
+<button class="btn success" onclick="startTimer()">▶ Mulai</button>
+<button class="btn warn" onclick="pauseTimer()">⏸ Pause</button>
+<button class="btn secondary" onclick="resetTimer()">↺ Reset</button>
+</div>
+
+</div>
+</div>
 
 <script>
-/* =========================================================
-   DAPUR KAPAL V15.4
-   ========================================================= */
 
-const KEY = {
-  profile:'v153_profile',
-  custom:'v14_custom',
-  weekly:'v14_weekly',
-  stock:'v14_stock',
-  expenses:'v14_expenses',
-  tasks:'v14_tasks',
-  ratings:'v14_ratings',
-  crew:'v14_crew',
-  note:'v14_dailyNote',
-  history:'v15_history',
-  cookCount:'v15_cookCount',
-  log:'v15_log',
-  prices:'v15_prices',
-  shopping:'v15_shoppingPlan',
-  shoppingChecked:'v15_shoppingChecked'
+/* =========================
+   STORAGE
+========================= */
+
+const KEY={
+ profile:'v153_profile',
+ custom:'v14_custom',
+ weekly:'v14_weekly',
+ stock:'v14_stock',
+ expenses:'v14_expenses',
+ tasks:'v14_tasks',
+ ratings:'v14_ratings',
+ crew:'v14_crew',
+ note:'v14_dailyNote',
+ history:'v15_history',
+ cookCount:'v15_cookCount',
+ log:'v15_log',
+ prices:'v15_prices',
+ shopping:'v15_shoppingPlan',
+ checked:'v15_shoppingChecked',
+ stockHistory:'v155_stockHistory'
 };
 
-const DAYS = [
-  'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'
-];
+function load(key, fallback){
+ try{
+   const x=localStorage.getItem(key);
+   return x ? JSON.parse(x) : fallback;
+ }catch(e){return fallback}
+}
 
-const recipes = [
+function save(key,value){
+ localStorage.setItem(key,JSON.stringify(value));
+}
+
+let profile=load(KEY.profile,{
+ name:'Akbar',
+ role:'Ship Cook',
+ ship:'Dapur Kapal',
+ experience:'1 Tahun',
+ bio:'Mengelola dapur kapal dengan rapi, hemat, dan terencana.',
+ photo:''
+});
+
+let custom=load(KEY.custom,[]);
+let weekly=load(KEY.weekly,{});
+let stock=load(KEY.stock,[]);
+let expenses=load(KEY.expenses,[]);
+let tasks=load(KEY.tasks,[]);
+let ratings=load(KEY.ratings,{});
+let crew=Number(load(KEY.crew,9)) || 9;
+let history=load(KEY.history,[]);
+let cookCount=load(KEY.cookCount,{});
+let logs=load(KEY.log,[]);
+let prices=load(KEY.prices,{});
+let shopping=load(KEY.shopping,[]);
+let shoppingChecked=load(KEY.checked,{});
+let stockHistory=load(KEY.stockHistory,[]);
+
+let timerSeconds=0;
+let timerInterval=null;
+let activeRecipe=null;
+
+
+/* =========================
+   DEFAULT RECIPES
+========================= */
+
+const recipes=[
 {
  id:1,
  name:'Pindang Ikan Palembang',
  category:'lunch',
  servings:9,
- fire:'Sedang',
- cook:'25 menit',
  ingredients:[
-  ['ikan',2,'kg'],['bawang merah',100,'gram'],['bawang putih',60,'gram'],
-  ['cabai merah',100,'gram'],['serai',3,'batang'],['lengkuas',50,'gram'],
-  ['asam jawa',30,'gram'],['gula',30,'gram'],['garam',25,'gram'],
+  ['ikan',1.5,'kg'],
+  ['bawang merah',8,'pcs'],
+  ['bawang putih',5,'pcs'],
+  ['cabai',12,'pcs'],
+  ['serai',2,'batang'],
+  ['daun salam',3,'lembar'],
+  ['asam jawa',30,'gram'],
+  ['gula',1,'sdm'],
+  ['garam',1.5,'sdm'],
   ['air',2,'liter']
  ],
  steps:[
-  'Bersihkan ikan dan potong sesuai porsi.',
-  'Haluskan bawang merah, bawang putih dan cabai.',
+  'Bersihkan ikan dan potong sesuai kebutuhan.',
+  'Haluskan bawang merah, bawang putih, dan cabai.',
   'Tumis bumbu sampai harum.',
-  'Masukkan serai dan lengkuas.',
+  'Masukkan serai dan daun salam.',
   'Tambahkan air lalu didihkan.',
-  'Masukkan ikan perlahan.',
-  'Masak dengan api sedang sampai ikan matang.',
-  'Masukkan asam jawa, gula dan garam.',
-  'Cek rasa lalu sajikan.'
+  'Masukkan ikan.',
+  'Masak api sedang sekitar 15–20 menit.',
+  'Masukkan asam jawa, gula, dan garam.',
+  'Cek rasa lalu matikan api.'
  ],
- tips:'Jangan terlalu sering mengaduk ikan supaya tidak hancur.'
+ fire:'Api sedang.',
+ cook:'15–20 menit setelah ikan masuk.',
+ tips:'Untuk kondisi laut bergelombang, gunakan api stabil dan tutup sebagian panci.'
 },
+
 {
  id:2,
  name:'Ayam Rica-Rica',
  category:'lunch',
  servings:9,
- fire:'Sedang',
- cook:'35 menit',
  ingredients:[
-  ['ayam',2.5,'kg'],['bawang merah',150,'gram'],['bawang putih',70,'gram'],
-  ['cabai merah',150,'gram'],['serai',3,'batang'],['daun jeruk',8,'lembar'],
-  ['jahe',40,'gram'],['garam',25,'gram'],['gula',20,'gram'],
-  ['minyak',100,'ml'],['air',700,'ml']
+  ['ayam',1.8,'kg'],
+  ['bawang merah',10,'pcs'],
+  ['bawang putih',6,'pcs'],
+  ['cabai',20,'pcs'],
+  ['serai',2,'batang'],
+  ['daun jeruk',5,'lembar'],
+  ['garam',1.5,'sdm'],
+  ['gula',1,'sdt'],
+  ['air',500,'ml']
  ],
  steps:[
-  'Potong ayam dan cuci bersih.',
-  'Haluskan bawang, cabai dan jahe.',
+  'Potong ayam dan bersihkan.',
+  'Haluskan bawang dan cabai.',
   'Tumis bumbu sampai matang dan harum.',
   'Masukkan serai dan daun jeruk.',
-  'Masukkan ayam lalu aduk rata.',
+  'Masukkan ayam.',
+  'Aduk sampai ayam berubah warna.',
   'Tambahkan air.',
-  'Masak api sedang sampai ayam empuk dan bumbu meresap.',
-  'Koreksi rasa.'
+  'Masak sampai ayam matang dan bumbu meresap.',
+  'Cek rasa.'
  ],
- tips:'Pastikan bumbu benar-benar matang sebelum ayam dimasukkan.'
+ fire:'Sedang lalu kecil.',
+ cook:'30–40 menit.',
+ tips:'Jangan terlalu banyak air agar bumbu rica tetap pekat.'
 },
+
 {
  id:3,
  name:'Nasi Goreng Telur',
  category:'breakfast',
  servings:9,
- fire:'Besar',
- cook:'15 menit',
  ingredients:[
-  ['nasi',2.5,'kg'],['telur',12,'pcs'],['bawang putih',60,'gram'],
-  ['bawang merah',80,'gram'],['cabai',60,'gram'],['kecap',100,'ml'],
-  ['garam',20,'gram'],['minyak',120,'ml']
+  ['nasi',2.5,'kg'],
+  ['telur',9,'pcs'],
+  ['bawang putih',6,'pcs'],
+  ['bawang merah',8,'pcs'],
+  ['cabai',10,'pcs'],
+  ['kecap',100,'ml'],
+  ['garam',1,'sdm'],
+  ['minyak',100,'ml']
  ],
  steps:[
-  'Siapkan nasi yang tidak terlalu lembek.',
-  'Kocok telur.',
-  'Panaskan minyak dengan api besar.',
-  'Masukkan telur dan orak-arik.',
-  'Masukkan bumbu lalu tumis cepat.',
+  'Panaskan minyak.',
+  'Orak-arik telur.',
+  'Masukkan bawang dan cabai.',
+  'Tumis sampai harum.',
   'Masukkan nasi.',
+  'Aduk sampai nasi terurai.',
   'Tambahkan kecap dan garam.',
-  'Aduk sampai nasi panas dan bumbu merata.'
+  'Masak dengan api agak besar sampai nasi harum.'
  ],
- tips:'Gunakan api besar dan aduk cepat supaya nasi tidak lembek.'
+ fire:'Sedang-besar.',
+ cook:'8–12 menit.',
+ tips:'Gunakan nasi dingin supaya nasi goreng tidak lembek.'
 },
+
 {
  id:4,
  name:'Ikan Kecap Pedas',
  category:'dinner',
  servings:9,
- fire:'Sedang',
- cook:'25 menit',
  ingredients:[
-  ['ikan',2,'kg'],['bawang merah',100,'gram'],['bawang putih',50,'gram'],
-  ['cabai',100,'gram'],['kecap manis',150,'ml'],['air',500,'ml'],
-  ['garam',20,'gram'],['gula',20,'gram'],['minyak',100,'ml']
+  ['ikan',1.5,'kg'],
+  ['bawang merah',8,'pcs'],
+  ['bawang putih',5,'pcs'],
+  ['cabai',15,'pcs'],
+  ['kecap',120,'ml'],
+  ['air',500,'ml'],
+  ['garam',1,'sdt'],
+  ['gula',1,'sdt']
  ],
  steps:[
-  'Bersihkan dan potong ikan.',
+  'Bersihkan ikan.',
   'Goreng ikan sampai setengah matang.',
   'Tumis bawang dan cabai.',
   'Tambahkan kecap dan air.',
   'Masukkan ikan.',
-  'Masak sampai kuah menyusut dan meresap.',
-  'Koreksi rasa.'
+  'Masak sampai kuah menyusut.',
+  'Cek rasa.'
  ],
- tips:'Jangan memasak terlalu lama setelah ikan masuk agar tidak hancur.'
+ fire:'Sedang.',
+ cook:'15–20 menit.',
+ tips:'Jangan sering membolak-balik ikan agar tidak hancur.'
 },
+
 {
  id:5,
  name:'Soto Ayam',
- category:'breakfast',
+ category:'lunch',
  servings:9,
- fire:'Sedang',
- cook:'40 menit',
  ingredients:[
-  ['ayam',1.8,'kg'],['bawang merah',100,'gram'],['bawang putih',60,'gram'],
-  ['kunyit',40,'gram'],['jahe',30,'gram'],['serai',3,'batang'],
-  ['daun salam',3,'lembar'],['air',3,'liter'],['garam',30,'gram']
+  ['ayam',1.5,'kg'],
+  ['bawang putih',6,'pcs'],
+  ['bawang merah',8,'pcs'],
+  ['kunyit',30,'gram'],
+  ['serai',2,'batang'],
+  ['daun salam',3,'lembar'],
+  ['air',3,'liter'],
+  ['garam',1.5,'sdm']
  ],
  steps:[
   'Rebus ayam sampai matang.',
   'Angkat ayam dan suwir.',
-  'Haluskan bumbu.',
+  'Haluskan bawang dan kunyit.',
   'Tumis bumbu sampai harum.',
   'Masukkan bumbu ke kuah.',
-  'Masukkan serai dan daun salam.',
-  'Masak sampai kuah harum.',
-  'Masukkan kembali ayam suwir.'
+  'Tambahkan serai dan daun salam.',
+  'Masak sampai aroma keluar.',
+  'Masukkan ayam suwir.',
+  'Cek rasa.'
  ],
- tips:'Jaga kuah tetap panas menjelang waktu makan.'
+ fire:'Sedang.',
+ cook:'30–40 menit.',
+ tips:'Jaga kuah tetap panas sebelum jam makan.'
 },
+
 {
  id:6,
  name:'Mie Goreng',
  category:'breakfast',
  servings:9,
- fire:'Besar',
- cook:'15 menit',
  ingredients:[
-  ['mie',1.2,'kg'],['telur',9,'pcs'],['bawang putih',50,'gram'],
-  ['bawang merah',70,'gram'],['sayur',500,'gram'],['kecap',120,'ml'],
-  ['minyak',100,'ml'],['garam',18,'gram']
+  ['mie',1.2,'kg'],
+  ['telur',9,'pcs'],
+  ['bawang putih',5,'pcs'],
+  ['bawang merah',6,'pcs'],
+  ['kecap',100,'ml'],
+  ['minyak',100,'ml'],
+  ['garam',1,'sdm']
  ],
  steps:[
-  'Rebus mie sampai hampir matang.',
+  'Rebus mie sampai setengah matang.',
   'Tiriskan.',
-  'Tumis bumbu.',
-  'Masukkan telur dan orak-arik.',
-  'Masukkan sayuran.',
+  'Tumis bawang.',
+  'Masukkan telur.',
   'Masukkan mie.',
   'Tambahkan kecap dan garam.',
-  'Aduk cepat dengan api besar.'
+  'Aduk sampai matang.'
  ],
- tips:'Jangan merebus mie terlalu matang.'
+ fire:'Sedang.',
+ cook:'8–10 menit.',
+ tips:'Jangan merebus mie terlalu lama.'
 },
+
 {
  id:7,
  name:'Orek Tempe Tahu',
  category:'dinner',
  servings:9,
- fire:'Sedang',
- cook:'25 menit',
  ingredients:[
-  ['tempe',1,'kg'],['tahu',1,'kg'],['bawang merah',100,'gram'],
-  ['bawang putih',50,'gram'],['cabai',80,'gram'],['kecap manis',150,'ml'],
-  ['gula',25,'gram'],['garam',20,'gram'],['minyak',150,'ml']
+  ['tempe',800,'gram'],
+  ['tahu',800,'gram'],
+  ['bawang merah',7,'pcs'],
+  ['bawang putih',5,'pcs'],
+  ['cabai',12,'pcs'],
+  ['kecap',100,'ml'],
+  ['gula',1,'sdm'],
+  ['garam',1,'sdt']
  ],
  steps:[
   'Potong tempe dan tahu.',
   'Goreng sampai kecokelatan.',
   'Tumis bawang dan cabai.',
-  'Masukkan kecap, gula dan garam.',
+  'Masukkan kecap.',
   'Masukkan tempe dan tahu.',
-  'Aduk sampai bumbu merata.'
+  'Aduk sampai bumbu merata.',
+  'Cek rasa.'
  ],
- tips:'Goreng tempe dan tahu sampai cukup kering supaya tidak mudah hancur.'
+ fire:'Sedang.',
+ cook:'10–15 menit.',
+ tips:'Jangan terlalu lama menggoreng tempe agar tidak keras.'
 },
+
 {
  id:8,
  name:'Bihun Goreng Telur',
  category:'breakfast',
  servings:9,
- fire:'Besar',
- cook:'15 menit',
  ingredients:[
-  ['bihun',1,'kg'],['telur',9,'pcs'],['bawang putih',50,'gram'],
-  ['bawang merah',60,'gram'],['sayur',400,'gram'],
-  ['kecap',100,'ml'],['minyak',100,'ml'],['garam',18,'gram']
+  ['bihun',800,'gram'],
+  ['telur',9,'pcs'],
+  ['bawang putih',5,'pcs'],
+  ['bawang merah',6,'pcs'],
+  ['kecap',80,'ml'],
+  ['minyak',80,'ml'],
+  ['garam',1,'sdt']
  ],
  steps:[
   'Rendam bihun sampai lunak.',
-  'Tumis bumbu.',
+  'Tiriskan.',
+  'Tumis bawang.',
   'Masukkan telur.',
-  'Masukkan sayuran.',
   'Masukkan bihun.',
   'Tambahkan kecap dan garam.',
   'Aduk sampai matang.'
  ],
+ fire:'Sedang.',
+ cook:'8–10 menit.',
  tips:'Jangan merendam bihun terlalu lama.'
 },
+
 {
  id:9,
  name:'Telur Balado',
  category:'dinner',
  servings:9,
- fire:'Sedang',
- cook:'25 menit',
  ingredients:[
-  ['telur',15,'pcs'],['cabai merah',150,'gram'],
-  ['bawang merah',100,'gram'],['bawang putih',50,'gram'],
-  ['tomat',200,'gram'],['garam',20,'gram'],
-  ['gula',20,'gram'],['minyak',120,'ml']
+  ['telur',18,'pcs'],
+  ['cabai',20,'pcs'],
+  ['bawang merah',10,'pcs'],
+  ['bawang putih',5,'pcs'],
+  ['garam',1,'sdt'],
+  ['gula',1,'sdt'],
+  ['minyak',100,'ml']
  ],
  steps:[
   'Rebus telur sampai matang.',
   'Kupas telur.',
   'Goreng sebentar.',
-  'Haluskan cabai, bawang dan tomat.',
-  'Tumis sambal sampai matang.',
-  'Masukkan gula dan garam.',
-  'Masukkan telur dan aduk perlahan.'
+  'Haluskan cabai dan bawang.',
+  'Tumis bumbu sampai matang.',
+  'Masukkan telur.',
+  'Aduk sampai bumbu merata.'
  ],
+ fire:'Sedang.',
+ cook:'10–15 menit.',
  tips:'Masak sambal sampai benar-benar matang agar tidak langu.'
 },
+
 {
  id:10,
  name:'Nasi Kuning + Telur',
  category:'breakfast',
  servings:9,
- fire:'Sedang',
- cook:'45 menit',
  ingredients:[
-  ['beras',1.5,'kg'],['santan',1,'liter'],['kunyit',40,'gram'],
-  ['serai',2,'batang'],['daun salam',3,'lembar'],
-  ['telur',9,'pcs'],['garam',20,'gram']
+  ['beras',2,'kg'],
+  ['santan',500,'ml'],
+  ['kunyit',20,'gram'],
+  ['telur',9,'pcs'],
+  ['daun salam',3,'lembar'],
+  ['serai',2,'batang'],
+  ['garam',1,'sdm']
  ],
  steps:[
   'Cuci beras.',
-  'Campurkan santan, kunyit dan garam.',
-  'Masak beras dengan campuran santan.',
-  'Masukkan serai dan daun salam.',
-  'Masak sampai nasi matang.',
-  'Rebus telur sampai matang.'
+  'Campurkan santan dan kunyit.',
+  'Masukkan daun salam dan serai.',
+  'Masak nasi sampai matang.',
+  'Rebus telur.',
+  'Sajikan nasi kuning dengan telur.'
  ],
- tips:'Aduk nasi sesekali agar santan tidak mengendap.'
+ fire:'Sedang lalu kecil.',
+ cook:'30–40 menit.',
+ tips:'Pastikan santan tidak pecah saat dimasak.'
 }
 ];
 
-
-/* =========================
-   DATA HELPERS
-========================= */
-
-function getJSON(key, fallback){
-  try{
-    const raw=localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  }catch(e){return fallback}
-}
-
-function setJSON(key,value){
-  localStorage.setItem(key,JSON.stringify(value));
-}
-
-function getCrew(){
-  return Number(localStorage.getItem(KEY.crew)) || 9;
-}
-
 function allRecipes(){
-  return recipes.concat(getJSON(KEY.custom,[]));
-}
-
-function recipeById(id){
-  return allRecipes().find(r=>String(r.id)===String(id));
-}
-
-function esc(v){
-  return String(v ?? '')
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
-}
-
-function rupiah(n){
-  return 'Rp'+Number(n||0).toLocaleString('id-ID');
-}
-
-function normalizeName(name){
-  return String(name||'').trim().toLowerCase();
-}
-
-function convertToBase(qty,unit){
-  unit=normalizeName(unit);
-  if(unit==='kg') return {qty:qty*1000,unit:'gram'};
-  if(unit==='gram'||unit==='g') return {qty:qty,unit:'gram'};
-  if(unit==='liter'||unit==='l') return {qty:qty*1000,unit:'ml'};
-  if(unit==='ml') return {qty:qty,unit:'ml'};
-  return {qty:qty,unit:unit};
-}
-
-function convertFromBase(qty,unit){
-  unit=normalizeName(unit);
-  if(unit==='kg') return qty/1000;
-  if(unit==='gram'||unit==='g') return qty;
-  if(unit==='liter'||unit==='l') return qty/1000;
-  if(unit==='ml') return qty;
-  return qty;
-}
-
-function compatibleUnits(a,b){
-  const A=normalizeName(a);
-  const B=normalizeName(b);
-  if(A===B)return true;
-  if(['kg','gram','g'].includes(A)&&['kg','gram','g'].includes(B))return true;
-  if(['liter','l','ml'].includes(A)&&['liter','l','ml'].includes(B))return true;
-  return false;
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-let profile=getJSON(KEY.profile,{
-  name:'Akbar',
-  role:'Ship Cook',
-  ship:'Dapur Kapal',
-  experience:'1 Tahun',
-  bio:'Mengatur dapur kapal, menu, stok dan kebutuhan crew.',
-  photo:''
-});
-
-function renderProfile(){
-  document.getElementById('dashName').textContent=profile.name;
-  document.getElementById('dashRole').textContent=profile.role;
-  document.getElementById('dashShip').textContent=profile.ship;
-  document.getElementById('dashBio').textContent=profile.bio;
-
-  const avatar=document.getElementById('avatarBox');
-
-  if(profile.photo){
-    avatar.innerHTML='<img src="'+profile.photo+'" style="width:100%;height:100%;border-radius:50%;object-fit:cover">';
-  }else{
-    avatar.textContent=(profile.name||'A').charAt(0).toUpperCase();
-  }
-
-  document.getElementById('profileName').value=profile.name;
-  document.getElementById('profileRole').value=profile.role;
-  document.getElementById('profileShip').value=profile.ship;
-  document.getElementById('profileExperience').value=profile.experience;
-  document.getElementById('profileBio').value=profile.bio;
-
-  const preview=document.getElementById('profilePreview');
-  if(profile.photo){
-    preview.src=profile.photo;
-    preview.style.display='block';
-  }else{
-    preview.style.display='none';
-  }
-
-  renderAchievements();
-}
-
-function loadPhoto(e){
-  const file=e.target.files[0];
-  if(!file)return;
-
-  const reader=new FileReader();
-  reader.onload=function(){
-    profile.photo=reader.result;
-    document.getElementById('profilePreview').src=profile.photo;
-    document.getElementById('profilePreview').style.display='block';
-  };
-  reader.readAsDataURL(file);
-}
-
-function saveProfile(){
-  profile={
-    ...profile,
-    name:document.getElementById('profileName').value.trim()||'Akbar',
-    role:document.getElementById('profileRole').value.trim()||'Ship Cook',
-    ship:document.getElementById('profileShip').value.trim()||'Dapur Kapal',
-    experience:document.getElementById('profileExperience').value.trim()||'',
-    bio:document.getElementById('profileBio').value.trim()||''
-  };
-
-  setJSON(KEY.profile,profile);
-  renderProfile();
-  renderAll();
-  alert('Profil berhasil disimpan ✅');
-}
-
-
-/* =========================
-   LEVEL & ACHIEVEMENT
-========================= */
-
-function renderLevel(){
-  const count=Number(localStorage.getItem(KEY.cookCount))||0;
-
-  let level=1;
-  let name='Chef Pemula';
-  let target=10;
-
-  if(count>=100){
-    level=6;name='Galley Master';target=150;
-  }else if(count>=50){
-    level=5;name='Chef of the Sea';target=100;
-  }else if(count>=25){
-    level=4;name='Chef Aktif';target=50;
-  }else if(count>=10){
-    level=3;name='Chef Berpengalaman';target=25;
-  }else if(count>=1){
-    level=2;name='Chef Pemula+';target=10;
-  }
-
-  const previous=level===1?0:
-    level===2?1:
-    level===3?10:
-    level===4?25:
-    level===5?50:100;
-
-  const percent=Math.min(100,((count-previous)/(target-previous))*100);
-
-  document.getElementById('levelName').textContent=name;
-  document.getElementById('levelBadge').textContent='LV '+level;
-  document.getElementById('levelText').textContent=count+' / '+target+' masakan';
-  document.getElementById('levelProgress').style.width=Math.max(0,percent)+'%';
-}
-
-function renderAchievements(){
-  const count=Number(localStorage.getItem(KEY.cookCount))||0;
-  const ratings=getJSON(KEY.ratings,{});
-  const vals=Object.values(ratings).map(Number).filter(Boolean);
-  const avg=vals.length?vals.reduce((a,b)=>a+b,0)/vals.length:0;
-
-  const list=[
-    ['👨‍🍳','Chef Pemula',count>=1],
-    ['🔥','10x Masak',count>=10],
-    ['⚡','Chef Aktif',count>=25],
-    ['🌊','Chef of the Sea',count>=50],
-    ['👑','Galley Master',count>=100],
-    ['⭐','Chef Favorit',avg>=4.5]
-  ];
-
-  document.getElementById('achievements').innerHTML=list.map(x=>`
-    <div class="item">
-      <div class="row">
-        <span>${x[0]} ${x[1]}</span>
-        <span class="badge ${x[2]?'green':''}">${x[2]?'✓ Terbuka':'🔒'}</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-
-/* =========================
-   SMART MENU
-========================= */
-
-function stockAvailable(recipe){
-  const stock=getJSON(KEY.stock,[]);
-  let total=0;
-
-  recipe.ingredients.forEach(i=>{
-    const name=normalizeName(i[0]);
-    const need=Number(i[1]);
-    const unit=i[2];
-
-    const s=stock.find(x=>normalizeName(x.name)===name);
-
-    if(!s){
-      return;
-    }
-
-    if(compatibleUnits(s.unit,unit)){
-      const a=convertToBase(Number(s.qty),s.unit);
-      const b=convertToBase(need,unit);
-
-      if(a.unit===b.unit){
-        total+=Math.min(1,a.qty/b.qty);
-      }
-    }else{
-      if(Number(s.qty)>=need)total+=1;
-    }
-  });
-
-  return recipe.ingredients.length ? total/recipe.ingredients.length : 0;
-}
-
-function recentIds(){
-  const history=getJSON(KEY.history,[]);
-  return history.slice(-15).map(x=>String(x.recipeId));
-}
-
-function chooseSmart(pool,used){
-  if(!pool.length)return null;
-
-  const recent=recentIds();
-
-  const scored=pool.map(r=>{
-    let score=stockAvailable(r)*100;
-
-    if(recent.includes(String(r.id)))score-=60;
-    if(used.includes(String(r.id)))score-=40;
-
-    score+=Math.random()*15;
-
-    return {r,score};
-  });
-
-  scored.sort((a,b)=>b.score-a.score);
-  return scored[0].r;
-}
-
-function generateSmartWeek(){
-  const all=allRecipes();
-
-  const breakfast=all.filter(r=>r.category==='breakfast');
-  const lunch=all.filter(r=>r.category==='lunch');
-  const dinner=all.filter(r=>r.category==='dinner');
-
-  if(!breakfast.length||!lunch.length||!dinner.length){
-    alert('Resep untuk semua kategori belum tersedia.');
-    return;
-  }
-
-  const week={};
-  const used=[];
-
-  DAYS.forEach(day=>{
-    const b=chooseSmart(breakfast,used);
-    used.push(String(b.id));
-
-    const l=chooseSmart(lunch,used);
-    used.push(String(l.id));
-
-    const d=chooseSmart(dinner,used);
-    used.push(String(d.id));
-
-    week[day]={
-      breakfast:b.id,
-      lunch:l.id,
-      dinner:d.id
-    };
-  });
-
-  setJSON(KEY.weekly,week);
-  calculateShopping();
-  renderWeek();
-  renderAll();
-
-  alert('Smart Menu 7 hari berhasil dibuat 🧠🍳');
-}
-
-function clearWeek(){
-  if(!confirm('Reset menu mingguan?'))return;
-  localStorage.removeItem(KEY.weekly);
-  localStorage.removeItem(KEY.shopping);
-  renderWeek();
-  renderShopping();
-}
-
-function renderWeek(){
-  const week=getJSON(KEY.weekly,{});
-
-  document.getElementById('weekMenu').innerHTML=DAYS.map(day=>{
-    const x=week[day]||{};
-
-    return `
-    <div class="day">
-      <div class="dayhead">
-        <span>${day}</span>
-        <span class="badge">${getCrew()} crew</span>
-      </div>
-
-      ${mealHTML('🌅','Sarapan',x.breakfast)}
-      ${mealHTML('☀️','Makan Siang',x.lunch)}
-      ${mealHTML('🌙','Makan Malam',x.dinner)}
-    </div>`;
-  }).join('');
-}
-
-function mealHTML(icon,name,id){
-  const r=recipeById(id);
-
-  if(!r){
-    return `
-    <div class="meal">
-      <div class="mealname">${icon} ${name}</div>
-      <div class="empty" style="padding:10px">Belum ada menu</div>
-    </div>`;
-  }
-
-  return `
-  <div class="meal">
-    <div class="mealname">${icon} ${name}</div>
-    <div class="row" style="margin-top:5px">
-      <div>
-        <b>${esc(r.name)}</b>
-        <div class="small">${r.fire} • ${r.cook}</div>
-      </div>
-      <button class="btn primary sm" onclick="cookRecipe('${r.id}')">🍳 Masak</button>
-    </div>
-  </div>`;
-}
-
-
-/* =========================
-   COOKING + STOCK OUT
-========================= */
-
-function cookRecipe(id){
-  const r=recipeById(id);
-  if(!r)return;
-
-  const count=(Number(localStorage.getItem(KEY.cookCount))||0)+1;
-  localStorage.setItem(KEY.cookCount,count);
-
-  const history=getJSON(KEY.history,[]);
-  history.push({
-    recipeId:r.id,
-    name:r.name,
-    date:new Date().toISOString(),
-    crew:getCrew()
-  });
-
-  setJSON(KEY.history,history.slice(-200));
-
-  deductRecipeStock(r);
-
-  const log=getJSON(KEY.log,[]);
-  log.push({
-    type:'COOK',
-    recipeId:r.id,
-    name:r.name,
-    date:new Date().toISOString()
-  });
-  setJSON(KEY.log,log.slice(-300));
-
-  openChefMode(r.id);
-  renderAll();
-}
-
-function deductRecipeStock(recipe){
-  let stock=getJSON(KEY.stock,[]);
-  const movements=getJSON(KEY.log,[]);
-
-  recipe.ingredients.forEach(i=>{
-    const name=i[0];
-    const qty=Number(i[1])*(getCrew()/recipe.servings);
-    const unit=i[2];
-
-    const idx=stock.findIndex(x=>normalizeName(x.name)===normalizeName(name));
-
-    if(idx<0)return;
-
-    const s=stock[idx];
-
-    if(compatibleUnits(s.unit,unit)){
-      const available=convertToBase(Number(s.qty),s.unit);
-      const used=convertToBase(qty,unit);
-
-      if(available.unit===used.unit){
-        const remain=Math.max(0,available.qty-used.qty);
-        s.qty=convertFromBase(remain,s.unit);
-      }
-    }else{
-      s.qty=Math.max(0,Number(s.qty)-qty);
-    }
-
-    movements.push({
-      type:'OUT',
-      name:s.name,
-      qty:qty,
-      unit:unit,
-      reason:'Masak: '+recipe.name,
-      date:new Date().toISOString()
-    });
-  });
-
-  setJSON(KEY.stock,stock);
-  setJSON(KEY.log,movements.slice(-300));
-}
-
-
-/* =========================
-   STOCK
-========================= */
-
-function addStock(){
-  const name=document.getElementById('stockName').value.trim();
-  const qty=Number(document.getElementById('stockQty').value);
-  const unit=document.getElementById('stockUnit').value;
-  const min=Number(document.getElementById('stockMin').value)||0;
-
-  if(!name||!qty){
-    alert('Isi nama bahan dan jumlah.');
-    return;
-  }
-
-  let stock=getJSON(KEY.stock,[]);
-  const idx=stock.findIndex(x=>normalizeName(x.name)===normalizeName(name));
-
-  if(idx>=0){
-    if(stock[idx].unit===unit){
-      stock[idx].qty=Number(stock[idx].qty)+qty;
-    }else if(compatibleUnits(stock[idx].unit,unit)){
-      const old=convertToBase(Number(stock[idx].qty),stock[idx].unit);
-      const add=convertToBase(qty,unit);
-      if(old.unit===add.unit){
-        stock[idx].qty=convertFromBase(old.qty+add.qty,stock[idx].unit);
-      }
-    }else{
-      stock[idx].qty=qty;
-      stock[idx].unit=unit;
-    }
-
-    if(min)stock[idx].min=min;
-  }else{
-    stock.push({
-      name,qty,unit,min
-    });
-  }
-
-  setJSON(KEY.stock,stock);
-
-  const log=getJSON(KEY.log,[]);
-  log.push({
-    type:'IN',
-    name,
-    qty,
-    unit,
-    reason:'Tambah stok',
-    date:new Date().toISOString()
-  });
-  setJSON(KEY.log,log.slice(-300));
-
-  document.getElementById('stockName').value='';
-  document.getElementById('stockQty').value='';
-  document.getElementById('stockMin').value='';
-
-  renderAll();
-}
-
-function removeStock(name){
-  if(!confirm('Hapus stok '+name+'?'))return;
-
-  let stock=getJSON(KEY.stock,[]);
-  stock=stock.filter(x=>normalizeName(x.name)!==normalizeName(name));
-  setJSON(KEY.stock,stock);
-
-  renderAll();
-}
-
-function renderStock(){
-  const stock=getJSON(KEY.stock,[]);
-  const q=normalizeName(document.getElementById('stockSearch')?.value||'');
-
-  const filtered=stock.filter(x=>normalizeName(x.name).includes(q));
-
-  if(!filtered.length){
-    document.getElementById('stockList').innerHTML='<div class="empty">Belum ada stok.</div>';
-  }else{
-    document.getElementById('stockList').innerHTML=filtered.map(x=>{
-      const low=Number(x.min)>0&&Number(x.qty)<=Number(x.min);
-
-      return `
-      <div class="item">
-        <div class="row">
-          <div>
-            <b>${esc(x.name)}</b>
-            <div class="small">${x.qty} ${esc(x.unit)}</div>
-          </div>
-          <div class="actions">
-            <span class="badge ${low?'red':'green'}">${low?'⚠️ Rendah':'✓ Aman'}</span>
-            <button class="btn red sm" onclick="removeStock('${esc(x.name)}')">🗑️</button>
-          </div>
-        </div>
-      </div>`;
-    }).join('');
-  }
-
-  renderStockHistory();
-}
-
-function renderStockHistory(){
-  const log=getJSON(KEY.log,[]);
-  const movements=log.filter(x=>x.type==='IN'||x.type==='OUT').slice(-20).reverse();
-
-  if(!movements.length){
-    document.getElementById('stockHistory').innerHTML='<div class="empty">Belum ada riwayat stok.</div>';
-    return;
-  }
-
-  document.getElementById('stockHistory').innerHTML=movements.map(x=>`
-    <div class="item">
-      <div class="row">
-        <div>
-          <b>${x.type==='IN'?'📥':'📤'} ${esc(x.name)}</b>
-          <div class="small">${esc(x.reason)}</div>
-        </div>
-        <div style="text-align:right">
-          <b>${x.type==='IN'?'+':'-'}${x.qty} ${esc(x.unit)}</b>
-          <div class="small">${formatDate(x.date)}</div>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-
-/* =========================
-   SHOPPING
-========================= */
-
-function calculateShopping(){
-  const week=getJSON(KEY.weekly,{});
-  const stock=getJSON(KEY.stock,[]);
-  const prices=getJSON(KEY.prices,{});
-  const result={};
-
-  DAYS.forEach(day=>{
-    const meals=week[day]||{};
-
-    ['breakfast','lunch','dinner'].forEach(type=>{
-      const r=recipeById(meals[type]);
-      if(!r)return;
-
-      const scale=getCrew()/r.servings;
-
-      r.ingredients.forEach(i=>{
-        const name=i[0];
-        const qty=Number(i[1])*scale;
-        const unit=i[2];
-        const key=normalizeName(name);
-
-        if(!result[key]){
-          result[key]={
-            name,
-            qty:0,
-            unit,
-            price:0,
-            checked:false
-          };
-        }
-
-        if(compatibleUnits(result[key].unit,unit)){
-          const a=convertToBase(result[key].qty,result[key].unit);
-          const b=convertToBase(qty,unit);
-
-          if(a.unit===b.unit){
-            result[key].qty=convertFromBase(a.qty+b.qty,result[key].unit);
-          }
-        }else{
-          result[key].qty+=qty;
-        }
-      });
-    });
-  });
-
-  Object.values(result).forEach(x=>{
-    const s=stock.find(v=>normalizeName(v.name)===normalizeName(x.name));
-
-    if(s&&compatibleUnits(s.unit,x.unit)){
-      const a=convertToBase(Number(s.qty),s.unit);
-      const b=convertToBase(Number(x.qty),x.unit);
-
-      if(a.unit===b.unit){
-        const remain=Math.max(0,a.qty-b.qty);
-        x.qty=convertFromBase(remain,x.unit);
-      }
-    }else if(s){
-      x.qty=Math.max(0,Number(x.qty)-Number(s.qty));
-    }
-
-    const p=prices[normalizeName(x.name)];
-    if(p){
-      x.price=Number(p.amount)||0;
-    }
-  });
-
-  setJSON(KEY.shopping,result);
-  renderShopping();
-}
-
-function toggleShopping(name){
-  const data=getJSON(KEY.shopping,{});
-  const key=normalizeName(name);
-
-  if(!data[key])return;
-
-  data[key].checked=!data[key].checked;
-  setJSON(KEY.shopping,data);
-  renderShopping();
-}
-
-function setPrice(name){
-  const amount=prompt('Harga beli untuk '+name+' (Rp):');
-
-  if(amount===null)return;
-
-  const n=Number(String(amount).replace(/\D/g,''));
-
-  if(!n){
-    alert('Harga tidak valid.');
-    return;
-  }
-
-  const prices=getJSON(KEY.prices,{});
-  prices[normalizeName(name)]={
-    amount:n,
-    updated:new Date().toISOString()
-  };
-
-  setJSON(KEY.prices,prices);
-  calculateShopping();
-}
-
-function renderShopping(){
-  const data=getJSON(KEY.shopping,{});
-  const entries=Object.values(data).filter(x=>Number(x.qty)>0);
-
-  let total=0;
-
-  entries.forEach(x=>{
-    total+=Number(x.qty)*Number(x.price||0);
-  });
-
-  document.getElementById('shoppingTotal').textContent=rupiah(total);
-
-  if(!entries.length){
-    document.getElementById('shoppingList').innerHTML=
-      '<div class="success">🎉 Tidak ada kekurangan bahan berdasarkan menu dan stok.</div>';
-  }else{
-    document.getElementById('shoppingList').innerHTML=entries.map(x=>`
-      <div class="item">
-        <div class="row">
-          <label style="display:flex;align-items:center;gap:8px;margin:0;color:var(--text)">
-            <input type="checkbox"
-              style="width:18px"
-              ${x.checked?'checked':''}
-              onchange="toggleShopping('${esc(x.name)}')">
-            <span>
-              <b>${esc(x.name)}</b><br>
-              <span class="small">${Number(x.qty).toFixed(2)} ${esc(x.unit)}</span>
-            </span>
-          </label>
-
-          <div style="text-align:right">
-            <b>${rupiah(Number(x.qty)*Number(x.price||0))}</b>
-            <br>
-            <button class="btn sm yellow" onclick="setPrice('${encodeURIComponent(x.name)}')">💵 Harga</button>
-            <button class="btn sm primary" onclick="buyToStock('${encodeURIComponent(x.name)}')">📥 Beli</button>
-          </div>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  renderPriceList();
-}
-
-function setPrice(encoded){
-  const name=decodeURIComponent(encoded);
-  const amount=prompt('Harga beli untuk '+name+' (Rp):');
-
-  if(amount===null)return;
-
-  const n=Number(String(amount).replace(/\D/g,''));
-
-  if(!n){
-    alert('Harga tidak valid.');
-    return;
-  }
-
-  const prices=getJSON(KEY.prices,{});
-  prices[normalizeName(name)]={
-    amount:n,
-    updated:new Date().toISOString()
-  };
-
-  setJSON(KEY.prices,prices);
-  calculateShopping();
-}
-
-function buyToStock(encoded){
-  const name=decodeURIComponent(encoded);
-  const data=getJSON(KEY.shopping,{});
-  const item=data[normalizeName(name)];
-
-  if(!item)return;
-
-  let stock=getJSON(KEY.stock,[]);
-  const idx=stock.findIndex(x=>normalizeName(x.name)===normalizeName(name));
-
-  if(idx>=0&&compatibleUnits(stock[idx].unit,item.unit)){
-    const a=convertToBase(Number(stock[idx].qty),stock[idx].unit);
-    const b=convertToBase(Number(item.qty),item.unit);
-
-    if(a.unit===b.unit){
-      stock[idx].qty=convertFromBase(a.qty+b.qty,stock[idx].unit);
-    }
-  }else{
-    stock.push({
-      name:item.name,
-      qty:item.qty,
-      unit:item.unit,
-      min:0
-    });
-  }
-
-  setJSON(KEY.stock,stock);
-
-  const log=getJSON(KEY.log,[]);
-  log.push({
-    type:'IN',
-    name:item.name,
-    qty:item.qty,
-    unit:item.unit,
-    reason:'Pembelian dari daftar belanja',
-    date:new Date().toISOString()
-  });
-  setJSON(KEY.log,log.slice(-300));
-
-  item.checked=true;
-  item.qty=0;
-  data[normalizeName(name)]=item;
-  setJSON(KEY.shopping,data);
-
-  renderAll();
-}
-
-function renderPriceList(){
-  const data=getJSON(KEY.shopping,{});
-  const prices=getJSON(KEY.prices,{});
-
-  const entries=Object.values(data);
-
-  if(!entries.length){
-    document.getElementById('priceList').innerHTML='<div class="empty">Generate menu dan hitung belanja dulu.</div>';
-    return;
-  }
-
-  document.getElementById('priceList').innerHTML=entries.map(x=>{
-    const p=prices[normalizeName(x.name)];
-    return `
-      <div class="item">
-        <div class="row">
-          <div>
-            <b>${esc(x.name)}</b>
-            <div class="small">${p?rupiah(p.amount):'Harga belum diisi'}</div>
-          </div>
-          <button class="btn yellow sm" onclick="setPrice('${encodeURIComponent(x.name)}')">💵 Atur</button>
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function printShopping(){
-  const data=getJSON(KEY.shopping,{});
-  const entries=Object.values(data).filter(x=>Number(x.qty)>0);
-
-  let total=0;
-
-  const rows=entries.map(x=>{
-    const subtotal=Number(x.qty)*Number(x.price||0);
-    total+=subtotal;
-    return `${x.name} — ${Number(x.qty).toFixed(2)} ${x.unit} — ${rupiah(subtotal)}`;
-  }).join('\n');
-
-  const win=window.open('','_blank');
-
-  if(!win){
-    alert('Browser memblokir halaman print.');
-    return;
-  }
-
-  win.document.write(`
-    <html>
-    <head><title>Daftar Belanja Dapur Kapal</title></head>
-    <body>
-      <h2>🛒 Daftar Belanja Dapur Kapal</h2>
-      <pre>${esc(rows)}</pre>
-      <hr>
-      <h3>Total: ${rupiah(total)}</h3>
-      <script>window.print()<\/script>
-    </body>
-    </html>
-  `);
-
-  win.document.close();
-}
-
-
-/* =========================
-   RECIPES
-========================= */
-
-function renderRecipes(){
-  const q=normalizeName(document.getElementById('recipeSearch')?.value||'');
-  const cat=document.getElementById('recipeCategory')?.value||'all';
-
-  const list=allRecipes().filter(r=>{
-    const matchName=normalizeName(r.name).includes(q);
-    const matchCat=cat==='all'||r.category===cat;
-    return matchName&&matchCat;
-  });
-
-  document.getElementById('recipeList').innerHTML=list.map(r=>`
-    <div class="card">
-      <div class="row">
-        <div>
-          <div class="recipe-title">${esc(r.name)}</div>
-          <div class="small">${categoryName(r.category)} • ${r.servings} porsi • ${r.cook}</div>
-        </div>
-        <span class="badge blue">${r.fire}</span>
-      </div>
-
-      <hr>
-
-      <div class="ingredient">
-        <span>🥘 Bahan</span>
-        <b>${r.ingredients.length}</b>
-      </div>
-
-      <div class="actions">
-        <button class="btn blue" onclick="showRecipe('${r.id}')">📖 Detail</button>
-        <button class="btn primary" onclick="cookRecipe('${r.id}')">🍳 Masak</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function categoryName(cat){
-  return {
-    breakfast:'Sarapan',
-    lunch:'Makan Siang',
-    dinner:'Makan Malam'
-  }[cat]||cat;
-}
-
-function showRecipe(id){
-  const r=recipeById(id);
-  if(!r)return;
-
-  const ingredients=r.ingredients.map(i=>
-    `<div class="ingredient"><span>${esc(i[0])}</span><b>${i[1]} ${esc(i[2])}</b></div>`
-  ).join('');
-
-  const steps=r.steps.map((x,i)=>
-    `<div class="item"><b>${i+1}.</b> ${esc(x)}</div>`
-  ).join('');
-
-  document.getElementById('recipeList').innerHTML=`
-    <div class="card">
-      <button class="btn sm" onclick="renderRecipes()">← Kembali</button>
-      <h2 style="margin-top:13px">${esc(r.name)}</h2>
-
-      <span class="badge">${categoryName(r.category)}</span>
-      <span class="badge blue">${r.fire}</span>
-      <span class="badge yellow">${r.cook}</span>
-
-      <hr>
-
-      <h3>🥘 Bahan untuk ${getCrew()} orang</h3>
-      ${r.ingredients.map(i=>{
-        const qty=Number(i[1])*(getCrew()/r.servings);
-        return `<div class="ingredient"><span>${esc(i[0])}</span><b>${Number(qty.toFixed(2))} ${esc(i[2])}</b></div>`;
-      }).join('')}
-
-      <hr>
-
-      <h3>👨‍🍳 Cara Memasak</h3>
-      ${steps}
-
-      <hr>
-
-      <div class="success">💡 <b>Tips:</b> ${esc(r.tips||'Masak sampai matang dan cek rasa.')}</div>
-
-      <button class="btn primary block" onclick="cookRecipe('${r.id}')">🍳 MASAK MENU INI</button>
-    </div>
-  `;
-}
-
-function openCustomRecipe(){
-  const name=prompt('Nama resep baru:');
-  if(!name)return;
-
-  const category=prompt('Kategori: breakfast / lunch / dinner','lunch');
-  if(!['breakfast','lunch','dinner'].includes(category)){
-    alert('Kategori harus breakfast, lunch atau dinner.');
-    return;
-  }
-
-  const raw=prompt(
-    'Bahan satu per baris.\nContoh:\n500 gram ikan\n100 gram bawang merah\n9 pcs telur'
-  );
-
-  if(!raw)return;
-
-  const ingredients=[];
-
-  raw.split('\n').forEach(line=>{
-    const parts=line.trim().split(/\s+/);
-    if(parts.length>=3){
-      const qty=Number(parts[0]);
-      const unit=parts[1];
-      const item=parts.slice(2).join(' ');
-      if(qty&&!isNaN(qty)){
-        ingredients.push([item,qty,unit]);
-      }
-    }
-  });
-
-  if(!ingredients.length){
-    alert('Format bahan tidak terbaca.');
-    return;
-  }
-
-  const custom=getJSON(KEY.custom,[]);
-
-  const id='custom_'+Date.now();
-
-  custom.push({
-    id,
-    name,
-    category,
-    servings:getCrew(),
-    fire:'Sedang',
-    cook:'20 menit',
-    ingredients,
-    steps:['Siapkan semua bahan.','Masak bumbu sampai harum.','Masukkan bahan utama.','Masak sampai matang.','Koreksi rasa dan sajikan.'],
-    tips:'Sesuaikan rasa dengan kondisi crew.'
-  });
-
-  setJSON(KEY.custom,custom);
-  renderAll();
-
-  alert('Resep baru berhasil dibuat ✅');
-}
-
-
-/* =========================
-   EXPENSE
-========================= */
-
-function addExpense(){
-  const name=document.getElementById('expenseName').value.trim();
-  const amount=Number(document.getElementById('expenseAmount').value);
-
-  if(!name||!amount){
-    alert('Isi keterangan dan nominal.');
-    return;
-  }
-
-  const expenses=getJSON(KEY.expenses,[]);
-
-  expenses.push({
-    name,
-    amount,
-    date:new Date().toISOString()
-  });
-
-  setJSON(KEY.expenses,expenses);
-
-  document.getElementById('expenseName').value='';
-  document.getElementById('expenseAmount').value='';
-
-  renderAll();
-}
-
-function deleteExpense(index){
-  const expenses=getJSON(KEY.expenses,[]);
-  expenses.splice(index,1);
-  setJSON(KEY.expenses,expenses);
-  renderAll();
-}
-
-function renderExpenses(){
-  const expenses=getJSON(KEY.expenses,[]);
-  const total=expenses.reduce((a,x)=>a+Number(x.amount||0),0);
-
-  document.getElementById('expenseTotal').textContent=rupiah(total);
-  document.getElementById('expenseCount').textContent=expenses.length;
-
-  if(!expenses.length){
-    document.getElementById('expenseList').innerHTML='<div class="empty">Belum ada pengeluaran.</div>';
-    return;
-  }
-
-  document.getElementById('expenseList').innerHTML=expenses.slice().reverse().map((x,revIndex)=>{
-    const index=expenses.length-1-revIndex;
-
-    return `
-    <div class="item">
-      <div class="row">
-        <div>
-          <b>${esc(x.name)}</b>
-          <div class="small">${formatDate(x.date)}</div>
-        </div>
-        <div style="text-align:right">
-          <b>${rupiah(x.amount)}</b><br>
-          <button class="btn red sm" onclick="deleteExpense(${index})">Hapus</button>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-
-/* =========================
-   RATINGS
-========================= */
-
-function renderRatingBox(){
-  const history=getJSON(KEY.history,[]);
-  const ratings=getJSON(KEY.ratings,{});
-
-  const latest=history.slice().reverse().slice(0,10);
-
-  if(!latest.length){
-    document.getElementById('ratingBox').innerHTML=
-      '<div class="empty">Masak menu dulu untuk memberikan rating.</div>';
-    return;
-  }
-
-  document.getElementById('ratingBox').innerHTML=latest.map(x=>{
-    const current=Number(ratings[x.recipeId])||0;
-
-    return `
-      <div class="item">
-        <div class="row">
-          <div>
-            <b>${esc(x.name)}</b>
-            <div class="small">${formatDate(x.date)}</div>
-          </div>
-        </div>
-
-        <div class="stars">
-          ${[1,2,3,4,5].map(n=>`
-            <button
-              class="${n<=current?'on':''}"
-              onclick="rateRecipe('${x.recipeId}',${n})">★</button>
-          `).join('')}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function rateRecipe(id,rating){
-  const ratings=getJSON(KEY.ratings,{});
-  ratings[id]=rating;
-  setJSON(KEY.ratings,ratings);
-
-  renderAll();
-}
-
-function averageRating(){
-  const ratings=getJSON(KEY.ratings,{});
-  const vals=Object.values(ratings).map(Number).filter(Boolean);
-  if(!vals.length)return 0;
-  return vals.reduce((a,b)=>a+b,0)/vals.length;
-}
-
-
-/* =========================
-   CHECKLIST
-========================= */
-
-function addTask(){
-  const text=document.getElementById('taskInput').value.trim();
-  const category=document.getElementById('taskCategory').value;
-
-  if(!text)return;
-
-  const tasks=getJSON(KEY.tasks,[]);
-
-  tasks.push({
-    text,
-    category,
-    done:false,
-    date:new Date().toISOString()
-  });
-
-  setJSON(KEY.tasks,tasks);
-  document.getElementById('taskInput').value='';
-
-  renderAll();
-}
-
-function toggleTask(i){
-  const tasks=getJSON(KEY.tasks,[]);
-  tasks[i].done=!tasks[i].done;
-  setJSON(KEY.tasks,tasks);
-  renderAll();
-}
-
-function deleteTask(i){
-  const tasks=getJSON(KEY.tasks,[]);
-  tasks.splice(i,1);
-  setJSON(KEY.tasks,tasks);
-  renderAll();
-}
-
-function renderTasks(){
-  const tasks=getJSON(KEY.tasks,[]);
-
-  if(!tasks.length){
-    document.getElementById('taskList').innerHTML='<div class="empty">Checklist masih kosong.</div>';
-    return;
-  }
-
-  document.getElementById('taskList').innerHTML=tasks.map((x,i)=>`
-    <div class="check">
-      <input type="checkbox" ${x.done?'checked':''} onchange="toggleTask(${i})">
-      <div style="flex:1">
-        <b style="${x.done?'text-decoration:line-through;color:var(--muted)':''}">${esc(x.text)}</b>
-        <div class="small">${esc(x.category)}</div>
-      </div>
-      <button class="btn red sm" onclick="deleteTask(${i})">×</button>
-    </div>
-  `).join('');
-}
-
-
-/* =========================
-   NOTE
-========================= */
-
-function loadNote(){
-  document.getElementById('dailyNote').value=localStorage.getItem(KEY.note)||'';
-}
-
-function saveNote(){
-  localStorage.setItem(KEY.note,document.getElementById('dailyNote').value);
-  alert('Catatan disimpan 📝');
-}
-
-
-/* =========================
-   REPORT
-========================= */
-
-function renderReport(){
-  const count=Number(localStorage.getItem(KEY.cookCount))||0;
-  const history=getJSON(KEY.history,[]);
-  const stock=getJSON(KEY.stock,[]);
-  const expenses=getJSON(KEY.expenses,[]);
-  const ratings=getJSON(KEY.ratings,{});
-
-  const expenseTotal=expenses.reduce((a,x)=>a+Number(x.amount||0),0);
-
-  const low=stock.filter(x=>Number(x.min)>0&&Number(x.qty)<=Number(x.min));
-
-  const ratingValues=Object.values(ratings).map(Number).filter(Boolean);
-  const avg=ratingValues.length
-    ?ratingValues.reduce((a,b)=>a+b,0)/ratingValues.length
-    :0;
-
-  document.getElementById('reportContent').innerHTML=`
-    <div class="grid">
-      <div class="stat"><span>🍳 Total Masak</span><b>${count}</b></div>
-      <div class="stat"><span>📅 Riwayat</span><b>${history.length}</b></div>
-      <div class="stat"><span>📦 Item Stok</span><b>${stock.length}</b></div>
-      <div class="stat"><span>⚠️ Stok Rendah</span><b>${low.length}</b></div>
-    </div>
-
-    <hr>
-
-    <div class="stat">
-      <span>💰 Total Pengeluaran</span>
-      <b>${rupiah(expenseTotal)}</b>
-    </div>
-
-    <br>
-
-    <div class="stat">
-      <span>⭐ Rating Rata-rata</span>
-      <b>${avg.toFixed(1)} / 5</b>
-    </div>
-  `;
-
-  const counts={};
-
-  history.forEach(x=>{
-    counts[x.recipeId]=(counts[x.recipeId]||0)+1;
-  });
-
-  const rows=Object.entries(counts)
-    .map(([id,count])=>{
-      const r=recipeById(id);
-      return r?{name:r.name,count}:null;
-    })
-    .filter(Boolean)
-    .sort((a,b)=>b.count-a.count);
-
-  document.getElementById('recipeStats').innerHTML=rows.length
-    ?rows.map(x=>`
-      <div class="item">
-        <div class="row">
-          <b>${esc(x.name)}</b>
-          <span class="badge green">${x.count}x</span>
-        </div>
-      </div>
-    `).join('')
-    :'<div class="empty">Belum ada data masak.</div>';
-}
-
-
-/* =========================
-   CHEF MODE + TIMER
-========================= */
-
-let timerSeconds=0;
-let timerInterval=null;
-let activeChefRecipe=null;
-
-function openChefMode(id){
-  activeChefRecipe=id;
-  showPage('chef');
-  renderChefMode();
-}
-
-function renderChefMode(){
-  const r=recipeById(activeChefRecipe);
-
-  if(!r){
-    document.getElementById('chefRecipe').innerHTML=
-      '<div class="empty">Belum ada menu yang dimasak.</div>';
-    return;
-  }
-
-  document.getElementById('chefRecipe').innerHTML=`
-    <h2>${esc(r.name)}</h2>
-    <div class="actions">
-      <span class="badge blue">${r.fire}</span>
-      <span class="badge yellow">${r.cook}</span>
-    </div>
-    <hr>
-    ${r.steps.map((x,i)=>`
-      <div class="item">
-        <b>Langkah ${i+1}</b>
-        <div style="margin-top:4px">${esc(x)}</div>
-      </div>
-    `).join('')}
-  `;
-}
-
-function updateTimer(){
-  const m=Math.floor(timerSeconds/60);
-  const s=timerSeconds%60;
-
-  document.getElementById('timer').textContent=
-    String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-
-  if(timerSeconds<=0&&timerInterval){
-    clearInterval(timerInterval);
-    timerInterval=null;
-    alert('⏰ Timer selesai!');
-  }
-}
-
-function setTimer(minutes){
-  clearInterval(timerInterval);
-  timerInterval=null;
-  timerSeconds=minutes*60;
-  updateTimer();
-}
-
-function startTimer(){
-  if(timerSeconds<=0){
-    alert('Atur timer dulu.');
-    return;
-  }
-
-  if(timerInterval)return;
-
-  timerInterval=setInterval(()=>{
-    timerSeconds--;
-    updateTimer();
-  },1000);
-}
-
-function pauseTimer(){
-  clearInterval(timerInterval);
-  timerInterval=null;
-}
-
-function resetTimer(){
-  clearInterval(timerInterval);
-  timerInterval=null;
-  timerSeconds=0;
-  updateTimer();
-}
-
-
-/* =========================
-   BACKUP / RESTORE
-========================= */
-
-function exportData(){
-  const data={};
-
-  Object.values(KEY).forEach(k=>{
-    const value=localStorage.getItem(k);
-    if(value!==null)data[k]=value;
-  });
-
-  data.exportedAt=new Date().toISOString();
-  data.version='V15.4';
-
-  const blob=new Blob(
-    [JSON.stringify(data,null,2)],
-    {type:'application/json'}
-  );
-
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-
-  a.href=url;
-  a.download='dapur-kapal-v15.4-backup.json';
-  a.click();
-
-  URL.revokeObjectURL(url);
-}
-
-function restoreData(event){
-  const file=event.target.files[0];
-  if(!file)return;
-
-  const reader=new FileReader();
-
-  reader.onload=function(){
-    try{
-      const data=JSON.parse(reader.result);
-
-      Object.values(KEY).forEach(k=>{
-        if(data[k]!==undefined){
-          localStorage.setItem(k,data[k]);
-        }
-      });
-
-      alert('Backup berhasil dipulihkan ✅');
-      location.reload();
-
-    }catch(e){
-      alert('File backup tidak valid.');
-    }
-  };
-
-  reader.readAsText(file);
-}
-
-function resetAll(){
-  if(!confirm('Yakin hapus SEMUA data Dapur Kapal?'))return;
-
-  Object.values(KEY).forEach(k=>localStorage.removeItem(k));
-
-  location.reload();
-}
-
-
-/* =========================
-   DASHBOARD STATUS
-========================= */
-
-function renderDashboard(){
-  const count=Number(localStorage.getItem(KEY.cookCount))||0;
-  const crew=getCrew();
-  const avg=averageRating();
-
-  document.getElementById('statCook').textContent=count;
-  document.getElementById('statCrew').textContent=crew;
-  document.getElementById('statRating').textContent=avg.toFixed(1);
-  document.getElementById('statRecipe').textContent=allRecipes().length;
-
-  const stock=getJSON(KEY.stock,[]);
-  const low=stock.filter(x=>Number(x.min)>0&&Number(x.qty)<=Number(x.min));
-
-  if(low.length){
-    document.getElementById('dashboardWarnings').innerHTML=`
-      <div class="warning">
-        ⚠️ <b>${low.length} bahan stok rendah.</b>
-        <br><span class="small">${low.map(x=>esc(x.name)).join(', ')}</span>
-      </div>
-    `;
-  }else{
-    document.getElementById('dashboardWarnings').innerHTML='';
-  }
-
-  const week=getJSON(KEY.weekly,{});
-  const hasMenu=DAYS.some(d=>{
-    const x=week[d];
-    return x&&x.breakfast&&x.lunch&&x.dinner;
-  });
-
-  document.getElementById('dashboardStatus').innerHTML=`
-    <div class="item">
-      <div class="row">
-        <span>📅 Menu Mingguan</span>
-        <span class="badge ${hasMenu?'green':'red'}">${hasMenu?'Siap':'Belum dibuat'}</span>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <span>📦 Stok</span>
-        <span class="badge ${stock.length?'green':'yellow'}">${stock.length} bahan</span>
-      </div>
-    </div>
-    <div class="item">
-      <div class="row">
-        <span>👨‍🍳 Profil</span>
-        <span class="badge green">Aktif</span>
-      </div>
-    </div>
-  `;
+ return recipes.concat(custom.map((r,i)=>({
+   ...r,
+   id:'c'+i
+ })));
 }
 
 
@@ -2416,84 +932,1532 @@ function renderDashboard(){
 ========================= */
 
 function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
 
-  const page=document.getElementById(id);
-  if(page)page.classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+ const btn=[...document.querySelectorAll('.nav button')]
+   .find(b=>b.getAttribute('onclick')?.includes("'"+id+"'"));
+ if(btn)btn.classList.add('active');
 
-  document.querySelectorAll('.nav button').forEach(b=>{
-    b.classList.toggle('active',b.dataset.page===id);
-  });
-
-  if(id==='notes')loadNote();
-  if(id==='chef')renderChefMode();
-
-  renderAll();
-
-  window.scrollTo({top:0,behavior:'smooth'});
+ renderAll();
 }
 
 
 /* =========================
-   DATE
+   PROFILE
 ========================= */
 
-function formatDate(date){
-  try{
-    return new Date(date).toLocaleString('id-ID',{
-      day:'2-digit',
-      month:'2-digit',
-      year:'numeric',
-      hour:'2-digit',
-      minute:'2-digit'
-    });
-  }catch(e){
-    return '';
-  }
+function openProfile(){
+ pName.value=profile.name;
+ pRole.value=profile.role;
+ pShip.value=profile.ship;
+ pExperience.value=profile.experience||'';
+ pBio.value=profile.bio||'';
+ document.getElementById('profileModal').classList.add('show');
+}
+
+function saveProfile(){
+ profile.name=pName.value.trim()||'Chef';
+ profile.role=pRole.value.trim()||'Ship Cook';
+ profile.ship=pShip.value.trim()||'Dapur Kapal';
+ profile.experience=pExperience.value.trim();
+ profile.bio=pBio.value.trim();
+
+ const file=pPhoto.files[0];
+
+ if(file){
+   const reader=new FileReader();
+   reader.onload=()=>{
+     profile.photo=reader.result;
+     save(KEY.profile,profile);
+     closeModal('profileModal');
+     renderAll();
+   };
+   reader.readAsDataURL(file);
+ }else{
+   save(KEY.profile,profile);
+   closeModal('profileModal');
+   renderAll();
+ }
+}
+
+function closeModal(id){
+ document.getElementById(id).classList.remove('show');
 }
 
 
 /* =========================
-   MASTER RENDER
+   CREW
+========================= */
+
+function saveCrew(){
+ crew=Math.max(1,Number(crewInput.value)||9);
+ save(KEY.crew,crew);
+ renderAll();
+}
+
+
+/* =========================
+   UNIT
+========================= */
+
+function normalizeName(name){
+ return String(name||'').trim().toLowerCase();
+}
+
+function convertQty(qty,unit,target){
+ qty=Number(qty)||0;
+
+ if(unit===target)return qty;
+
+ if(unit==='kg'&&target==='gram')return qty*1000;
+ if(unit==='gram'&&target==='kg')return qty/1000;
+
+ if(unit==='liter'&&target==='ml')return qty*1000;
+ if(unit==='ml'&&target==='liter')return qty/1000;
+
+ return null;
+}
+
+function compatible(a,b){
+ return a===b ||
+  (a==='kg'&&b==='gram') ||
+  (a==='gram'&&b==='kg') ||
+  (a==='liter'&&b==='ml') ||
+  (a==='ml'&&b==='liter');
+}
+
+function formatQty(q){
+ return Number(q.toFixed(2)).toString();
+}
+
+
+/* =========================
+   STOCK
+========================= */
+
+function addStock(){
+ const name=stockName.value.trim();
+ const qty=Number(stockQty.value);
+ const unit=stockUnit.value;
+ const note=stockNote.value.trim();
+
+ if(!name||qty<=0){
+   alert('Isi nama dan jumlah stok.');
+   return;
+ }
+
+ const key=normalizeName(name);
+ const existing=stock.find(x=>normalizeName(x.name)===key);
+
+ if(existing && compatible(existing.unit,unit)){
+   const converted=convertQty(qty,unit,existing.unit);
+   existing.qty+=converted;
+ }else{
+   stock.push({
+     name,
+     qty,
+     unit,
+     note
+   });
+ }
+
+ stockHistory.unshift({
+   date:new Date().toLocaleString('id-ID'),
+   type:'IN',
+   name,
+   qty,
+   unit,
+   note:note||'Stok masuk'
+ });
+
+ save(KEY.stock,stock);
+ save(KEY.stockHistory,stockHistory);
+
+ stockName.value='';
+ stockQty.value='';
+ stockNote.value='';
+
+ renderAll();
+}
+
+function stockOut(name,qty,unit,reason){
+ const item=stock.find(x=>normalizeName(x.name)===normalizeName(name));
+
+ if(!item)return;
+
+ if(compatible(item.unit,unit)){
+   const amount=convertQty(qty,unit,item.unit);
+   item.qty=Math.max(0,item.qty-amount);
+
+   stockHistory.unshift({
+     date:new Date().toLocaleString('id-ID'),
+     type:'OUT',
+     name:item.name,
+     qty,
+     unit,
+     note:reason||'Stok keluar'
+   });
+ }
+
+ save(KEY.stock,stock);
+ save(KEY.stockHistory,stockHistory);
+}
+
+function deleteStock(index){
+ if(!confirm('Hapus stok ini?'))return;
+
+ stock.splice(index,1);
+ save(KEY.stock,stock);
+ renderAll();
+}
+
+function clearStock(){
+ if(!confirm('Reset seluruh stok?'))return;
+ stock=[];
+ save(KEY.stock,stock);
+ renderAll();
+}
+
+function getStock(name){
+ return stock.find(x=>normalizeName(x.name)===normalizeName(name));
+}
+
+
+/* =========================
+   SMART STOCK SCORE
+========================= */
+
+function ingredientNeed(recipe,ing){
+ const ratio=crew/recipe.servings;
+ return ing[1]*ratio;
+}
+
+function ingredientAvailability(recipe){
+ let total=0;
+ let count=0;
+
+ recipe.ingredients.forEach(ing=>{
+   const item=getStock(ing[0]);
+   const need=ingredientNeed(recipe,ing);
+
+   if(!item){
+     total+=0;
+     count++;
+     return;
+   }
+
+   const available=convertQty(item.qty,item.unit,ing[2]);
+
+   if(available===null){
+     total+=0;
+   }else{
+     total+=Math.min(available/need,1);
+   }
+
+   count++;
+ });
+
+ return count ? total/count : 0;
+}
+
+
+/* =========================
+   SMART MENU V15.5
+========================= */
+
+function generateSmartWeek(){
+
+ const days=[
+  'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'
+ ];
+
+ const pools={
+  breakfast:allRecipes().filter(r=>r.category==='breakfast'),
+  lunch:allRecipes().filter(r=>r.category==='lunch'),
+  dinner:allRecipes().filter(r=>r.category==='dinner')
+ };
+
+ const recent=history.slice(-15).map(x=>String(x.id));
+
+ const used=[];
+
+ function choose(pool){
+   if(!pool.length)return null;
+
+   let scored=pool.map(r=>{
+     const stockScore=ingredientAvailability(r);
+     const repeat=recent.includes(String(r.id))?0.35:0;
+     const weeklyRepeat=used.includes(String(r.id))?0.3:0;
+
+     return {
+       recipe:r,
+       score:stockScore-repeat-weeklyRepeat+Math.random()*0.08
+     };
+   });
+
+   scored.sort((a,b)=>b.score-a.score);
+
+   const selected=scored[0]?.recipe||pool[0];
+
+   used.push(String(selected.id));
+
+   return selected;
+ }
+
+ const result={};
+
+ days.forEach(day=>{
+   result[day]={
+     breakfast:choose(pools.breakfast),
+     lunch:choose(pools.lunch),
+     dinner:choose(pools.dinner)
+   };
+ });
+
+ weekly=result;
+ save(KEY.weekly,weekly);
+
+ calculateShopping();
+ renderAll();
+
+ alert('🧠 Smart Menu V15.5 berhasil dibuat!');
+}
+
+
+/* =========================
+   COOK RECIPE
+========================= */
+
+function cookRecipe(id){
+
+ const recipe=allRecipes().find(r=>String(r.id)===String(id));
+
+ if(!recipe)return;
+
+ const missing=[];
+
+ recipe.ingredients.forEach(ing=>{
+   const need=ingredientNeed(recipe,ing);
+   const item=getStock(ing[0]);
+
+   if(!item){
+     missing.push(`${ing[0]} ${formatQty(need)} ${ing[2]}`);
+     return;
+   }
+
+   const available=convertQty(item.qty,item.unit,ing[2]);
+
+   if(available===null || available<need){
+     const kurang=available===null?need:Math.max(0,need-available);
+     missing.push(`${ing[0]} kurang ${formatQty(kurang)} ${ing[2]}`);
+   }
+ });
+
+ if(missing.length){
+   const lanjut=confirm(
+     '⚠️ Stok belum cukup untuk:\n\n'+
+     missing.join('\n')+
+     '\n\nTetap masak?'
+   );
+
+   if(!lanjut)return;
+ }
+
+ recipe.ingredients.forEach(ing=>{
+   const need=ingredientNeed(recipe,ing);
+   stockOut(
+     ing[0],
+     need,
+     ing[2],
+     `Masak: ${recipe.name}`
+   );
+ });
+
+ cookCount[recipe.id]=(cookCount[recipe.id]||0)+1;
+
+ history.push({
+   id:recipe.id,
+   name:recipe.name,
+   date:new Date().toISOString(),
+   crew
+ });
+
+ if(history.length>100)history=history.slice(-100);
+
+ logs.unshift({
+   type:'cook',
+   date:new Date().toLocaleString('id-ID'),
+   recipe:recipe.name,
+   crew
+ });
+
+ save(KEY.cookCount,cookCount);
+ save(KEY.history,history);
+ save(KEY.log,logs);
+
+ openChefMode(recipe);
+ renderAll();
+}
+
+
+/* =========================
+   CHEF MODE
+========================= */
+
+function openChefMode(recipe){
+ activeRecipe=recipe;
+
+ chefRecipe.innerHTML=`
+   <h2>${recipe.name}</h2>
+   <div class="tag">${categoryName(recipe.category)}</div>
+
+   <h3>🥘 Bahan</h3>
+   <ul>
+   ${recipe.ingredients.map(x=>
+     `<li>${x[0]} — ${formatQty(ingredientNeed(recipe,x))} ${x[2]}</li>`
+   ).join('')}
+   </ul>
+
+   <h3>🔥 Cara Masak</h3>
+   <ol>
+   ${recipe.steps.map(x=>`<li>${x}</li>`).join('')}
+   </ol>
+
+   <p><b>Api:</b> ${recipe.fire}</p>
+   <p><b>Waktu:</b> ${recipe.cook}</p>
+   <p><b>Tips:</b> ${recipe.tips}</p>
+ `;
+
+ resetTimer();
+
+ document.getElementById('chefModal').classList.add('show');
+}
+
+function startTimer(){
+ if(timerInterval)return;
+
+ timerInterval=setInterval(()=>{
+   if(timerSeconds<=0){
+     clearInterval(timerInterval);
+     timerInterval=null;
+     alert('⏰ TIMER SELESAI!');
+     return;
+   }
+
+   timerSeconds--;
+   updateTimer();
+ },1000);
+}
+
+function pauseTimer(){
+ clearInterval(timerInterval);
+ timerInterval=null;
+}
+
+function resetTimer(){
+ pauseTimer();
+ timerSeconds=0;
+ updateTimer();
+}
+
+function setTimer(minutes){
+ timerSeconds=minutes*60;
+ updateTimer();
+}
+
+function updateTimer(){
+ const m=String(Math.floor(timerSeconds/60)).padStart(2,'0');
+ const s=String(timerSeconds%60).padStart(2,'0');
+ timerDisplay.textContent=`${m}:${s}`;
+}
+
+
+/* =========================
+   RECIPES
+========================= */
+
+function categoryName(cat){
+ return {
+   breakfast:'Sarapan',
+   lunch:'Siang',
+   dinner:'Malam'
+ }[cat]||'Lainnya';
+}
+
+function renderRecipes(){
+
+ const search=(recipeSearch.value||'').toLowerCase();
+ const cat=recipeCategory.value;
+
+ const data=allRecipes().filter(r=>
+   r.name.toLowerCase().includes(search) &&
+   (cat==='all'||r.category===cat)
+ );
+
+ recipeList.innerHTML=data.length?
+ data.map(r=>`
+ <div class="recipe">
+   <div class="between">
+     <div>
+       <h4>${r.name}</h4>
+       <span class="tag">${categoryName(r.category)}</span>
+       <span class="tag">${r.servings} orang</span>
+     </div>
+     <button class="btn small" onclick="showRecipe('${r.id}')">Lihat</button>
+   </div>
+
+   <button class="btn success small" onclick="cookRecipe('${r.id}')">
+     🍳 Masak
+   </button>
+ </div>
+ `).join(''):
+ '<div class="empty">Resep tidak ditemukan.</div>';
+}
+
+function showRecipe(id){
+
+ const recipe=allRecipes().find(r=>String(r.id)===String(id));
+
+ if(!recipe)return;
+
+ recipeModalContent.innerHTML=`
+ <div class="between">
+   <h2>${recipe.name}</h2>
+   <button class="btn danger small" onclick="closeModal('recipeModal')">X</button>
+ </div>
+
+ <span class="tag">${categoryName(recipe.category)}</span>
+ <span class="tag">${recipe.servings} orang</span>
+
+ <h3>🥘 Bahan untuk ${crew} orang</h3>
+
+ <ul>
+ ${recipe.ingredients.map(x=>
+   `<li>${x[0]} — ${formatQty(ingredientNeed(recipe,x))} ${x[2]}</li>`
+ ).join('')}
+ </ul>
+
+ <h3>🔥 Langkah</h3>
+
+ <ol>
+ ${recipe.steps.map(x=>`<li>${x}</li>`).join('')}
+ </ol>
+
+ <p><b>Api:</b> ${recipe.fire}</p>
+ <p><b>Waktu:</b> ${recipe.cook}</p>
+ <p><b>Tips:</b> ${recipe.tips}</p>
+
+ <button class="btn success" onclick="cookRecipe('${recipe.id}');closeModal('recipeModal')">
+   👨‍🍳 Masak Menu Ini
+ </button>
+ `;
+
+ document.getElementById('recipeModal').classList.add('show');
+}
+
+function openCustomRecipe(){
+
+ recipeModalContent.innerHTML=`
+ <div class="between">
+   <h3>➕ Tambah Resep</h3>
+   <button class="btn danger small" onclick="closeModal('recipeModal')">X</button>
+ </div>
+
+ <input id="crName" placeholder="Nama resep">
+
+ <select id="crCategory">
+   <option value="breakfast">Sarapan</option>
+   <option value="lunch">Siang</option>
+   <option value="dinner">Malam</option>
+ </select>
+
+ <input id="crServings" type="number" value="9" placeholder="Porsi">
+
+ <textarea id="crIngredients"
+ placeholder="Bahan satu per baris:
+ikan | 1 | kg
+bawang merah | 8 | pcs"></textarea>
+
+ <textarea id="crSteps"
+ placeholder="Langkah satu per baris"></textarea>
+
+ <input id="crFire" placeholder="Api">
+ <input id="crCook" placeholder="Waktu masak">
+ <textarea id="crTips" placeholder="Tips"></textarea>
+
+ <button class="btn success" onclick="saveCustomRecipe()">Simpan Resep</button>
+ `;
+
+ document.getElementById('recipeModal').classList.add('show');
+}
+
+function saveCustomRecipe(){
+
+ const name=crName.value.trim();
+
+ if(!name){
+   alert('Nama resep wajib diisi.');
+   return;
+ }
+
+ const ingredients=crIngredients.value
+ .split('\n')
+ .map(x=>x.trim())
+ .filter(Boolean)
+ .map(x=>{
+   const p=x.split('|').map(y=>y.trim());
+   return [p[0],Number(p[1])||0,p[2]||'pcs'];
+ });
+
+ const steps=crSteps.value
+ .split('\n')
+ .map(x=>x.trim())
+ .filter(Boolean);
+
+ custom.push({
+   name,
+   category:crCategory.value,
+   servings:Number(crServings.value)||9,
+   ingredients,
+   steps,
+   fire:crFire.value||'Sedang',
+   cook:crCook.value||'-',
+   tips:crTips.value||'-'
+ });
+
+ save(KEY.custom,custom);
+
+ closeModal('recipeModal');
+ renderAll();
+}
+
+
+/* =========================
+   SHOPPING
+========================= */
+
+function calculateShopping(){
+
+ const aggregate={};
+
+ Object.values(weekly||{}).forEach(day=>{
+   ['breakfast','lunch','dinner'].forEach(meal=>{
+     const recipe=day?.[meal];
+
+     if(!recipe)return;
+
+     recipe.ingredients.forEach(ing=>{
+       const name=ing[0];
+       const unit=ing[2];
+       const qty=ingredientNeed(recipe,ing);
+
+       const key=normalizeName(name)+'|'+unit;
+
+       if(!aggregate[key]){
+         aggregate[key]={
+           name,
+           unit,
+           need:0
+         };
+       }
+
+       aggregate[key].need+=qty;
+     });
+   });
+ });
+
+ shopping=Object.values(aggregate).map(x=>{
+
+   const item=getStock(x.name);
+   let available=0;
+
+   if(item){
+     const c=convertQty(item.qty,item.unit,x.unit);
+     if(c!==null)available=c;
+   }
+
+   const buy=Math.max(0,x.need-available);
+
+   const price=Number(prices[normalizeName(x.name)]||0);
+   const estimated=buy*price;
+
+   return {
+     ...x,
+     available,
+     buy,
+     price,
+     estimated
+   };
+ });
+
+ save(KEY.shopping,shopping);
+
+ renderAll();
+}
+
+function toggleShopping(name){
+
+ const key=normalizeName(name);
+
+ shoppingChecked[key]=!shoppingChecked[key];
+
+ save(KEY.checked,shoppingChecked);
+
+ renderAll();
+}
+
+function setPrice(name){
+
+ const key=normalizeName(name);
+ const old=prices[key]||0;
+
+ const value=prompt(
+   `Harga ${name} per satuan bahan.\n`+
+   `Contoh jika bahan dibeli Rp15.000/kg, masukkan 15000.`,
+   old
+ );
+
+ if(value===null)return;
+
+ prices[key]=Number(value)||0;
+
+ save(KEY.prices,prices);
+
+ calculateShopping();
+}
+
+function buyToStock(name){
+
+ const item=shopping.find(x=>normalizeName(x.name)===normalizeName(name));
+
+ if(!item||item.buy<=0){
+   alert('Tidak ada jumlah yang perlu dibeli.');
+   return;
+ }
+
+ const existing=getStock(name);
+
+ if(existing && compatible(existing.unit,item.unit)){
+   existing.qty+=convertQty(item.buy,item.unit,existing.unit);
+ }else{
+   stock.push({
+     name:item.name,
+     qty:item.buy,
+     unit:item.unit,
+     note:'Dari daftar belanja'
+   });
+ }
+
+ const cost=item.estimated||0;
+
+ if(cost>0){
+   expenses.unshift({
+     name:`Belanja ${item.name}`,
+     amount:cost,
+     date:new Date().toLocaleString('id-ID')
+   });
+
+   save(KEY.expenses,expenses);
+ }
+
+ stockHistory.unshift({
+   date:new Date().toLocaleString('id-ID'),
+   type:'IN',
+   name:item.name,
+   qty:item.buy,
+   unit:item.unit,
+   note:'Pembelian'
+ });
+
+ save(KEY.stock,stock);
+ save(KEY.stockHistory,stockHistory);
+
+ shoppingChecked[normalizeName(name)]=true;
+ save(KEY.checked,shoppingChecked);
+
+ renderAll();
+}
+
+function shoppingTotal(){
+ return shopping.reduce((sum,x)=>sum+(x.estimated||0),0);
+}
+
+function renderShopping(){
+
+ if(!shopping.length){
+   shoppingList.innerHTML=
+   '<div class="empty">Belum ada daftar belanja. Buat Smart Menu dulu.</div>';
+   return;
+ }
+
+ shoppingList.innerHTML=`
+
+ <div class="card">
+   <div class="between">
+     <b>Estimasi Total</b>
+     <b>Rp ${formatMoney(shoppingTotal())}</b>
+   </div>
+ </div>
+
+ ${shopping.map(x=>{
+
+   const checked=shoppingChecked[normalizeName(x.name)];
+
+   return `
+   <div class="recipe">
+     <div class="between">
+       <div>
+         <b style="${checked?'text-decoration:line-through':''}">
+           ${x.name}
+         </b>
+
+         <div class="muted">
+           Butuh: ${formatQty(x.need)} ${x.unit}
+           <br>
+           Stok: ${formatQty(x.available)} ${x.unit}
+         </div>
+
+         <div class="${x.buy>0?'stock-low':'stock-ok'}">
+           ${x.buy>0
+             ?`Belanja: ${formatQty(x.buy)} ${x.unit}`
+             :'✅ Stok cukup'}
+         </div>
+
+         ${x.buy>0?
+         `<div class="muted">
+           Estimasi: Rp ${formatMoney(x.estimated)}
+         </div>`:''}
+       </div>
+     </div>
+
+     <div class="row">
+       <button class="btn small secondary"
+       onclick="setPrice('${escapeJs(x.name)}')">
+       💰 Harga
+       </button>
+
+       ${x.buy>0?
+       `<button class="btn small success"
+       onclick="buyToStock('${escapeJs(x.name)}')">
+       🛍️ Beli → Stok
+       </button>`:''}
+
+       <button class="btn small"
+       onclick="toggleShopping('${escapeJs(x.name)}')">
+       ${checked?'↩️ Batal':'☑️ Selesai'}
+       </button>
+     </div>
+   </div>
+   `;
+ }).join('')}
+ `;
+}
+
+function printShopping(){
+
+ if(!shopping.length){
+   alert('Daftar belanja masih kosong.');
+   return;
+ }
+
+ const text=shopping.map(x=>
+ `${x.name}: ${formatQty(x.buy)} ${x.unit} — Rp ${formatMoney(x.estimated)}`
+ ).join('\n');
+
+ const win=window.open('','_blank');
+
+ if(!win){
+   alert('Browser memblokir halaman print.');
+   return;
+ }
+
+ win.document.write(`
+ <html>
+ <head><title>Belanja Dapur Kapal V15.5</title></head>
+ <body>
+ <h2>⚓ Dapur Kapal V15.5</h2>
+ <h3>Daftar Belanja</h3>
+ <pre>${escapeHtml(text)}</pre>
+ <hr>
+ <b>Total: Rp ${formatMoney(shoppingTotal())}</b>
+ </body>
+ </html>
+ `);
+
+ win.document.close();
+ win.print();
+}
+
+async function copyShopping(){
+
+ const text=shopping.map(x=>
+ `${x.name}: ${formatQty(x.buy)} ${x.unit} — Rp ${formatMoney(x.estimated)}`
+ ).join('\n');
+
+ try{
+   await navigator.clipboard.writeText(text);
+   alert('Daftar belanja berhasil dicopy.');
+ }catch(e){
+   prompt('Copy daftar belanja:',text);
+ }
+}
+
+
+/* =========================
+   WEEKLY MENU RENDER
+========================= */
+
+function renderWeekly(){
+
+ crewInput.value=crew;
+
+ const days=[
+  'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'
+ ];
+
+ if(!Object.keys(weekly||{}).length){
+   weeklyMenu.innerHTML=
+   '<div class="empty">Belum ada menu. Tekan 🧠 Smart Menu.</div>';
+   return;
+ }
+
+ weeklyMenu.innerHTML=days.map(day=>{
+
+   const d=weekly[day]||{};
+
+   return `
+   <div class="day">
+
+     <h3>📅 ${day}</h3>
+
+     ${mealHtml('🌅 Sarapan',d.breakfast)}
+     ${mealHtml('☀️ Siang',d.lunch)}
+     ${mealHtml('🌙 Malam',d.dinner)}
+
+   </div>
+   `;
+ }).join('');
+}
+
+function mealHtml(title,recipe){
+
+ if(!recipe){
+   return `<div class="meal"><b>${title}</b><br><span class="muted">Belum ada menu</span></div>`;
+ }
+
+ return `
+ <div class="meal">
+   <div class="between">
+     <div>
+       <b>${title}</b><br>
+       ${recipe.name}
+     </div>
+     <button class="btn success small"
+       onclick="cookRecipe('${recipe.id}')">
+       Masak
+     </button>
+   </div>
+
+   <div class="muted">
+     Ketersediaan stok:
+     ${Math.round(ingredientAvailability(recipe)*100)}%
+   </div>
+ </div>
+ `;
+}
+
+
+/* =========================
+   EXPENSE
+========================= */
+
+function addExpense(){
+
+ const name=expenseName.value.trim();
+ const amount=Number(expenseAmount.value);
+
+ if(!name||amount<=0){
+   alert('Isi nama dan nominal.');
+   return;
+ }
+
+ expenses.unshift({
+   name,
+   amount,
+   date:new Date().toLocaleString('id-ID')
+ });
+
+ save(KEY.expenses,expenses);
+
+ expenseName.value='';
+ expenseAmount.value='';
+
+ renderAll();
+}
+
+function deleteExpense(i){
+ expenses.splice(i,1);
+ save(KEY.expenses,expenses);
+ renderAll();
+}
+
+function renderExpenses(){
+
+ if(!expenses.length){
+   expenseList.innerHTML='<div class="empty">Belum ada pengeluaran.</div>';
+   return;
+ }
+
+ expenseList.innerHTML=expenses.map((x,i)=>`
+ <div class="recipe">
+   <div class="between">
+     <div>
+       <b>${x.name}</b>
+       <div class="muted">${x.date}</div>
+     </div>
+
+     <div>
+       <b>Rp ${formatMoney(x.amount)}</b>
+       <br>
+       <button class="btn danger small" onclick="deleteExpense(${i})">Hapus</button>
+     </div>
+   </div>
+ </div>
+ `).join('');
+}
+
+
+/* =========================
+   CHECKLIST
+========================= */
+
+function addTask(){
+
+ const text=taskInput.value.trim();
+
+ if(!text)return;
+
+ tasks.push({
+   text,
+   done:false
+ });
+
+ save(KEY.tasks,tasks);
+
+ taskInput.value='';
+
+ renderAll();
+}
+
+function toggleTask(i){
+ tasks[i].done=!tasks[i].done;
+ save(KEY.tasks,tasks);
+ renderAll();
+}
+
+function deleteTask(i){
+ tasks.splice(i,1);
+ save(KEY.tasks,tasks);
+ renderAll();
+}
+
+function renderTasks(){
+
+ taskList.innerHTML=tasks.length?
+ tasks.map((x,i)=>`
+ <div class="recipe">
+   <div class="between">
+     <div
+       style="${x.done?'text-decoration:line-through;color:#71869a':''}"
+       onclick="toggleTask(${i})">
+       ${x.done?'☑️':'⬜'} ${x.text}
+     </div>
+
+     <button class="btn danger small" onclick="deleteTask(${i})">X</button>
+   </div>
+ </div>
+ `).join(''):
+ '<div class="empty">Checklist kosong.</div>';
+}
+
+
+/* =========================
+   NOTES
+========================= */
+
+function saveNote(){
+ save(KEY.note,dailyNote.value);
+ alert('Catatan disimpan.');
+}
+
+function renderNotes(){
+ dailyNote.value=load(KEY.note,'');
+}
+
+
+/* =========================
+   HISTORY
+========================= */
+
+function renderHistory(){
+
+ if(!history.length){
+   cookHistory.innerHTML=
+   '<div class="empty">Belum ada riwayat masak.</div>';
+   return;
+ }
+
+ const recent=[...history].reverse().slice(0,30);
+
+ cookHistory.innerHTML=recent.map(x=>`
+ <div class="recipe">
+   <b>${x.name}</b>
+   <div class="muted">
+     ${new Date(x.date).toLocaleString('id-ID')}
+     • ${x.crew} crew
+   </div>
+ </div>
+ `).join('');
+}
+
+
+/* =========================
+   STOCK RENDER
+========================= */
+
+function renderStock(){
+
+ if(!stock.length){
+   stockList.innerHTML=
+   '<div class="empty">Stok masih kosong.</div>';
+   return;
+ }
+
+ stockList.innerHTML=stock.map((x,i)=>`
+ <div class="recipe">
+   <div class="between">
+     <div>
+       <b>${x.name}</b>
+
+       <div class="${x.qty<=0?'stock-low':'stock-ok'}">
+         ${formatQty(x.qty)} ${x.unit}
+       </div>
+
+       <div class="muted">${x.note||''}</div>
+     </div>
+
+     <button class="btn danger small"
+       onclick="deleteStock(${i})">
+       Hapus
+     </button>
+   </div>
+ </div>
+ `).join('');
+}
+
+function renderStockHistory(){
+
+ if(!stockHistory.length){
+   stockHistoryDiv.innerHTML=
+   '<div class="empty">Belum ada riwayat stok.</div>';
+   return;
+ }
+
+ stockHistoryDiv.innerHTML=stockHistory.slice(0,40).map(x=>`
+ <div class="recipe">
+   <b>${x.type==='IN'?'🟢 MASUK':'🔴 KELUAR'} — ${x.name}</b>
+   <div class="muted">
+     ${formatQty(x.qty)} ${x.unit}
+     • ${x.date}
+   </div>
+   <div class="muted">${x.note||''}</div>
+ </div>
+ `).join('');
+}
+
+
+/* =========================
+   REPORT
+========================= */
+
+function renderReport(){
+
+ const totalExpense=expenses.reduce((s,x)=>s+Number(x.amount||0),0);
+ const totalCook=history.length;
+ const totalShopping=shoppingTotal();
+
+ const avgRating=getAverageRating();
+
+ reportContent.innerHTML=`
+ <div class="grid">
+   <div class="card stat">
+     <b>${totalCook}</b>
+     <span>TOTAL MASAK</span>
+   </div>
+
+   <div class="card stat">
+     <b>${stock.length}</b>
+     <span>ITEM STOK</span>
+   </div>
+
+   <div class="card stat">
+     <b>Rp ${formatMoney(totalShopping)}</b>
+     <span>EST. BELANJA</span>
+   </div>
+
+   <div class="card stat">
+     <b>Rp ${formatMoney(totalExpense)}</b>
+     <span>PENGELUARAN</span>
+   </div>
+ </div>
+
+ <div class="recipe">
+   ⭐ Rating rata-rata: <b>${avgRating.toFixed(1)}</b>
+ </div>
+
+ <div class="recipe">
+   👥 Crew: <b>${crew} orang</b>
+ </div>
+
+ <div class="recipe">
+   🍳 Resep tersedia: <b>${allRecipes().length}</b>
+ </div>
+ `;
+}
+
+
+/* =========================
+   RATING
+========================= */
+
+function rateRecipe(id){
+
+ const recipe=allRecipes().find(r=>String(r.id)===String(id));
+
+ if(!recipe)return;
+
+ const value=prompt(
+   `Beri rating ${recipe.name}\nMasukkan 1 sampai 5:`,
+   ratings[id]||5
+ );
+
+ if(value===null)return;
+
+ const rating=Math.min(5,Math.max(1,Number(value)||1));
+
+ ratings[id]=rating;
+
+ save(KEY.ratings,ratings);
+
+ renderAll();
+}
+
+function getAverageRating(){
+
+ const vals=Object.values(ratings)
+ .map(Number)
+ .filter(x=>x>0);
+
+ if(!vals.length)return 0;
+
+ return vals.reduce((a,b)=>a+b,0)/vals.length;
+}
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+function renderDashboard(){
+
+ profileName.textContent=profile.name;
+ profileRole.textContent=profile.role;
+ profileShip.textContent='⚓ '+profile.ship;
+ profileBio.textContent=profile.bio||'';
+
+ if(profile.photo){
+   avatar.innerHTML=`<img src="${profile.photo}" alt="Profil">`;
+ }else{
+   avatar.textContent='👨‍🍳';
+ }
+
+ const totalCook=history.length;
+ const rating=getAverageRating();
+
+ statCooked.textContent=totalCook;
+ statCrew.textContent=crew;
+ statRating.textContent=rating.toFixed(1);
+ statRecipes.textContent=allRecipes().length;
+
+ dashboardSummary.innerHTML=`
+   <div class="recipe">
+     📅 Menu minggu:
+     <b>${Object.keys(weekly||{}).length}/7 hari</b>
+   </div>
+
+   <div class="recipe">
+     📦 Stok:
+     <b>${stock.length} item</b>
+   </div>
+
+   <div class="recipe">
+     🛒 Estimasi belanja:
+     <b>Rp ${formatMoney(shoppingTotal())}</b>
+   </div>
+ `;
+}
+
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+function renderAchievements(){
+
+ const total=history.length;
+ const rating=getAverageRating();
+
+ const list=[
+  ['👨‍🍳','Chef Pemula',total>=1,'Masak minimal 1 kali'],
+  ['🔥','10x Masak',total>=10,'Masak minimal 10 kali'],
+  ['⚓','Chef Aktif',total>=25,'Masak minimal 25 kali'],
+  ['🌊','Chef of the Sea',total>=50,'Masak minimal 50 kali'],
+  ['🏆','Galley Master',total>=100,'Masak minimal 100 kali'],
+  ['⭐','Chef Favorit',rating>=4.5,'Rating minimal 4.5']
+ ];
+
+ achievements.innerHTML=list.map(x=>`
+ <div class="recipe" style="opacity:${x[2]?1:.45}">
+   <b>${x[0]} ${x[1]}</b>
+   <div class="muted">
+     ${x[2]?'✅ Terbuka':'🔒 '+x[3]}
+   </div>
+ </div>
+ `).join('');
+}
+
+
+/* =========================
+   LEVEL
+========================= */
+
+function renderLevel(){
+
+ const total=history.length;
+
+ let level='Chef Pemula';
+ let next=10;
+ let prev=0;
+
+ if(total>=100){
+   level='🏆 Galley Master';
+   next=150;
+   prev=100;
+ }else if(total>=50){
+   level='🌊 Chef of the Sea';
+   next=100;
+   prev=50;
+ }else if(total>=25){
+   level='⚓ Chef Aktif';
+   next=50;
+   prev=25;
+ }else if(total>=10){
+   level='🔥 Chef Berpengalaman';
+   next=25;
+   prev=10;
+ }
+
+ let percent;
+
+ if(total>=100){
+   percent=Math.min(100,((total-100)/50)*100);
+ }else{
+   percent=Math.min(100,((total-prev)/(next-prev))*100);
+ }
+
+ levelText.textContent=level;
+ levelProgress.style.width=Math.max(0,percent)+'%';
+
+ if(total>=100){
+   levelNext.textContent=`${total} kali masak • target berikutnya ${next}`;
+ }else{
+   levelNext.textContent=`${total}/${next} kali masak untuk level berikutnya`;
+ }
+}
+
+
+/* =========================
+   BACKUP
+========================= */
+
+function backupData(){
+
+ const data={
+   version:'V15.5',
+   exportedAt:new Date().toISOString(),
+   profile,
+   custom,
+   weekly,
+   stock,
+   expenses,
+   tasks,
+   ratings,
+   crew,
+   note:load(KEY.note,''),
+   history,
+   cookCount,
+   logs,
+   prices,
+   shopping,
+   shoppingChecked,
+   stockHistory
+ };
+
+ const blob=new Blob(
+   [JSON.stringify(data,null,2)],
+   {type:'application/json'}
+ );
+
+ const url=URL.createObjectURL(blob);
+
+ const a=document.createElement('a');
+ a.href=url;
+ a.download='dapur-kapal-v15.5-backup.json';
+ a.click();
+
+ URL.revokeObjectURL(url);
+}
+
+function restoreData(event){
+
+ const file=event.target.files[0];
+
+ if(!file)return;
+
+ const reader=new FileReader();
+
+ reader.onload=()=>{
+   try{
+
+     const data=JSON.parse(reader.result);
+
+     if(data.profile)profile=data.profile;
+     if(data.custom)custom=data.custom;
+     if(data.weekly)weekly=data.weekly;
+     if(data.stock)stock=data.stock;
+     if(data.expenses)expenses=data.expenses;
+     if(data.tasks)tasks=data.tasks;
+     if(data.ratings)ratings=data.ratings;
+     if(data.crew)crew=data.crew;
+     if(data.note!==undefined)save(KEY.note,data.note);
+     if(data.history)history=data.history;
+     if(data.cookCount)cookCount=data.cookCount;
+     if(data.logs)logs=data.logs;
+     if(data.prices)prices=data.prices;
+     if(data.shopping)shopping=data.shopping;
+     if(data.shoppingChecked)shoppingChecked=data.shoppingChecked;
+     if(data.stockHistory)stockHistory=data.stockHistory;
+
+     saveAll();
+
+     alert('✅ Backup berhasil direstore.');
+     renderAll();
+
+   }catch(e){
+     alert('❌ File backup tidak valid.');
+   }
+ };
+
+ reader.readAsText(file);
+}
+
+function saveAll(){
+
+ save(KEY.profile,profile);
+ save(KEY.custom,custom);
+ save(KEY.weekly,weekly);
+ save(KEY.stock,stock);
+ save(KEY.expenses,expenses);
+ save(KEY.tasks,tasks);
+ save(KEY.ratings,ratings);
+ save(KEY.crew,crew);
+ save(KEY.history,history);
+ save(KEY.cookCount,cookCount);
+ save(KEY.log,logs);
+ save(KEY.prices,prices);
+ save(KEY.shopping,shopping);
+ save(KEY.checked,shoppingChecked);
+ save(KEY.stockHistory,stockHistory);
+}
+
+function resetAll(){
+
+ const ok=confirm(
+  '⚠️ SEMUA DATA DAPUR KAPAL AKAN DIHAPUS.\n\nLanjutkan?'
+ );
+
+ if(!ok)return;
+
+ Object.values(KEY).forEach(k=>localStorage.removeItem(k));
+
+ location.reload();
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatMoney(n){
+ return Number(n||0).toLocaleString('id-ID');
+}
+
+function escapeHtml(str){
+ return String(str)
+  .replaceAll('&','&amp;')
+  .replaceAll('<','&lt;')
+  .replaceAll('>','&gt;')
+  .replaceAll('"','&quot;')
+  .replaceAll("'","&#039;");
+}
+
+function escapeJs(str){
+ return String(str)
+  .replaceAll('\\','\\\\')
+  .replaceAll("'","\\'");
+}
+
+
+/* =========================
+   RENDER ALL
 ========================= */
 
 function renderAll(){
-  renderProfile();
-  renderLevel();
-  renderDashboard();
-  renderWeek();
-  renderStock();
-  renderShopping();
-  renderRecipes();
-  renderExpenses();
-  renderTasks();
-  renderReport();
-  renderRatingBox();
+
+ renderDashboard();
+ renderLevel();
+ renderAchievements();
+ renderWeekly();
+ renderStock();
+ renderStockHistory();
+ renderShopping();
+ renderRecipes();
+ renderExpenses();
+ renderTasks();
+ renderNotes();
+ renderHistory();
+ renderReport();
 }
 
 
 /* =========================
-   INIT
+   START
 ========================= */
 
-(function init(){
+renderAll();
 
-  if(!localStorage.getItem(KEY.crew)){
-    localStorage.setItem(KEY.crew,'9');
-  }
-
-  if(!localStorage.getItem(KEY.weekly)){
-    /*
-      Jangan otomatis membuat menu.
-      User bisa Generate Smart Menu sendiri.
-    */
-  }
-
-  renderAll();
-  loadNote();
-  updateTimer();
-
-})();
 </script>
 
 </body>
