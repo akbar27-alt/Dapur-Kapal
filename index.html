@@ -2822,6 +2822,1385 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 });
 
+  /* =========================================================
+   🚢 DAPUR KAPAL V16.2 PATCH
+   Dibuat khusus untuk source V16.1 yang kamu kirim
+========================================================= */
+
+(function(){
+
+"use strict";
+
+/* =========================================================
+   V16.2 HELPERS
+========================================================= */
+
+function v162Month(value){
+
+  const d=new Date(value);
+
+  if(isNaN(d.getTime())) return "";
+
+  return d.getFullYear()+"-"+
+    String(d.getMonth()+1).padStart(2,"0");
+}
+
+
+function v162TodayMonth(){
+
+  return v162Month(new Date());
+
+}
+
+
+function v162GetRecentRecipes(days){
+
+  const logs=getData(STORAGE.cookLog,[]);
+
+  const limit=
+    Date.now()-(days*24*60*60*1000);
+
+  return logs
+    .filter(x=>{
+      const t=new Date(x.time).getTime();
+      return !isNaN(t) && t>=limit;
+    })
+    .map(x=>x.recipeId);
+
+}
+
+
+/* =========================================================
+   🧠 SMART MENU V16.2
+   Prioritas:
+   1. Sesuai kategori waktu makan
+   2. Punya stok
+   3. Tidak baru dimasak
+   4. Mengurangi pengulangan
+========================================================= */
+
+window.smartMenuV162=function(){
+
+  const recipes=getData(STORAGE.recipes,[]);
+  const stock=getData(STORAGE.stock,[]);
+  const recent=v162GetRecentRecipes(3);
+
+  const mode=
+    document.getElementById("menuMode")?.value||
+    "balanced";
+
+  if(!recipes.length){
+
+    alert("Belum ada resep.");
+
+    return;
+  }
+
+
+  function score(recipe){
+
+    let value=0;
+
+    /* Stok */
+    value+=stockScore(recipe,stock)*5;
+
+    /* Jangan terlalu sering muncul */
+    if(recent.includes(recipe.id)){
+      value-=15;
+    }
+
+    /* Random sedikit supaya tidak selalu sama */
+    value+=Math.random()*5;
+
+    return value;
+  }
+
+
+  const week={};
+
+  DAYS.forEach(day=>{
+
+    week[day]={
+      breakfast:null,
+      lunch:null,
+      dinner:null
+    };
+
+  });
+
+
+  const usedToday={};
+
+
+  MEALS.forEach(([meal])=>{
+
+    DAYS.forEach(day=>{
+
+      let candidates=
+        recipes.filter(r=>r.category===meal);
+
+      if(!candidates.length){
+        candidates=[...recipes];
+      }
+
+
+      /* Hindari pengulangan */
+      let fresh=
+        candidates.filter(r=>
+          !recent.includes(r.id) &&
+          !Object.values(usedToday).includes(r.id)
+        );
+
+
+      if(!fresh.length){
+
+        fresh=
+          candidates.filter(r=>
+            !Object.values(usedToday).includes(r.id)
+          );
+      }
+
+
+      if(!fresh.length){
+        fresh=candidates;
+      }
+
+
+      if(mode==="random"){
+
+        fresh.sort(
+          ()=>Math.random()-.5
+        );
+
+      }else{
+
+        fresh.sort(
+          (a,b)=>score(b)-score(a)
+        );
+
+      }
+
+
+      const chosen=fresh[0];
+
+      if(chosen){
+
+        week[day][meal]=chosen.id;
+
+        usedToday[
+          day+"_"+meal
+        ]=chosen.id;
+
+      }
+
+    });
+
+  });
+
+
+  setData(STORAGE.week,week);
+
+  addActivity(
+    "Smart Menu V16.2 dibuat"
+  );
+
+  renderAll();
+
+  alert(
+    "🤖 Smart Menu V16.2 berhasil dibuat!\n\n"+
+    "Menu yang baru dimasak dalam 3 hari terakhir "+
+    "akan dikurangi prioritasnya."
+  );
+
+};
+
+
+/* Ganti tombol Smart Menu lama */
+window.smartMenu=window.smartMenuV162;
+
+
+/* =========================================================
+   🔴 STOK KRITIS
+========================================================= */
+
+function v162CriticalStock(){
+
+  const stock=getData(STORAGE.stock,[]);
+
+  return stock.filter(x=>{
+
+    const qty=Number(x.qty)||0;
+    const min=Number(x.min)||0;
+
+    return qty<=min;
+
+  });
+
+}
+
+
+function v162RenderCriticalStock(){
+
+  const box=
+    document.getElementById(
+      "v162CriticalStock"
+    );
+
+  if(!box) return;
+
+
+  const critical=
+    v162CriticalStock();
+
+
+  if(!critical.length){
+
+    box.innerHTML=`
+      <div class="good">
+        ✅ Semua stok masih aman.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  box.innerHTML=`
+
+    <div class="danger">
+      ⚠️ <b>${critical.length} bahan perlu dibeli</b>
+    </div>
+
+    <br>
+
+    ${critical.map(x=>`
+
+      <div class="check">
+
+        <div style="flex:1">
+
+          <b>${esc(x.item)}</b>
+
+          <div class="small danger">
+
+            Stok:
+            ${round(x.qty)}
+            ${esc(x.unit)}
+
+            • Minimum:
+            ${round(x.min)}
+            ${esc(x.unit)}
+
+          </div>
+
+        </div>
+
+      </div>
+
+    `).join("")}
+
+  `;
+
+}
+
+
+/* =========================================================
+   📦 PANEL STOK KRITIS DI HOME
+========================================================= */
+
+function v162InstallCriticalCard(){
+
+  if(document.getElementById(
+    "v162CriticalCard"
+  )) return;
+
+
+  const dashboard=
+    document.getElementById("dashboard");
+
+  if(!dashboard) return;
+
+
+  const card=
+    document.createElement("div");
+
+  card.id="v162CriticalCard";
+
+  card.className="card";
+
+  card.innerHTML=`
+
+    <h2>🚨 Stok Kritis</h2>
+
+    <div id="v162CriticalStock"></div>
+
+    <br>
+
+    <button
+      class="btn warning"
+      onclick="showPage('stock')">
+
+      📦 Buka Stok
+
+    </button>
+
+  `;
+
+
+  const summary=
+    document.getElementById(
+      "dashboardSummary"
+    );
+
+
+  if(summary){
+
+    summary.parentElement.after(card);
+
+  }else{
+
+    dashboard.appendChild(card);
+
+  }
+
+}
+
+
+/* =========================================================
+   🛒 BELANJA → MASUK STOK
+========================================================= */
+
+window.v162BuyToStock=function(id){
+
+  const list=
+    getData(STORAGE.shopping,[]);
+
+  const item=
+    list.find(x=>x.id===id);
+
+  if(!item){
+
+    alert("Barang tidak ditemukan.");
+
+    return;
+  }
+
+
+  const qty=
+    Number(item.qty)||0;
+
+
+  if(qty<=0){
+
+    alert("Jumlah barang tidak valid.");
+
+    return;
+  }
+
+
+  let stock=
+    getData(STORAGE.stock,[]);
+
+
+  const existing=
+    stock.find(x=>
+      normalize(x.item)===
+      normalize(item.item) &&
+      x.unit===item.unit
+    );
+
+
+  if(existing){
+
+    existing.qty=
+      Number(existing.qty||0)+qty;
+
+    /*
+      Kalau stok sebelumnya belum punya
+      minimum, biarkan minimum tetap.
+    */
+
+  }else{
+
+    stock.push({
+
+      id:uid(),
+
+      item:item.item,
+
+      qty:qty,
+
+      unit:item.unit,
+
+      min:0
+
+    });
+
+  }
+
+
+  setData(
+    STORAGE.stock,
+    stock
+  );
+
+
+  setData(
+    STORAGE.shopping,
+    list.filter(x=>x.id!==id)
+  );
+
+
+  addStockHistory(
+    `Barang belanja masuk stok: +${round(qty)} ${item.unit} ${item.item}`
+  );
+
+
+  addActivity(
+    `Belanja masuk stok: ${item.item}`
+  );
+
+
+  renderAll();
+
+
+  alert(
+    "📦 Berhasil masuk stok!\n\n"+
+    `${item.item}: ${round(qty)} ${item.unit}`
+  );
+
+};
+
+
+window.v162BuyChecked=function(){
+
+  const list=
+    getData(STORAGE.shopping,[]);
+
+  const checked=
+    list.filter(x=>x.checked);
+
+
+  if(!checked.length){
+
+    alert(
+      "Centang dulu barang yang sudah dibeli."
+    );
+
+    return;
+  }
+
+
+  let stock=
+    getData(STORAGE.stock,[]);
+
+
+  checked.forEach(item=>{
+
+    const qty=
+      Number(item.qty)||0;
+
+
+    if(qty<=0) return;
+
+
+    const existing=
+      stock.find(x=>
+        normalize(x.item)===
+        normalize(item.item) &&
+        x.unit===item.unit
+      );
+
+
+    if(existing){
+
+      existing.qty=
+        Number(existing.qty||0)+qty;
+
+    }else{
+
+      stock.push({
+
+        id:uid(),
+
+        item:item.item,
+
+        qty,
+
+        unit:item.unit,
+
+        min:0
+
+      });
+
+    }
+
+
+    addStockHistory(
+      `Belanja masuk stok: +${round(qty)} ${item.unit} ${item.item}`
+    );
+
+  });
+
+
+  setData(
+    STORAGE.stock,
+    stock
+  );
+
+
+  setData(
+    STORAGE.shopping,
+    list.filter(x=>!x.checked)
+  );
+
+
+  addActivity(
+    `${checked.length} barang belanja masuk stok`
+  );
+
+
+  renderAll();
+
+
+  alert(
+    `✅ ${checked.length} barang berhasil masuk stok.`
+  );
+
+};
+
+
+/* =========================================================
+   Tambahkan tombol BELI → STOK ke daftar belanja
+========================================================= */
+
+function v162ShoppingButtons(){
+
+  const container=
+    document.getElementById(
+      "shoppingList"
+    );
+
+  if(!container) return;
+
+
+  const list=
+    getData(STORAGE.shopping,[]);
+
+
+  if(!list.length) return;
+
+
+  /*
+    Tambahkan tombol bulk
+  */
+
+  if(!document.getElementById(
+    "v162BulkStock"
+  )){
+
+    const bulk=
+      document.createElement("button");
+
+    bulk.id="v162BulkStock";
+
+    bulk.className=
+      "btn success";
+
+    bulk.style.width="100%";
+    bulk.style.marginBottom="10px";
+
+    bulk.textContent=
+      "📦 Masukkan Semua yang Dicentang ke Stok";
+
+    bulk.onclick=
+      v162BuyChecked;
+
+
+    container.prepend(bulk);
+
+  }
+
+
+  /*
+    Ambil semua baris belanja.
+    Baris memiliki class .check
+  */
+
+  const rows=
+    Array.from(
+      container.children
+    ).filter(el=>
+      el.classList.contains("check")
+    );
+
+
+  list.forEach((item,index)=>{
+
+    const row=rows[index];
+
+    if(!row) return;
+
+
+    if(row.querySelector(
+      "[data-v162-buy]"
+    )) return;
+
+
+    const button=
+      document.createElement("button");
+
+    button.className=
+      "btn success fit";
+
+    button.dataset.v162Buy="1";
+
+    button.textContent=
+      "📦 Ke Stok";
+
+
+    button.style.marginTop="6px";
+
+
+    button.onclick=function(){
+
+      v162BuyToStock(item.id);
+
+    };
+
+
+    const content=
+      row.querySelector(
+        "div[style*='flex:1']"
+      );
+
+
+    if(content){
+
+      content.appendChild(button);
+
+    }else{
+
+      row.appendChild(button);
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   📊 LAPORAN BULANAN
+========================================================= */
+
+function v162RenderMonthlyReport(){
+
+  const box=
+    document.getElementById(
+      "v162MonthlyReport"
+    );
+
+  if(!box) return;
+
+
+  const select=
+    document.getElementById(
+      "v162ReportMonth"
+    );
+
+
+  const month=
+    select?.value||
+    v162TodayMonth();
+
+
+  const cookLog=
+    getData(STORAGE.cookLog,[]);
+
+
+  const expenses=
+    getData(STORAGE.expenses,[]);
+
+
+  const recipes=
+    getData(STORAGE.recipes,[]);
+
+
+  const cooks=
+    cookLog.filter(x=>
+      v162Month(x.time)===month
+    );
+
+
+  const monthExpenses=
+    expenses.filter(x=>
+      v162Month(x.time)===month
+    );
+
+
+  const expenseTotal=
+    monthExpenses.reduce(
+      (sum,x)=>
+        sum+Number(x.amount||0),
+      0
+    );
+
+
+  const counts={};
+
+
+  cooks.forEach(x=>{
+
+    counts[x.recipeId]=
+      (counts[x.recipeId]||0)+1;
+
+  });
+
+
+  const popular=
+    recipes
+      .map(r=>({
+
+        name:r.name,
+
+        count:counts[r.id]||0
+
+      }))
+      .filter(x=>x.count>0)
+      .sort((a,b)=>b.count-a.count)
+      .slice(0,5);
+
+
+  box.innerHTML=`
+
+    <div class="grid">
+
+      <div class="card">
+
+        <div class="muted">
+          🍳 Masakan bulan ini
+        </div>
+
+        <div class="stat">
+          ${cooks.length}
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="muted">
+          💰 Pengeluaran bulan ini
+        </div>
+
+        <div class="stat">
+          ${rupiah(expenseTotal)}
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <h3>🏆 Menu Terbanyak</h3>
+
+    ${
+      popular.length
+
+      ?
+
+      popular.map(x=>`
+
+        <div class="check">
+
+          <div style="flex:1">
+
+            <b>${esc(x.name)}</b>
+
+          </div>
+
+          <strong>
+            ${x.count}x
+          </strong>
+
+        </div>
+
+      `).join("")
+
+      :
+
+      `<div class="empty">
+        Belum ada masakan bulan ini.
+      </div>`
+    }
+
+  `;
+
+}
+
+
+/* =========================================================
+   📅 PANEL LAPORAN BULANAN
+========================================================= */
+
+function v162InstallMonthlyReport(){
+
+  if(document.getElementById(
+    "v162MonthlyCard"
+  )) return;
+
+
+  const reports=
+    document.getElementById(
+      "reports"
+    );
+
+  if(!reports) return;
+
+
+  const card=
+    document.createElement("div");
+
+  card.id="v162MonthlyCard";
+
+  card.className="card";
+
+
+  card.innerHTML=`
+
+    <h2>📅 Laporan Bulanan</h2>
+
+    <div class="row">
+
+      <input
+        id="v162ReportMonth"
+        type="month"
+        value="${v162TodayMonth()}"
+        onchange="v162RenderMonthlyReport()">
+
+    </div>
+
+    <br>
+
+    <div id="v162MonthlyReport"></div>
+
+  `;
+
+
+  reports.insertBefore(
+    card,
+    reports.children[1]||null
+  );
+
+}
+
+
+/* =========================================================
+   👨‍🍳 CHEF MODE
+========================================================= */
+
+window.v162ChefMode=function(id){
+
+  const recipes=
+    getData(STORAGE.recipes,[]);
+
+  const recipe=
+    recipes.find(x=>x.id===id);
+
+
+  if(!recipe) return;
+
+
+  const crew=
+    getData(STORAGE.crew,9);
+
+
+  const multiplier=
+    crew/Number(recipe.servings||9);
+
+
+  const ingredients=
+    recipe.ingredients.map(x=>`
+
+      <li>
+
+        <b>${esc(x.item)}</b>
+
+        —
+
+        ${round(
+          Number(x.qty)*multiplier
+        )}
+
+        ${esc(x.unit)}
+
+      </li>
+
+    `).join("");
+
+
+  const steps=
+    (recipe.steps||[]).map(
+      (step,index)=>`
+
+        <div class="card"
+          style="margin-bottom:8px">
+
+          <b>
+            Langkah ${index+1}
+          </b>
+
+          <p>
+            ${esc(step)}
+          </p>
+
+        </div>
+
+      `
+    ).join("");
+
+
+  openModal(`
+
+    <h2>👨‍🍳 Chef Mode</h2>
+
+    <h3>
+      🍽️ ${esc(recipe.name)}
+    </h3>
+
+    <p class="muted">
+      Untuk ${crew} orang
+    </p>
+
+
+    <h3>🧂 Bahan</h3>
+
+    <ul>
+      ${ingredients}
+    </ul>
+
+
+    <h3>🔥 Langkah Memasak</h3>
+
+    ${steps}
+
+
+    <br>
+
+    <div class="row">
+
+      <button
+        class="btn warning"
+        onclick="startChefTimer('${recipe.id}')">
+
+        ⏱️ Timer
+
+      </button>
+
+
+      <button
+        class="btn success"
+        onclick="cookRecipe('${recipe.id}');closeModal()">
+
+        🍳 Sudah Masak
+
+      </button>
+
+    </div>
+
+  `);
+
+};
+
+
+/* =========================================================
+   Tambahkan tombol Chef Mode ke kartu resep
+========================================================= */
+
+function v162RecipeButtons(){
+
+  const list=
+    document.getElementById(
+      "recipeList"
+    );
+
+  if(!list) return;
+
+
+  const cards=
+    list.querySelectorAll(".recipe");
+
+
+  const recipes=
+    getData(STORAGE.recipes,[]);
+
+
+  cards.forEach(card=>{
+
+    const title=
+      card.querySelector("h3");
+
+    if(!title) return;
+
+
+    const name=
+      title.textContent
+        .replace("🍽️","")
+        .trim();
+
+
+    const recipe=
+      recipes.find(r=>
+        r.name===name
+      );
+
+
+    if(!recipe) return;
+
+
+    if(card.querySelector(
+      "[data-v162-chef]"
+    )) return;
+
+
+    const button=
+      document.createElement("button");
+
+    button.className=
+      "btn warning fit";
+
+    button.dataset.v162Chef="1";
+
+    button.textContent=
+      "👨‍🍳 Chef Mode";
+
+
+    button.onclick=function(){
+
+      v162ChefMode(recipe.id);
+
+    };
+
+
+    const row=
+      card.querySelector(".row");
+
+
+    if(row){
+
+      row.appendChild(button);
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   💾 BACKUP V16.2
+   Tetap memakai key dk161_
+========================================================= */
+
+window.v162Backup=function(){
+
+  const backup={
+
+    version:"16.2",
+
+    createdAt:
+      new Date().toISOString(),
+
+    data:{}
+
+  };
+
+
+  Object.values(STORAGE).forEach(key=>{
+
+    backup.data[key]=
+      getData(key,null);
+
+  });
+
+
+  const blob=
+    new Blob(
+      [
+        JSON.stringify(
+          backup,
+          null,
+          2
+        )
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+
+  const url=
+    URL.createObjectURL(blob);
+
+
+  const a=
+    document.createElement("a");
+
+
+  a.href=url;
+
+  a.download=
+    "dapur-kapal-v16.2-"+
+    dateFile()+
+    ".json";
+
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+
+  URL.revokeObjectURL(url);
+
+
+  alert(
+    "✅ Backup Dapur Kapal V16.2 berhasil dibuat."
+  );
+
+};
+
+
+/* =========================================================
+   Tambahkan tombol backup V16.2
+========================================================= */
+
+function v162BackupButton(){
+
+  const settings=
+    document.getElementById(
+      "settings"
+    );
+
+  if(!settings) return;
+
+
+  if(document.getElementById(
+    "v162BackupBtn"
+  )) return;
+
+
+  const cards=
+    settings.querySelectorAll(
+      ".card"
+    );
+
+
+  const backupCard=
+    Array.from(cards).find(card=>
+      card.textContent.includes(
+        "Backup Data"
+      )
+    );
+
+
+  if(!backupCard) return;
+
+
+  const button=
+    document.createElement("button");
+
+
+  button.id=
+    "v162BackupBtn";
+
+  button.className=
+    "btn success";
+
+  button.style.marginLeft="8px";
+
+  button.textContent=
+    "⬇️ Backup V16.2";
+
+
+  button.onclick=
+    v162Backup;
+
+
+  backupCard
+    .querySelector("button")
+    ?.after(button);
+
+}
+
+
+/* =========================================================
+   📱 MOBILE
+========================================================= */
+
+function v162Mobile(){
+
+  const style=
+    document.getElementById(
+      "v162MobileStyle"
+    );
+
+  if(style) return;
+
+
+  const css=
+    document.createElement("style");
+
+  css.id=
+    "v162MobileStyle";
+
+
+  css.textContent=`
+
+    @media(max-width:600px){
+
+      .row{
+        gap:6px;
+      }
+
+      .btn{
+        min-height:42px;
+      }
+
+      .card{
+        padding:13px;
+      }
+
+      .tabs button{
+        padding:10px 12px;
+      }
+
+      table{
+        min-width:620px;
+      }
+
+      .timer{
+        font-size:44px;
+      }
+
+    }
+
+  `;
+
+
+  document.head.appendChild(css);
+
+}
+
+
+/* =========================================================
+   🔄 RENDER HOOK
+========================================================= */
+
+const v162OriginalRenderAll=
+  window.renderAll;
+
+
+window.renderAll=function(){
+
+  v162OriginalRenderAll();
+
+
+  try{
+
+    v162InstallCriticalCard();
+
+    v162InstallMonthlyReport();
+
+    v162BackupButton();
+
+    v162ShoppingButtons();
+
+    v162RecipeButtons();
+
+    v162RenderCriticalStock();
+
+    v162RenderMonthlyReport();
+
+    v162Mobile();
+
+  }catch(error){
+
+    console.error(
+      "Dapur Kapal V16.2:",
+      error
+    );
+
+  }
+
+};
+
+
+/* =========================================================
+   V16.2 VERSION DISPLAY
+========================================================= */
+
+function v162Version(){
+
+  document.title=
+    "Dapur Kapal V16.2";
+
+
+  document
+    .querySelector("header p")
+    ?.replaceChildren(
+      document.createTextNode(
+        "Kitchen Management System • V16.2"
+      )
+    );
+
+
+  document
+    .querySelector("footer")
+    ?.replaceChildren(
+      document.createTextNode(
+        "Dapur Kapal V16.2 • Data tersimpan di perangkat"
+      )
+    );
+
+}
+
+
+/* =========================================================
+   START PATCH
+========================================================= */
+
+v162Version();
+
+
+/*
+  render pertama setelah seluruh fungsi V16.2
+  sudah terpasang.
+*/
+
+setTimeout(()=>{
+
+  try{
+
+    renderAll();
+
+  }catch(e){
+
+    console.error(
+      "V16.2 initial render:",
+      e
+    );
+
+  }
+
+},50);
+
+
+})();
+
 </script>
 
 </body>
